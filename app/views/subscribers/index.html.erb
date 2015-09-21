@@ -1,0 +1,20 @@
+<% content_for :outside do %>
+
+	<%= render :partial => 'page_head'%>
+	
+	<div class="col-single-large-margin box-shadow-reg">
+
+		<h1>Subscribers</h1>
+
+
+		<ul id="subscribers">
+		  <%= render :partial => @subscribers.reverse %>
+		</ul>
+
+		<h3> Add a new subscriber </h3>
+		<div id="form-holder">
+		<%= render 'form' %>
+		</div>
+
+	</div>
+<% end %>

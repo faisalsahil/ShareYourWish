@@ -1,0 +1,131 @@
+<% title "How it Works - Benefits - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+	<div class="col-single-large-margin box-shadow-reg">
+		
+		<H1>How ShareYourWish Works: Benefits of using ShareYourWish</H1>
+		
+		<table class="benefits">
+			<tr class="section">
+				<td colspan="2">
+					<span style="text-decoration:underline;line-height:2em;">For the Host of the Party:</span>
+				</td>
+			</tr>
+			<tr class="head">
+				<td><span style="text-decoration:underline;">Traditional Birthday Party</span></td>
+				<td><span style="text-decoration:underline;">&quot;Share Your Wish&quot; Birthday Party</span></td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Spend time researching and purchasing invitations, hand writing each envelope, and making a trip to the post office.
+				</td>
+				<td class="syw">
+					Easily send invitations to your child’s party and event page right from ShareYourWish.com, free of charge!
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Worry about where you are going to fit all your child’s new toys!
+				</td>
+				<td class="syw">
+					Have the perfect spot for that one (or few) special gift(s) for your child
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					You and your spouse drive two cars to the event space in order to have enough room to bring the bounty of gifts home with you, and then enlist the help of those lucky “last-to-leave” attendees to get the gifts to your car.
+				</td>
+				<td class="syw">
+					Drive comfortably, and stress-free, to the event space, with your child’s special gift(s) nestled neatly in the trunk, and return home just as comfortably.
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Designate an area at the party for guests to place they gifts they bring, creating a “present landfill”
+				</td>
+				<td class="syw">
+					Proudly display your child’s special gift(s) and Reward Certificate as recognition of the good deed they have done, leaving more space open for play and celebration!
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Start the arduous process of opening gifts, one at a time, keeping track of who the giver is, disposing of wrapping paper, and deciding what to do with all the gifts your child already has or is not interested in playing with.
+				</td>
+				<td class="syw">
+					Watch excitedly as your child opens the gifts(s) from his/her friends that you are sure they are going to love!
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Purchase and hand write Thank You cards for each and every gift received.
+				</td>
+				<td class="syw">
+					Send one, personalized, Thank You e-mail to all of your guests for the special gift they contributed towards, and the charities they helped support, all from ShareYourWish.com, free of charge!
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Hope your child doesn’t become spoiled from all the gifts they received.
+				</td>
+				<td class="syw">
+					Hope your child has learned these valuable lessons:
+					<ul>
+						<li>the importance of helping others
+						<li>quality over quantity
+						<li>material things do not make lasting memories, friends do
+					</ul>
+				</td>
+			</tr>
+		</table>
+			
+		<table class="benefits">
+			<tr class="section">
+				<td colspan="2">
+					<span style="text-decoration:underline;line-height:2em;">For Guests of the Party:</span>
+				</td>
+			</tr>
+			<tr class="head">
+				<td><span style="text-decoration:underline;">Traditional Birthday Party</span></td>
+				<td><span style="text-decoration:underline;">&quot;Share Your Wish&quot; Birthday Party</span></td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Spend hours collectively researching gift ideas, shopping for a gift, and wrapping gifts.
+				</td>
+				<td class="syw">
+					Spend minutes logging onto ShareYourWish.com and contributing towards a gift.
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Walk to party holding your child’s hand in one hand and balancing the gift in the other.
+				</td>
+				<td class="syw">
+					Walk to party holding your child’s hand in one hand and checking your Facebook with the other!
+				</td>
+			</tr>
+			<tr class="fact-row">
+				<td>
+					Leave the party hoping the birthday boy/girl will like the gift you got them.
+				</td>
+				<td class="syw">
+					Leave the party knowing the birthday boy/girl will love the gift you contributed towards, and feel good about supporting their charitable wish.
+				</td>
+			</tr>
+		</table>
+		
+		
+		<div style="min-height:50px;">&nbsp;</div>
+
+	
+		<p>
+		<%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green fl" %>
+		<%= link_to 'NEXT: My Dashboard', '/how-it-works/dashboard', :class=>'button-type-standard button-size-big button-color-blue fr' %>
+		
+	</div>
+	
+	
+<% end %>

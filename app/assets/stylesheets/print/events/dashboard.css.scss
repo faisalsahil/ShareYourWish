@@ -1,0 +1,33 @@
+.events{
+  .col-single-large-margin{
+    h1,
+    .alerts-container,
+    .event_timeline,
+    #dashboard-header,
+    #dashboard_contributions,
+    #dashboard_activity_log{
+      display:none;
+    }
+    #dashboard_guests{
+      #guest_select_buttons,
+      #dashboard_guests_actions{
+        display:none;
+      }
+      #dashboard_guests_list{
+        .guest-table{
+          .guests-checkbox,
+          .guests-edit{
+            display:none;
+          }
+        }
+      }
+    }
+  }
+  #pagehead,
+  .footer-outside{
+    display:none;
+  }
+}
+.hidden{
+  display:none;
+}

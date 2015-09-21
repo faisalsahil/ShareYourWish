@@ -1,0 +1,115 @@
+.charity_container {
+  display: block; 
+  width: 183px; 
+  height: 130px; 
+  background-color: #fff; 
+  float: left; 
+  border: gray 1px solid; 
+  margin: 10px; 
+  padding: 5px;
+  .charity_name a {
+    display: block;
+    font-size: 14px;
+    line-height: 14px;
+    font-weight: bold;
+    overflow: hidden;
+    max-height: 30px;
+    padding-bottom: 3px;
+  }
+  .charity_container_left_col {
+    float: left;
+    width: 70px;
+    margin-top: 2px;
+    margin-right: 5px;
+  }
+  .charity_image {
+    margin: 3px;
+  }
+  .charity_button {
+    .charity_selected_check{
+      padding-left:20px;
+    }
+    
+  }
+  .charity_description {
+    font-size: 12px;
+    z-index: 200;
+    overflow: hidden;
+  }
+}
+.featured {
+	background: image-url('featured_charity_bg.png') no-repeat; 
+}
+.featured_on_event {
+	background: image-url('featured_charity_event_page_bg.png') no-repeat; 
+}
+.charity_container_full { 
+  height: 300px; 
+  width: 700px;
+  padding:5px;
+  .charity_name { 
+    font-size: 1.25em;
+    line-height: 1.5em;
+    font-weight: bold;
+    padding-bottom: 5px;
+  }
+  .charity_container_full_left_col { 
+    float: left;
+    width: 260px; 
+    margin-top: 5px;
+    margin-right: 10px;
+  }
+  .charity_image {
+    margin: 5px;
+	height: 250px;
+  }
+  .charity_button {
+    
+  }
+  .charity_description {
+    font-size: 1em;
+    overflow: scroll;
+    max-height: 270px;
+  }
+}
+
+.selected_charities { 
+  width: 670px;  
+  height: 175px; 
+  font-size: 11px; 
+  background: image-url('charity_select_bg.png');
+  ul {
+    list-style:none; 
+  }
+}
+.charities_for_selection { 
+  border: #ccc 1px dashed; 
+  font-size:11px; 
+  width: 650px!important; 
+  background-color: #ddd;
+}
+div.externalControl { 
+  text-align: center; 
+  margin-top: 5px;
+}
+.externalControl button { 
+  font-size: 12px; 
+  text-align: center; 
+}
+.externalControl div { 
+  display:inline; 
+}
+#search_by_ntee_code {
+  width: 180px;
+}
+#search_by_name { 
+  width: 147px; 
+  margin-left: 5px; 
+}
+.close_popup { 
+  float:right;
+  font-size: 12px;
+}
+.step form#new_event button.choose_button.active { 
+  color: #E59A3E; 
+}

@@ -1,0 +1,14 @@
+<% title "Create a New Event - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+  <%= render :partial => 'page_head'%>
+  <div class="clearfloat"></div>  
+
+  <div class="col-single box-shadow-reg">
+	 <%= render 'timeline' %>
+	 <%= render :partial => 'notices-and-errors', :locals => {:errobj => nil} %>
+    <%= render 'form' %>
+  </div>
+
+<% end %>

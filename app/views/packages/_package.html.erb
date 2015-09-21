@@ -1,0 +1,40 @@
+<% if package %>
+  <li>
+    
+    <div class="package" id="package_<%= package.id %>">
+			
+			<div class="package_name">
+          	<%= package.name %>
+			</div>
+			
+			<div class="package_icon popup_large">
+	          <% if package.picture && package.picture.image? %>
+              <%= link_to (image_tag package.picture.image.url(:icon), :alt => package.name), 'javascript:void(0)', 'data-picture-medium' => package.picture.image.url(:large), :tabindex => 300 %>
+				<% else %>
+					<%= image_tag 'missing_icon.png', :alt => 'missing image'%>
+	          <% end %>
+			</div>
+			
+          <div class="package_details">
+            <%= package.description %>
+            <div class="package_items">
+		          <% if package.items.count %>
+		            <% package.items.each do |item| %>
+		              <input type="checkbox" name="item_<%= item.id %>" value="<%= item.id %>" id="item_<%= item.id %>" checked="checked" disabled="disabled" />
+		              <label for="item_<%= item.id %>"><%= item.name %></label><br />        
+		            <% end %>
+		          <% end %>
+		        </div>
+          </div>
+
+	      <div class="package_cost">
+	        <%= package.cost==0 ? "free!" : number_to_currency(package.cost) %><br />	
+
+          <%= button_to "Select", line_items_path(item_id: package.proxy_item_id), remote: true, :class=>"btn btn-success package_select_button#{@event && @event.package.id == package.id ? ' hidden_important' : ''}", :tabindex => 300 %>	
+
+	      </div>       
+
+    </div>
+
+  </li>
+<% end %>

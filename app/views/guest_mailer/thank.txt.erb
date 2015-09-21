@@ -1,0 +1,16 @@
+We just wanted to say... THANKS!
+	
+<%= @guest.event.child_full_name %>'s event was a great success and we did something really good for charity.
+
+The great donations we were able to make:
+
+<% @guest.event.event_transaction_logs.total_amount_and_guest_count_by_charities.each do |charity| %>
+<%= number_to_currency charity.total_amount %> to <%= charity.name %> 
+<% end %>
+
+Thanks again!
+
+From,
+<%= @guest.event.host_name %>
+
+This message was sent to you by ShareYourWish.com on behalf of <%= @guest.event.host_name %>. Please visit our website to learn more about ShareYourWish.com. Do not reply to this message. For technical support please contact info@shareyourwish.com.

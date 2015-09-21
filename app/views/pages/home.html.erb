@@ -1,0 +1,27 @@
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+<%= render :partial => 'notices-and-errors', :locals => {:errobj => nil} %>
+
+<div class="col-one-third box-shadow-reg">
+	<%= link_to "Create a New Event", user_signed_in? ? new_event_path(:user_id => current_user.id, :anchor => @first_tab) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green", :id => :start_new_event_button, :tabindex => 70 %>
+</div>
+<div class="col-two-thirds box-shadow-reg">
+	<h1>Welcome to Share Your Wish!</h1>
+	<p>
+		The paint is still drying on the walls, but our doors our open! Just in case you encounter a problem, please use the Feedback tag hanging on the right. Got a great idea to help improve ShareYourWish? Same tag.
+	<h3>Getting Started</h3>
+	<p>
+		We recommend that you read our very sincere <%= link_to 'Mission Statement', '/mission' %> to learn more about why ShareYourWish exists, and what we are here to do.
+	<p>
+		Then, go ahead and start a new event. It's free, so there's no risk.
+</div>
+
+	<% if production? %>
+	<script type="text/javascript">
+	  _kmq.push(['record', 'Conversion']);
+	</script>
+	<% end %>
+
+<% end %>

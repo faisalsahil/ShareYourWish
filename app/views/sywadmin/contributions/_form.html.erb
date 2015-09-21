@@ -1,0 +1,13 @@
+<%= semantic_form_for [:sywadmin, @contribution], :html => { :class => 'edit_contribution' } do |f| %>
+    <%= hidden_field_tag :transaction_fee, Contribution::TRANSACTION_FEE %>
+    <%= f.inputs 'Details' do %>
+      <%= f.input :charity, :as => :select, :collection => @contribution.event.try(:charities) %>
+      <%= f.input :guest %>
+      <%= f.input :event %>
+      <%= f.input :amount %>
+      <%= f.input :anonymous %>
+      <%= f.input :pay_transaction_fee %>
+    <% end %>
+
+    <%= f.buttons :commit %>
+<% end %>

@@ -1,0 +1,53 @@
+<% title "How it Works - Event Page - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+	<div class="col-single-large-margin box-shadow-reg">
+		
+		<H1>How ShareYourWish Works: Your Event Page</H1>
+		
+		<div class="how-step-row">
+			<div class="how-step-num"></div>
+			<div class="how-step-description" style="width:600px;">
+				<span class="how-step-title">Guests Visit Your Event Page Before The Party</span>
+				<ul>
+					<li>Personalize with Photos and Choice of Design Theme</li>
+					<li>Provide Details of your Event</li>
+					<li>Share Recent News</li>
+					<li>Message Board</li>
+					<li>Your Charity Selections</li>
+					<li>Guests Can RSVP and Make a Contribution</li>
+					<li>Secured &amp; Privacy Protected</li>
+				</ul>
+			</div>
+		</div>
+		
+		<a href="https://www.shareyourwish.com/events/28?howto=1" style="margin:10px;padding-bottom:8px; font-size:30px;font-weight:900;display:block;width:0 auto;text-align:center;">
+			View a Sample Event Page
+		</a>
+		
+		
+		<h3 style="text-decoration:underline;">NEW THEMES ARRIVING EACH WEEK! UPCOMING SAMPLES:</h3>
+		
+		<div style="width: 200px; margin-top:10px; margin-right:50px; float:left; text-align:center; margin-left:80px; font-size:24px; font-weight:800; border:2px solid #CCC;">
+			<%= image_tag 'event-page-theme-default.jpg'%><br>Standard
+		</div>
+		<div style="width: 200px; margin-top:10px; margin-right:50px; float:left; text-align:center;  font-size:24px; font-weight:800;border:2px solid #CCC;">
+			<%= image_tag 'event-page-theme-pirates.jpg'%><br>Pirate
+		</div>
+		<div style="width: 200px; margin-top:10px; float:left; text-align:center; font-size:24px; font-weight:800; border:2px solid #CCC;">
+			<%= image_tag 'event-page-theme-fairy.jpg'%><br>Fairy
+		</div>
+		<div class="clearfloat"></div>
+
+	
+		<p>
+		<%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green fl" %>
+		<%= link_to 'NEXT: For The Guest', '/how-it-works/for-the-guest', :class=>'button-type-standard button-size-big button-color-blue fr' %>
+		
+	</div>
+	
+	
+<% end %>

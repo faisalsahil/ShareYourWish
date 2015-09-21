@@ -1,0 +1,233 @@
+<% if step %>
+<% content_for :head do %>
+<% javascript_include_tag "steps/#{step.slug}" %>
+<% end %>
+<div class="step">
+
+	<div class="event_description">
+		<div class="step-head">
+			Your Event page is for Guests so speak to them personally!
+		</div>
+		<div class="step-subhead">
+			We recommend 2-6 images. Preview your page to view it as a Guest
+		</div>
+	</div>
+
+	<div id="step_<%= step.order %>_error"></div>
+
+	<div class="form">
+
+		<% if @event %>
+
+		<%= render "/events/fileupload/edit_pictures" %>
+
+		<hr />
+
+		<h3>Event Page</h3>
+		<span class="description">Edit the contents of your Event Page</span>
+		<br />
+
+		<%= form_for @event, :url => event_path(:id => @event.id), :html => { :id => :personalize_new_event } do |f| %>
+
+		<div id="step_error"></div>
+
+		<% if step.next %>
+		<%= f.hidden_field :step_id, :value => step.next.id %>
+		<%= f.hidden_field :state %>
+		<% end %>
+		<% if step.previous %>
+		<%= hidden_field_tag :previous_tab, step.previous.id %>
+		<% end %>
+
+		<span class="field-flag">*</span>
+		<%= f.label :page_content_one, "Welcome - Introduction" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_area :page_content_one, :required => :required, :rows => 5,  :class => :required, :tabindex => 290 %>
+			<!-- begin tooltip popup -->
+			<div class="sample-text-buttons">
+				<a href="javascript:void(0);" class="show_tooltip" title="Click to show/hide tooltip" tabindex="291">Need a Suggestion?</a>
+				<div class="hidden tooltip">
+					<ul>
+						<li>
+							<a href="javascript:void(0);" id="tooltip_default" class="tooltip_sample_link" tabindex="291">1</a>
+							<div class="sample_text hidden">Hello friends and family! We are looking forward to sharing this special day with you. We'd like to keep the focus of this celebration on what really matters, and we are inspired to share some of our good fortune with others who are less fortunate.<br/><br/>Instead of traditional gift-giving, we're inviting you to help us weave the lesson of sharing into our lives. Please don't stress about finding a gift and instead make a contribution that will help us teach a valuable life lesson. We'll make sure there are just enough presents to bring great joy and a big smile, and trade anything more than that for the gift of giving. </div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="tooltip_sample_link" tabindex="291">2</a>
+							<div class="sample_text hidden">We can't believe how big our little one is getting, and what a year it has been! And now it's time for another happy birthday. This year we're asking all of our friends and family to help us share this celebration with those who need a little extra help. We don't need a lot more 'things' around the house, and we believe that practicing charity benefits everyone. So instead of running to the store please help us teach the lesson that doing good feels good. </div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="tooltip_sample_link" tabindex="291">3</a>
+							<div class="sample_text hidden">What a big year Sarah had: learning to ride a bike, decorating our house with fabulous paintings, sleeping over a friend's house for the first time, taking a plane all the way to Florida and making lots of new friends (especially from the PoP dance program!)<br><br>We've been blessed with health and happiness, and Sarah has decided she'd like to share some of her birthday wish this year. There are a few presents she is anxiously hoping for, but she especially hopes to be able to give a gift of her own to charity. </div>
+						</li>
+					</ul>
+				 	<a href="javascript:void(0);" class="example-text-close" tabindex="291">close</a><div class="clearfloat"></div>
+					<div class="sample_text_preview" id="page_content_one_example">
+						(no options)
+					</div>
+					<center>
+						<a href="javascript:void(0);" class="button-type-standard button-color-blue button-size-small use_this_button" onclick="apply_example_text('event_page_content_one', 'page_content_one_example');" tabindex="291"><-- Use This One </a>
+						<br /><span class="example-text-warn">This will replace any existing text</span>
+					</center>
+				</div>
+			</div>
+			<div class="clearfloat"></div>
+			<!-- end tooltip popup -->
+			<span class="description">This is the first thing Guests will read. Start by giving them a nice hello or maybe a story. How has your child has grown in the past year? Any recent achievements or new interests? Why is your child choosing to share their birthday?</span>
+			<br />
+
+		</div>
+
+		<span class="field-flag">*</span>
+		<%= f.label :page_content_two, "Our Charity(s) - How did you and your child make your choice?" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_area :page_content_two, :required => :required, :rows => 5,  :class => :required, :tabindex => 292 %>
+			<!-- begin tooltip popup -->
+			<div class="sample-text-buttons">
+				<a href="javascript:void(0);" class="show_tooltip" title="Click to show/hide tooltip" tabindex="292">Need a Suggestion?</a>
+				<div class="hidden tooltip">
+					<ul>
+						<li>
+							<a href="javascript:void(0);" id="tooltip_default" class="tooltip_sample_link" tabindex="292">1</a>
+							<div class="sample_text hidden tooltip_default">We've chosen these charities because we feel so lucky to have happy and healthy kids, but not everyone is so lucky. We are choosing to support kids, and their families, who need a little extra help.</div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="tooltip_sample_link" tabindex="292">2</a>
+							<div class="sample_text hidden">We chose charities that have a special meaning to our family. The most important thing we can do is honor our loved ones, especially when they leave this world too soon. We have chosen charities that honor our past, and that we hope will make the future brighter for everyone. We believe in these organizations and their missions. </div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="tooltip_sample_link" tabindex="292">3</a>
+							<div class="sample_text hidden">We sat down with Sarah and asked if she would be willing to give some of her birthday gifts to Charity. She agreed and decided that she wanted to help other kids who were stuck in bed or in a hospital and couldn't celebrate their birthday with all their friends and family.<br><br>We flipped around the top recommended charities and Sarah was most excited to know that she would be supporting the fight to find cures for leukemia and juvenile diabetes.</div>
+						</li>
+					</ul>
+					<a href="javascript:void(0);" class="example-text-close" tabindex="292">close</a><div class="clearfloat"></div>
+					<div class="sample_text_preview" id="page_content_two_example">
+						(no options)
+					</div>
+					<center>
+						<a href="javascript:void(0);" class="button-type-standard button-color-blue button-size-small use_this_button" onclick="apply_example_text('event_page_content_two', 'page_content_two_example');" tabindex="292"><-- Use This One</a>
+						<br /><span class="example-text-warn">This will replace any existing text</span>
+					</center>
+				</div>
+			</div>
+			<div class="clearfloat"></div>
+			<!-- end tooltip popup -->
+			<span class="description">This text will accompany a list of the Charity(s) you selected. How did you pick charities to support? </span>
+			<br />
+		</div>
+
+		<span class="field-flag">*</span>
+		<%= f.label :page_content_three, "What will the child's Gift Fund be used to purchase?" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_area :page_content_three, :required => :required, :rows => 5, :class => :required, :tabindex => 293 %>
+			<!-- begin tooltip popup -->
+			<div class="sample-text-buttons">
+				<a href="javascript:void(0);" class="show_tooltip" title="Click to show/hide tooltip" tabindex="293">Need a Suggestion?</a>
+				<div class="hidden tooltip">
+					<ul>
+						<li>
+							<a href="javascript:void(0);" id="tooltip_default" class="tooltip_sample_link" tabindex="293">1</a>
+							<div class="sample_text hidden tooltip_default">It's what every child wants: a brand new bicycle with all the trimmings. Mom and Dad are ready to relive childhood memories of skinned knees and bruised egos. And for those rainy days when biking just isn't possible, a big set of bright and colorful markers and a giant pad of paper.</div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="tooltip_sample_link" tabindex="293">2</a>
+							<div class="sample_text hidden">One of our favorite things to do as a family is Imagination Time, and one of the kids' favorite places to play is the trusty blankets-and-couch fort. For this birthday we'd like to surprise them by taking Imagination play time to the next level. We've found an awesome set of indoor building-blocks that the kids can use to build a mighty fort in the living room, and attempt to defend the attacks of evil Daddwing the dread dragon.</div>
+						</li>
+						<li>
+							<a href="javascript:void(0);" class="tooltip_sample_link" tabindex="293">3</a>
+							<div class="sample_text hidden">It's amazing how quickly kids can learn to use technology, and our Leo is no different!  He has become somewhat obsessed with our iPad and all the great learning apps on it, so much so that we think it's time for him to have his own!  With all of your generous contributions we are going to get our little techie a new iPad mini to fit his little hands.  By his 5th birthday, he'll probably be able to teach us a thing or two! </div>
+						</li>
+					</ul>
+				   <a href="javascript:void(0);" class="example-text-close" tabindex="293">close</a><div class="clearfloat"></div>
+					<div class="sample_text_preview" id="page_content_three_example">
+						(no options)
+					</div>
+					<center>
+						<a href="javascript:void(0);" class="button-type-standard button-color-blue button-size-small use_this_button" onclick="apply_example_text('event_page_content_three', 'page_content_three_example');" tabindex="293"><-- Use This One</a>
+						<br /><span class="example-text-warn">This will replace any existing text</span>
+					</center>
+				</div>
+			</div>
+			<div class="clearfloat"></div>
+			<!-- end tooltip popup -->
+			<span class="description">What special gift(s) will your Guests be contributing towards? Usually this is best if it is a single large gift or a few related gifts. Add a picture too, if you have one.</span>
+			<br />
+		</div>
+
+		<span class="field-flag"></span>
+		<%= f.label :page_content_four, "Other details about the Event" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_area :page_content_four, :rows => 5, :tabindex => 294 %>
+			<!-- begin tooltip popup -->
+			<div class="sample-text-buttons">
+				<a href="javascript:void(0);" class="show_tooltip" title="Click to show/hide tooltip" tabindex="294">Need a Suggestion?</a>
+                <div class="hidden tooltip">
+                    <ul>
+                        <li>
+                            <a href="javascript:void(0);" id="tooltip_default" class="tooltip_sample_link" tabindex="294">1</a>
+                            <div class="sample_text hidden">Be sure to dress in layers because we'll be going indoors and outdoors.<br><br>Lisa Smith @ 917.555.1234</div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="tooltip_sample_link" tabindex="294">2</a>
+                            <div class="sample_text hidden">Please feel free to call me with any questions. We can't wait to see everyone!<br><br>When you show up at the house, just walk around the side to the back door - don't wait in front because we might not hear the bell.<br><br>Dan's Cell Phone  917.555.1234<br>My Cell Phone  917.555.1234</div>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);" class="tooltip_sample_link" tabindex="294">3</a>
+                            <div class="sample_text hidden">The kids are in for a special superhero visitor, but we're not going to spoil the surprise! Things might get a little messy so consider bringing an extra t-shirt. Please call if you're running more than fifteen minutes late.<br><br>Judy 917-555-1234 </div>
+                        </li>
+                    </ul>
+						  <a href="javascript:void(0);" class="example-text-close" tabindex="294">close</a><div class="clearfloat"></div>
+						  <div class="sample_text_preview" id="page_content_four_example">
+                        (no options)
+                    </div>
+                    <center>
+                        <a href="javascript:void(0);" class="button-type-standard button-color-blue button-size-small use_this_button" onclick="apply_example_text('event_page_content_four', 'page_content_four_example');" tabindex="294"><-- Use This One</a>
+								<br /><span class="example-text-warn">This will replace any existing text</span>
+							</center>
+						</div>
+					</div>
+					<div class="clearfloat"></div>
+					<!-- end tooltip popup -->
+			<span class="description">Such as your phone number or contact info, special directions, attire, unusual requests and any other important details you want to appear in the invitation</span>
+			<br />
+		</div>
+
+		<span class="field-flag"></span>
+		<%= f.label :other_page_content, "Any other final thoughts?" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_area :other_page_content, :rows => 5, :cols => 60, :tabindex => 295 %>
+			<span class="description">Anything else that didn't fit in the spaces above</span>
+			<br />
+		</div>
+
+        <hr />
+        <% if @themes %>
+
+		<h3>Theme</h3>
+		<span class="description">Select a style for your page and customize colors</span>
+		<div class="themes_wrapper">
+			<%= render @themes %>
+		</div>
+
+		<hr />
+        <% end %>
+
+		<%= f.button (@edit ? 'Save' : 'Save & Next step'), :id => "personalize_page_button", :class => "button-type-standard button-size-medium button-color-green event_form_submit_button fr", :type => :button, :state_class => @event.get_state_at_complete(step), :tabindex => 297 %>
+
+		<%= f.button 'Previous', :class => "previous_event_button button-type-standard button-size-medium button-color-green fl", :type => :button, :tabindex => 298 %>
+
+		<% end # form%>
+
+		<%= button_to 'Cancel Event', event_path(@event), :method => :delete, :class => "button-type-standard button-size-medium button-color-red cancel_event_button", :confirm => 'Are you sure? This will permanently remove the Event.', :tabindex => 299 %>
+		<div class="clearfloat"></div>
+
+		<% end # event%>
+	</div>
+
+</div>
+<% end  #step%>

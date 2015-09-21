@@ -1,0 +1,288 @@
+<div class="col-single-large-margin box-shadow-reg event-page-bg">
+
+<% if @event && @guest %>
+	<% content_for :head do %>
+	<%= javascript_include_tag 'events' %>
+	<%= stylesheet_link_tag 'events/event-page-shared' %>
+	<%= stylesheet_link_tag @event.theme.stylesheet %>
+	<% end %>
+	<% title "#{@event.title} - Share Your Wish" %>
+
+	<%= render :partial => 'notices-and-errors' %>
+
+	<div class="show_event_wrapper"> 
+
+		<span class="event-page-title"> <% if @event.title.present? %>
+			<%= @event.title %>
+			<% else %>
+			(Title not entered yet)
+			<% end %> </span>
+
+		<div class="show_event_left_col_wrapper" id="gallery">
+			<% if @event.pictures.present? %>
+			<% @event.pictures.limit(4).each do |picture| %>
+			<%= link_to image_tag(picture.image.url(:medium)), picture.image.url(:large) %>
+			<% end %>
+			<% if @event.pictures.count > 4 %>
+			<% @event.pictures.offset(4).each do |picture| %>
+			<%= link_to image_tag(picture.image.url(:icon)), picture.image.url(:large) %>
+			<% end %>
+			<% end %>
+			<% else %>
+			(no images have been uploaded)
+			<% end %>
+		</div>
+		<div class="show_event_right_col_wrapper">
+
+			<div class="blowing_message_wrapper ">
+				<%= image_tag 'wishing-on-candles-icon.png' %>
+				<div class="blowing_message">
+					It's <%= @event.child_full_name %>'s special day and <%= @event.format_child_pronouns[0] %> <%= @event.joint_party? ? 'have' : 'has' %> chosen to share <%=  @event.format_child_pronouns[2] %> birthday wish! <%= @event.format_child_name('is','are') %> requesting that, in lieu of shopping for a gift, you make a contribution here so that <%= @event.format_child_pronouns[0]  %> can donate a portion of it to charity and pool the rest in a gift fund to purchase a special gift(s) from all <%= @event.format_child_pronouns[2]  %> friends!
+				</div>
+			</div>
+			<div class="event-page-content">
+				<div class="event-page-section-title">
+					Welcome to <%= @event.format_child_name %>'s Event page!
+				</div>
+				<% if @event.page_content_one.present? %>
+				<div class="event-page-section-details">
+					<%= clean_with_new_lines @event.page_content_one %>
+				</div>
+				<% else %>
+				<div class="event-page-section-details">
+					(introduction not yet entered)
+				</div>
+				<% end %>
+
+				<div class="event-page-section-title">
+					<%= @event.format_child_name  %>'s Chosen <%= "Charity".pluralize(@event.charities.length) %>
+				</div>
+				<% if @event.charities.present? %>
+				<div class="event-page-section-details no-bottom">
+					<%= clean_with_new_lines @event.page_content_two %>
+				</div>
+				<br />
+				<%= render :partial => 'charities/event_show_charity', :collection => @event.charities, :as => :charity %>
+				<% else %>
+				<div class="event-page-section-details">
+					(charity not yet selected)
+				</div>
+				<% end %>
+
+				<div class="event-page-section-title">
+					<%= @event.format_child_name %>'s Gift Fund
+				</div>
+				<% if @event.page_content_three.present? %>
+				<div class="event-page-section-details">
+					<%= clean_with_new_lines @event.page_content_three %>
+				</div>
+				<% else %>
+				<div class="event-page-section-details">
+					(Gift Fund use not yet described)
+				</div>
+				<% end %>
+
+				<div class="event-page-section-title">
+					Details about the Event
+				</div>
+				<div class="event-page-section-details">
+					<strong> <% if @event.event_date.present? %>
+					<%= @event.event_date.strftime("%A, %B %e, %Y") %>
+					<% else %>
+					(Event Date not yet set)
+					<% end %> </strong>
+					<br />
+					<% if @event.start_time && @event.end_time %>
+					<%= @event.start_time.to_datetime.strftime("%l:%M %P") %> to <%= @event.end_time.to_datetime.strftime("%l:%M %P") %>
+					<br />
+					<br />
+					<% end %>
+					<% if @event.location_name.present? %>
+					<%= @event.location_name %>
+					<br />
+					<br />
+					<% end %>
+					<% if @event.location_address.present? %>
+					<%= @event.location_address %>
+					<br />
+					<div class="indent-me">
+						<%= link_to 'http://maps.google.com/?q='+@event.location_address, :target=>'_new' do%>
+						<%= image_tag('map-it.png')%> Map It
+						<% end %>
+					</div>
+					<br />
+					<br />
+					<% end %>
+					<% case @event.parents_invited  
+							when "drop_off_only" %>
+							This party is Just For The Kids!
+						<% when "required" %>
+							Parents Please Attend
+						<% when "optional" %>
+							Parents are Welcome to Attend
+					<% end %>
+					<br />
+					<br />
+					<% if @event.page_content_four.present? %>
+					<%= clean_with_new_lines @event.page_content_four %>
+					<% else %>
+					(no other special details)
+					<% end %>
+				</div>
+
+				<% if @event.other_page_content.present? %>
+				<div class="event-page-section-title">
+					Other Thoughts
+				</div>
+				<div class="event-page-section-details">
+					<%= clean_with_new_lines @event.other_page_content %>
+				</div>
+				<% end %>
+
+			</div>
+			<div class="event-page-comments">
+				<div class="event-page-section-title">
+					Messages
+				</div>
+				Leave the birthday <%= @event.format_child_pronouns[3]  %> a special message!
+				<div id="guest_comments_target">
+					<% if @comments.present? %><%= render :template => 'comments/index' %><% end %>
+				</div>
+				<%= render 'comments/guest_event_coment_form' %>
+			</div>
+		</div>
+
+		<%= render :partial => 'mixed_popup' %>
+
+		<!-- section 2 -->
+		<div class="show_event_left_col_wrapper" class="">
+			&nbsp;
+		</div>
+
+		<div class="show_event_right_col_wrapper" class="bordered">
+			<div class="event-page-section-title">
+				RSVP
+			</div>
+			<div class="indent-me">
+				<%= render 'guests/attendance_form' %>
+			</div>
+		</div>
+
+		<div class="clearfloat"></div>
+		<div class="show_event_left_col_wrapper">
+			<div id="questions" class="bordered">
+				<ul>
+					<li>
+						<%= link_to 'Is my contribution tax deductible?','javascript:void(0);', :class=>:event_page_faq_btn %>
+					</li>
+					<li>
+						<%= link_to 'Is my contribution secure?','javascript:void(0);', :class=>:event_page_faq_btn  %>
+					</li>
+					<li>
+						<%= link_to 'How much should I contribute?','javascript:void(0);', :class=>:event_page_faq_btn  %>
+					</li>
+					<li>
+						<%= link_to 'Is there any fees in addition to my contribution?','javascript:void(0);', :class=>:event_page_faq_btn  %>
+					</li>
+				</ul>
+			</div>
+
+			<%= link_to 'Remind me about ShareYourWish for a future birthday!','javascript:void(0);', :class => 'button-type-standard button-color-blue button-size-big', :onclick =>  @guest.anonymous? ? '' : "jQuery('.guest_children').toggleClass('hidden');" %>
+			<% unless @guest.anonymous? %>
+			<%= render 'children/uninvited_form' %>
+			<div class="guests_notice bordered hidden"></div>
+			<% end %>
+		</div>
+
+		<div class="event_faq_popup hidden">
+			<%= render :partial=>'events/contribution_faqs'%>
+		</div>
+		
+		<div class="show_event_right_col_wrapper" class="bordered">
+			<p>
+			<div class="event-page-section-title">My Contribution</div>
+			<div class="indent-me">
+				<div class="dashed-box">
+					<% if @event.charity_donation_percent %>
+					<strong><%= (@event.charity_donation_percent*100).to_i %>%</strong> of all contributions will go to our Charity Donation Fund
+					<br />
+					<strong><%= ((1-@event.charity_donation_percent)*100).to_i %>%</strong> will go to a Gift Fund for <%= @event.format_child_name  %>
+					<% else %>
+					<strong>TBD %</strong> of all contributions will go to our Charity Donation Fund
+					<br />
+					<strong>TBD %</strong> will go to a Gift Fund for <%= @event.format_child_name  %>
+					<% end %>
+				</div>
+
+				<!-- need this to be rendered after contribution form is submitted -->
+				<div id="contribution-given" class="bordered" style="width: 500px; padding: 10px; font-size: 1em; font-weight: bold; display:none; ">
+					<h2>Thanks for making a contribution!</h2> 
+					<% if @guest.children.count>0 %>
+					<p>We'd also like to thank and recognize each child who, through you, has supported a great cause. Be sure to print out the <b>certificate of recognition</b> below:<br>
+						<div class="center-me indent-me">
+							<% @guest.children.each do |child| 
+								unless child.id==nil  # this will be the case for built record from reminder form%>
+							<div>
+								<%= link_to image_tag("print_certificate_icon.png") + "Print/Save "+first_word(child.name)+"'s Reward Certificate", reward_certificate_guest_child_path(:guest_id=> @guest.id, :id=> child.id, :event_id=> @guest.event_id, :format => :pdf), :target=>"_blank" %>
+							</div>
+							<% end 
+							   end %>
+						</div>
+					<% end %>
+					<p>Your payment has been received. If you need further assistance or have any questions about your contribution, please contact us and we'll be glad to help.
+					<br/>
+					<%= form_tag contact_us_path, :method => :put, :class => :button_to_inline do |f| %>
+					<%= hidden_field_tag 'feedback[name]', @guest.full_name %>
+					<%= hidden_field_tag 'feedback[email]', @guest.email %>
+					<%= hidden_field_tag 'feedback[title]', "Please contact me regarding: #{@event.title} [#{@event.id}]" %>
+					<%= submit_tag 'Contact Us', :class => "link button-type-standard button-color-blue button-size-medium", :tabindex => 57 %>
+					<% end %>
+				</div>
+				<!-- thanks -->
+				
+				<% if @contribution %>
+					<div id="contribution_form_with_buttons_wrapper">
+						<% unless @guest.anonymous? %>
+						<p>
+						<div id="my_contribution_response_wrapper" class="hidden">
+							My Response: <span class="event-response" id="my_contribution_response">No, Thanks</span>
+						</div>
+						<p>
+						<%= link_to 'Yes, I Will Participate', '#', :id => "contribution_participate_button", :tabindex => 39 %>
+						<%= link_to 'No, Thanks', '#', :id => "no_contribution_participate_button", 'data-url' => guest_path(@guest), 'data-lookup-guests-status-id' => @lookup_guests_status_rejected.id, :tabindex => 40 %>
+						<br/>
+
+						<% end %>
+						<div id="contribution_form_wrapper" class="bordered<%= @show_open ? '' : ' hidden_important' %>">
+							<%= render 'contribution/form' %>
+						</div>
+						<div id="checkout_confirmation" class="bordered hidden">
+							<h3>We are ready to charge your card.</h3>
+							<p>Total amount to be charged: $<span id="total_amount">12</span>
+							<p>
+							<%= button_tag 'Confirm My Contribution', :id => @guest.anonymous? ? :none : :submit_guest_contribution, :class => 'button-type-standard button-size-medium button-color-green', :disabled => @guest.anonymous?, :tabindex => 56 %>
+						</div>
+					</div>
+				<% elsif @event.contributions_locked? %>
+					<br />
+					<div id="contribution-locked" class="bordered hidden" style="width: 500px; padding: 10px; font-size: 1em; font-weight: bold; ">
+						Thanks to everyone that participated! Our event is now closed to further contributions.
+					</div>
+				<% elsif @guest.contributed? %>
+					<br />
+					<%= javascript_tag do %>
+						jQuery('#contribution-given').show();
+					<% end %>
+				<% end %>
+			
+				
+			
+			</div> <!-- indent -->
+
+		</div>
+	</div>
+
+
+<% end %>
+
+</div>

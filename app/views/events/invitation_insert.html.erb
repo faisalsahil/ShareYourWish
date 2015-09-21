@@ -1,0 +1,16 @@
+<% title "Printable Inserts for Invitations - ShareYourWish" %>
+<head>
+<%= stylesheet_link_tag 'print/events/invitation_insert', :media => 'screen, print' %>
+</head>
+
+<div class="invitation-insert-page">
+	<%= render :partial => 'events/invitation_insert' %>
+	<div class="invitation-insert-spacer">&nbsp;</div>
+	<%= render :partial => 'events/invitation_insert' %>
+	<div class="clearfloat"></div>
+	<div style="min-height:.5in;">&nbsp;</div>
+	<%= render :partial => 'events/invitation_insert' %>
+	<div class="invitation-insert-spacer">&nbsp;</div>
+	<%= render :partial => 'events/invitation_insert' %>
+	
+</div>

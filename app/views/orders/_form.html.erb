@@ -1,0 +1,30 @@
+<% if current_user && @event && @order && @payment && @states && @shipping_address %>
+
+<%= form_for([@payment, @shipping_address, @order], :url => url_for(@order)) do |of| %>
+<%= render :partial => 'notices-and-errors', :locals => {:errobj => @order} %>
+
+<%= of.hidden_field :user_id, :value => current_user.id %>
+<%= of.hidden_field :event_id, :value => @event.id %>
+<%= of.hidden_field :shipping_total_cost %>
+<%= of.hidden_field :tax_total_cost %>
+<%= of.hidden_field :subtotal %>
+<%= of.hidden_field :total_cost, :value => @order.calc_total_cost %>
+
+<fieldset class="dashed padded">
+	<legend class="padded">
+		Credit card
+	</legend>
+	<%= render 'payments/user_form', :form => of %>
+</fieldset>
+
+<fieldset class="dashed padded">
+	<legend class="padded">
+		Shipping address
+	</legend>
+	<%= render 'addresses/form', :form => of, :address => @shipping_address %>
+</fieldset>
+
+<%= of.submit 'Checkout', :id => :event_checkout_button, :class => 'hidden' %>
+
+<% end %>
+<% end %>

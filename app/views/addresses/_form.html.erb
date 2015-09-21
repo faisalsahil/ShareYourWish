@@ -1,0 +1,65 @@
+<% if current_user && defined? address %>
+<%= form.fields_for "#{address.atype}_address", address do |af| %>
+<%= af.hidden_field :user_id, :value => current_user.id %>
+<%= af.hidden_field :atype %>
+
+<span class="field-flag">*</span>
+<label>First name: </label>
+<br />
+<div class="indent-me">
+	<%= af.text_field :first_name, :class => 'form-field-small required', :size => 20, :required => :required, :tabindex => 357 %>
+</div>
+
+<span class="field-flag">*</span>
+<label>Last name: </label>
+<br />
+<div class="indent-me">
+    <%= af.text_field :last_name, :class => 'form-field-small required', :size => 20, :required => :required, :tabindex => 357 %>
+</div>
+
+<span class="field-flag"> </span>
+<label>Company name: </label>
+<br />
+<div class="indent-me">
+    <%= af.text_field :company_name, :class => 'form-field-small', :size => 20, :tabindex => 357 %>
+</div>
+
+<span class="field-flag">*</span>
+<label>Address 1: </label>
+<br />
+<div class="indent-me">
+    <%= af.text_field :address_1, :class => 'form-field-big required', :required => :required, :tabindex => 357 %>
+</div>
+
+<span class="field-flag"> </span>
+<label>Address 2: </label>
+<br />
+<div class="indent-me">
+    <%= af.text_field :address_2, :class => 'form-field-big', :tabindex => 357 %>
+</div>
+
+<span class="field-flag">*</span>
+<label>City: </label>
+<br />
+<div class="indent-me">
+    <%= af.text_field :city, :class => 'form-field-small required', :required => :required, :tabindex => 357 %>
+</div>
+
+<span class="field-flag">*</span>
+<label>State: </label>
+<br>
+<div class="indent-me">
+    <%= af.select :state_id, options_from_collection_for_select(@states, :id, :name), {:prompt =>'State'}, :required => :required,  :class => :required, :tabindex => 357 %>
+    </div>
+<br />
+
+<span class="field-flag">*</span>
+<label>Postal Code: </label>
+<br />
+<div class="indent-me">
+    <%= af.text_field :postal_code, :class => 'form-field-small required postalcode', :required => :required, :tabindex => 357  %>
+</div>
+
+<% end %>
+<% end %>
+

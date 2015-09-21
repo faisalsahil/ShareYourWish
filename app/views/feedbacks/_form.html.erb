@@ -1,0 +1,28 @@
+<%= form_for(@feedback) do |f| %>
+  <% if @feedback.errors.any? %>
+    <%= render :partial => 'notices-and-errors', :locals => {:errobj => @feedback} %>
+  <% end %>
+  <% if current_user %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  <% end %>
+
+  <div class="field">
+    <%= f.text_field :name, :placeholder => "Your Name", :class => "form-field-small required", :size => 50, :minlength => 2, :maxlength => 255, :required => :required, :tabindex => 1 %> 
+  </div>  
+
+  <div class="field">
+    <%= f.text_field :email, :placeholder => "Email", :class => "form-field-small required email", :size => 50, :minlength => 2, :maxlength => 255, :required => :required, :tabindex => 2  %> 
+  </div>
+
+  <div class="field">
+    <%= f.text_field :title, :placeholder => "Subject", :class => "form-field-medium required", :size => 100, :minlength => 2, :maxlength => 255, :required => :required, :tabindex => 3 %> 
+  </div>  
+
+  <div class="field">
+    <%= f.text_area :message, :placeholder => "Message", :class => "form-field-small required", :minlength => 2, :required => :required, :tabindex => 4 %> 
+  </div>
+
+  <div class="actions">
+    <%= f.submit :value => 'Submit', :id => :feedback_submit_button, :class => 'button-type-standard button-size-medium button-color-green', :tabindex => 5 %> 
+  </div>
+<% end %>

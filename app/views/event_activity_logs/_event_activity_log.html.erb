@@ -1,0 +1,3 @@
+<% if defined? event_activity_log %>
+  <li id="event_activity_log_<%= event_activity_log.id %>"><span style="color: #e59a3e;"><%=time_ago_in_words event_activity_log.created_at %> ago:</span> <%= event_activity_log.message %></li>
+<% end %>

@@ -1,0 +1,13 @@
+<% if @guest && @event && defined?(form) %> 
+    <% is_invited ||= false %>
+    <% children = is_invited ? @guest.children.invited : @guest.children %>
+    <% children << Child.new(:event => @event, :guest => @guest) %>
+    
+    <% children.each do |child| %>
+        <%= render 'children/guest_form_single', :child => child, :form => form, :is_invited => is_invited %>
+    <% end %>
+    <%= link_to 'Add Child', 'javascript:void(0);', :id => :add_new_guest_child_link %>
+    <div id="new_child_template" class="hidden">
+        <%= render 'children/guest_form_single', :child => Child.new(:event => @event, :guest => @guest), :form => form, :is_invited => is_invited %>
+    </div>
+<% end %>

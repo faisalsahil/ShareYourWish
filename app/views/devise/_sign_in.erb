@@ -1,0 +1,39 @@
+<h1 style="margin-bottom:12px;">I'm Already Registered &ndash; Sign in</h1>
+
+<%= render :partial => 'notices-and-errors', :locals => {:errobj => resource} %>
+
+<%= render 'social_login' %>
+
+<div id="local-login">
+
+	<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+
+	<div>
+		<%= f.label :email %>
+		<br />
+		<%= f.email_field :email, :class=> 'form-field-big', :placeholder => "your email", :tabindex => 13 %>
+	</div>
+
+	<div>
+		<%= f.label :password %>
+		<br />
+		<%= f.password_field :password, :class=> 'form-field-big', :placeholder => "password", :tabindex => 14 %>
+	</div>
+
+	<% if devise_mapping.rememberable? -%>
+	<div>
+		<%= f.check_box :remember_me, :checked=>true, :tabindex => 15 %> Keep Me Logged In
+	</div>
+	<% end -%>
+
+	<div class="center-contents">
+		<%= f.submit "Sign in", :class => 'button-type-standard button-size-big button-color-green display-IB', :value=> 'Sign In', :tabindex => 16 %>
+	</div>
+	<% end %>
+
+	<%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+	<%= link_to "Help! I forgot my password.", new_password_path(resource_name), :tabindex => 17 %>
+	<br />
+	<% end -%>
+</div>
+

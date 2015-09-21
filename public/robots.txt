@@ -1,0 +1,5 @@
+User-Agent: *
+Disallow: /assets/
+Disallow: /system/
+
+Sitemap: http://www.shareyourwish.com/sitemap_index.xml.gz

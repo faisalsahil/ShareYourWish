@@ -1,0 +1,12 @@
+<% content_for :outside do %>
+
+	<%= render :partial => 'page_head'%>
+	
+	<h2>Show Cookies</h2>
+        
+  	<% cookies.each do |k,v|      %>
+		<%= k %>  =  <%= v %>  <br> <br> 
+	<% end  %>
+	                 
+
+<% end %>

@@ -1,0 +1,96 @@
+<div id="pagehead">
+	<div class="logo" id="syw-logo">
+		<%= link_to image_tag('SYW_logo.png'), root_url %>
+	</div>
+
+	<div class="logo-title">
+		<%= link_to image_tag('SYW_logo_text.png'), root_url %>
+	</div>
+
+	<%= render 'nav' %>
+
+	<div id="main-menu-container">
+		<ul class="main-menu">
+			<li>
+				<%= link_to "My Events", events_path, :title=>"View a summary of all of your past and present Events" %>
+				<ul class="submenu">
+					<li>
+						<% if @event && @event.status!="in_progress" %>
+							<%= link_to 'Manage My Event', event_dashboard_path(@event.id), :title=>"Manage your existing event, or Create a new event" %>
+						<% elsif current_user && current_user.user_event_for_menu %>
+							<%= link_to 'Manage My Event', event_dashboard_path(current_user.user_event_for_menu), :title=>"Manage your existing event, or Create a new event" %>
+						<% else %>
+						<div class="menu-disabled">
+							Manage My Event
+						</div>
+						<% end %>
+					</li>
+					<li>
+						<% if @event && @event.status!="in_progress" %>
+							<%= link_to 'View Event Page', event_path(@event.id), :title=>"See your Event page from Guests' point of view" %>
+						<% elsif current_user && current_user.user_event_for_menu %>
+							<%= link_to 'View Event Page', event_path(current_user.user_event_for_menu), :title=>"See your Event page from Guests' point of view" %>
+						<% else %>
+						<div class="menu-disabled">
+							View Event Page
+						</div>
+						<% end %>
+					</li>
+					<li>
+						<% if current_user && user_signed_in? %>
+						<%= link_to 'Create new Event', new_event_path(:user_id => current_user.id, :anchor => @first_tab) %>
+						<% else %>
+						<%= link_to 'Create new Event', new_user_session_path %>
+						<% end %>
+					</li>
+				</ul>
+			<li>
+				<a href="/posts" title="Resources to Teach, Share, and Inspire">Teach &amp; Learn</a>
+			</li>
+			<!-- >
+			<ul class="submenu">
+			<li><a href="/learn/explore" title="Have fun exploring with your child">Explore</a>
+			<li><a href="/learn/community" title="A place to share experiences, tips, ideas, inspiration">Community</a>
+			<li><a href="/learn/teach" title="Tools and techniques to help children learn about Charity">Teach</a>
+			</ul>
+			-->
+			<li>
+				<a href="/browse/charities">Browse</a>
+				<ul class="submenu">
+					<li>
+						<a href="/browse/charities" title="Review the charities you are able to support through Share Your Wish">Charities</a>
+					</li>
+				</ul>
+				<!-- <li><a href="/browse/find-an-event" title="If you know the Magic Word, find your event here">Find an Event</a>
+				<li><a href="/browse/award-wall" title="Celebrate kids who have Shared Their Wish">Award Wall</a> -->
+				<!--
+				<li><a href="/goodies" title="Something special to make your child's big day even more special">Goodies</a>
+				-->
+			</li>
+			<li>
+				<a href="/how-it-works/for-the-host" title="How the Share Your Wish service works">How it Works</a>
+				<ul class="submenu">
+					<li>
+						<a href="/how-it-works/for-the-host" title="How SYW Works From the Host's point of view">For the Host</a>
+					</li>
+					<li>
+						<a href="/how-it-works/benefits" title="Use the Dashboard to Manage Your Event">Benefits</a>
+					</li>
+					<li>
+						<a href="/how-it-works/dashboard" title="Use the Dashboard to Manage Your Event">Dashboard</a>
+					</li>
+					<li>
+						<a href="/how-it-works/event-page" title="Your Event Page is for Your Guests">Event Page</a>
+					</li>
+					<li>
+						<a href="/how-it-works/for-the-guest" title="How SYW Works From the Guest's point of view">For the Guest</a>
+					</li>
+					<li>
+						<a href="/how-it-works/faq" title="Frequently Asked Questions">F.A.Q.</a>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+

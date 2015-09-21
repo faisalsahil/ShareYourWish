@@ -1,0 +1,19 @@
+// Place all the styles related to the children controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.show_event_wrapper .guest_children
+{
+  color: #888;
+  padding: 10px;
+  border: 1px solid #CCC;
+  background: #FBEFE0;
+  position: absolute;
+  left: 230px;
+  width: 510px;
+  z-index: 1000;
+  .guests_children_buttons{
+    padding-right:34px;
+    float:right;
+  }
+}

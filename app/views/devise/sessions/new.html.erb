@@ -1,0 +1,36 @@
+<% title "Login or Sign Up - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+<div class="clearfloat"></div>
+
+<div class="col-one-half box-shadow-reg">
+	<h1 style="margin-bottom:12px;">I'm a First Time User &ndash;  Sign Up</h1>
+	<p>
+		Share Your Wish is a <%= link_to "social enterprise", "/mission"%>  dedicated to teaching the virtues of charity while creating a better, more rewarding gift exchange for kids.
+		<ul id="feature-benefits">
+			<li>
+				All core features are <span class="text-emphasis">FREE</span>
+			<li>
+				<span class="text-emphasis">Support</span> your favorite charity
+			<li>
+				<span class="text-emphasis">Explore</span> tips and tools for teaching charity to kids
+			<li>
+				<span class="text-emphasis">Share</span> with our Community
+			<li>
+				Safe and <span class="text-emphasis">Secure</span>
+		</ul>
+	<p class="center-contents">
+		<%= link_to new_user_registration_path do %>
+		<input type="submit" class="button-type-standard button-size-big button-color-green display-IB" value="Sign Up" tabindex="18">
+		<% end %>
+</div>
+<div class="col-one-half box-shadow-reg" id="new_session">
+
+	<%= render "sign_in" %>
+
+</div>
+
+<% end %>

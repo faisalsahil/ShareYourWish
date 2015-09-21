@@ -1,0 +1,10 @@
+<%= @title %>
+	
+<%= @body %>
+
+Please <%= link_to 'visit our event page', invite_url(@guest) %> at ShareYourWish.com.
+
+From,
+<%= @guest.event.host_name %>
+
+This message was sent to you by ShareYourWish.com on behalf of <%= @guest.event.host_name %>. Please visit our website to learn more about ShareYourWish.com. Do not reply to this message. For technical support please contact info@shareyourwish.com.

@@ -1,0 +1,41 @@
+<% if defined? guest %><% @guest = guest %><% end %>
+<%= form_for @guest, :html => { :id => :create_or_update_guest } do |f| %>
+<%= f.hidden_field :event_id, :value => @event.id %>
+
+<%= render 'children/invited_form', :form => f %>
+
+<table class="guest-table" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="width:30px;" class="guests-checkbox"><% if @guest.persisted? %><%= check_box_tag :select_guest, @guest.id, false  %><% end %></td>
+			<td style="width:125px;" class="guests-full-name"> <%= f.text_field :full_name, :required => :required, :size => 15, :class => :required, :minlength => 2, :maxlength => 255, :placeholder => "Adult name" %> </td>
+			<td style="width:150px;" class="guests-email"> <%= f.text_field :email, :required => :required, :size => 23, :class => 'required email', :minlength => 2, :maxlength => 255, :placeholder => "Email"  %> </td>
+			<td style="width:56px;"><% if @guest.message.present? %><%= link_to image_tag('message_icon.png'), 'javascript:void(0);', :class=>'message-tip', :title => @guest.message %><% else %><%= image_tag 'message_icon_empty.png', :class=>'message-tip-empty'%><% end %></td>
+			<td style="width:170px; padding-right: 4px;" colspan="2" class="guests-status-smaller"> <% if @guest.persisted? %><%= @guest.lookup_guests_status.friendly_text if @guest.lookup_guests_status %><% end %></td>
+			<td style="width:135px;"> <%= link_to 'Save', 'javascript:void(0)', :id => :guests_save_button, :class =>'choose_button ui-button ui-widget ui-state-default ui-corner-all ui-state-hover' %>
+			<%= link_to 'Cancel', 'javascript:void(0)', :id => :guests_cancel_button, :class =>'choose_button ui-button ui-widget ui-state-default ui-corner-all ui-state-hover' %> </td>
+		</tr>
+
+		<tr>
+			<td style="width:30px;"></td>
+			<td style="width:275px;" colspan="2" class="guests-children-names"><span style="font-weight:400;"><span style="text-decoration:underline;">Kids</span>: </span><%= @guest.invited_children.length>0 ? @guest.invited_children : "none" %></td>
+			<td style="width:56px;"></td>
+			<td style="width:99px;" class="guests-status-smaller">RSVP:</td>
+			<td style="width:210px;" colspan="2" class="guests-status-smaller"><%= f.select :attendance, Guest::ATTENDANCES_TMP.invert %></td>
+		</tr>
+		<tr>
+			<td style="width:30px;"></td>
+			<td style="width:275px;" colspan="2"><%= link_to 'Add / Remove Kid(s)', 'javascript:void(0)', :class => :add_remove_kids_link %></td>
+			<td style="width:56px;"></td>
+			<td style="width:99px;" class="guests-status-smaller">Contribution:</td>
+			<td style="width:210px;" colspan="2" class="guests-status-smaller"><%= @guest.contribution_text %></td>
+		</tr>
+		<tr>
+			<td colspan="7" style="font-size: 10px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+
+<% end %>
+

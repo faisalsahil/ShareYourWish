@@ -1,0 +1,20 @@
+<% if line_item.item.is_package_proxy? or line_item.cost == 0 %>
+<tr class="mini-cart-row ">
+	<td class="qty">&nbsp;</td>
+	<td class="name"><%= line_item.item.name %></td>
+	<td class="each"></td>
+	<td class="ext"><%= number_to_currency(line_item.ext_cost) %></td>
+</tr>
+<% else %>
+<tr class="mini-cart-row">
+	<td class="qty"> <%= form_for line_item, remote: true, :html => {:class=>"button_to"} do |f| %>
+	<input type="text" name="line_item[quantity]" size=2 value="<%= line_item.quantity %>" tabindex="520">
+	<br />
+	<input type="submit" value="update" tabindex="520">
+	<% end %>
+	<%= button_to 'remove', line_item, method: :delete, remote: true, tabindex: 520 %> </td>
+	<td class="name"><%= line_item.item.name %></td>
+	<td class="each"></td>
+	<td class="ext"><%= number_to_currency(line_item.ext_cost) %></td>
+</tr>
+<% end %>

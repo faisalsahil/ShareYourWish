@@ -1,0 +1,107 @@
+<% content_for :head do %>
+<%= javascript_tag do %>
+function scrollToAnchor(id) {
+  jQuery("html, body").animate({scrollTop: $("#"+id).offset().top}, 800);
+}
+
+// slider
+
+jQuery(document).ready(function() {
+  var pager = jQuery('.gallery-pager'),
+    pager_width,
+    pagerFactory = function(idx, slide) {
+      return '<li><a href="#">'+(idx+1)+'</a></li>';
+    };
+
+  jQuery('.gallery').cycle({
+    fx: 'fade',
+    sync: true,
+    timeout: 2500,
+    speed: 2000,
+    pager: '.gallery-pager',
+    pagerAnchorBuilder: pagerFactory
+  });
+
+  pager_width = pager.width();
+
+  pager.css({
+    width: pager_width,
+    left: ( 350 - ( pager_width/2 ) )
+  });
+
+});
+<% end %>
+<% end %>
+
+<% content_for :outside do %>
+
+<%= render 'page_head' %>
+
+<%= render :partial => 'notices-and-errors', :locals => {:errobj => nil} %>
+
+<div id="clearfloat"></div>
+
+<div id="landing-container-B">
+	<div id="landing-big-text">Simplifying Your Child's Birthday</div>
+	<h1>While Teaching the Virtues of Charity</h1>
+	<div class="gallery-container">
+		<ul class="gallery" >
+			<li class="gallery-slide">
+				<%= image_tag "slides/slides-1.jpg", :width => 680, :height => 380 %>
+				<div class="gallery-caption">
+					&quot;Make a wish!&quot;
+					Now we’d like to invite you to Share Your Wish…
+				</div>
+			</li>
+			<li class="gallery-slide">
+				<%= image_tag "slides/slides-2.jpg" %>
+				<div class="gallery-caption">
+					Birthday parties should be about celebrating with friends...
+				</div>
+			</li>
+			<li class="gallery-slide">
+				<%= image_tag "slides/slides-3.jpg" %>
+				<div class="gallery-caption">
+					...and not about &quot;things&quot;
+				</div>
+			</li>
+			<li class="gallery-slide">
+				<%= image_tag "slides/slides-4.jpg" %>
+				<div class="gallery-caption">
+					Wouldn’t it be nice to be able to share that good feeling with someone less fortunate?
+				</div>
+			</li>
+			<li class="gallery-slide">
+				<%= image_tag "slides/slides-5.jpg" %>
+				<div class="gallery-caption">
+					With Share Your Wish, now we can teach our children about the virtues of charity
+				</div>
+			</li>
+			<li class="gallery-slide">
+				<%= image_tag "slides/slides-6.jpg" %>
+				<div class="gallery-caption">
+					Children and parents alike will fill with pride...
+				</div>
+			</li>
+			<li class="gallery-slide">
+				<%= image_tag "slides/slides-7.jpg" %>
+				<div class="gallery-caption">
+					...knowing just what it means
+				</div>
+			</li>
+		</ul>
+		<ul class="gallery-pager"></ul>
+	</div>
+	
+	<div style="margin-top: 10px;">
+		<%= link_to "How Does it Work?", "/how-it-works/for-the-host", :class=> 'button-type-standard button-size-medium button-color-green', :tabindex=>80%>
+		<span style="width:200px; display: inline-block;">&nbsp;</span>
+		<%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green", :tabindex => 82 %>
+	</div>
+	
+</div>
+
+<p>
+	&nbsp;
+
+	<% end %>

@@ -1,0 +1,14 @@
+<div id="clearfloat"></div>
+	<div class="alerts-container">
+
+		<% flash.each do |key, value| %>
+		    <div class="flash <%= key %>"><%= value %></div>
+		<% end %>
+		
+		<% if defined? errobj and errobj.try(:errors)
+			errobj.errors.full_messages.each do |msg|  %> 
+			<div class="flash error"> <%= msg %></div><br />
+		<% end
+		 end %>
+		
+</div>

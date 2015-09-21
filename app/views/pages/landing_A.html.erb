@@ -1,0 +1,133 @@
+<% content_for :head do %>
+<%= javascript_tag do %>
+function scrollToAnchor(id) {
+  jQuery("html, body").animate({scrollTop: $("#"+id).offset().top}, 800);
+}
+
+// slider
+
+jQuery(document).ready(function() {
+  var pager = jQuery('.gallery-pager'),
+    pager_width,
+    pagerFactory = function(idx, slide) {
+      return '<li><a href="#">'+(idx+1)+'</a></li>';
+    };
+
+  jQuery('.gallery').cycle({
+    fx: 'fade',
+    sync: true,
+    timeout: 2500,
+    speed: 2000,
+    pager: '.gallery-pager',
+    pagerAnchorBuilder: pagerFactory
+  });
+
+  jQuery('.counter').cycle({
+    height:'39px',
+    fx: 'fade',
+    sync: true,
+    speed: 1500,
+    timeout: 5000,
+  });
+
+  pager_width = pager.width();
+
+  pager.css({
+    width: pager_width,
+    left: ( 350 - ( pager_width/2 ) )
+  });
+
+});
+<% end %>
+<% end %>
+
+<% content_for :outside do %>
+
+<%= render 'page_head_nomenu' %>
+
+<%= render :partial => 'notices-and-errors', :locals => {:errobj => nil} %>
+
+<div id="clearfloat"></div>
+
+<div id="landing-container">
+
+	<div id="landing-lcol">
+
+		<div class="gallery-container">
+			<ul class="gallery" >
+				<li class="gallery-slide">
+					<%= image_tag "slides/slides-1.jpg" %>
+					<div class="gallery-caption">
+						&quot;Make a wish!&quot;
+						Now we’d like to invite you to Share Your Wish…
+					</div>
+				</li>
+				<li class="gallery-slide">
+					<%= image_tag "slides/slides-2.jpg" %>
+					<div class="gallery-caption">
+						Birthday parties should be about celebrating with friends...
+					</div>
+				</li>
+				<li class="gallery-slide">
+					<%= image_tag "slides/slides-3.jpg" %>
+					<div class="gallery-caption">
+						...and not about &quot;things&quot;
+					</div>
+				</li>
+				<li class="gallery-slide">
+					<%= image_tag "slides/slides-4.jpg" %>
+					<div class="gallery-caption">
+						Wouldn’t it be nice to be able to share that good feeling with someone less fortunate?
+					</div>
+				</li>
+				<li class="gallery-slide">
+					<%= image_tag "slides/slides-5.jpg" %>
+					<div class="gallery-caption">
+						With Share Your Wish, now we can teach our children about the virtues of charity
+					</div>
+				</li>
+				<li class="gallery-slide">
+					<%= image_tag "slides/slides-6.jpg" %>
+					<div class="gallery-caption">
+						Children and parents alike will fill with pride...
+					</div>
+				</li>
+				<li class="gallery-slide">
+					<%= image_tag "slides/slides-7.jpg" %>
+					<div class="gallery-caption">
+						...knowing just what it means
+					</div>
+				</li>
+			</ul>
+			<ul class="gallery-pager"></ul>
+		</div>
+
+	</div>
+
+	<div id="landing-rcol">
+		<div class="landing-button-container">
+			<a href="javascript:scrollToAnchor('how-it-works')" id="how-it-works-btn" class="button-type-standard button-size-big button-color-green" tabindex="80"> How Does it Work? </a>
+		</div>
+		<div class="landing-button-container">
+			<%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green", :tabindex => 81 %>
+		</div>
+	</div>
+
+</div>
+
+<div id="clearfloat"></div>
+
+<div class="col-single-large-margin" id="how-illustration-container">
+	<a name="how-it-works" id="how-it-works"></a>
+
+	<%= render :partial => 'how_it_works'%>
+
+	<div class="landing-button-container">
+		<%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green", :tabindex => 82 %>
+	</div>
+
+</div>
+<p>
+	&nbsp;
+
+	<% end %>

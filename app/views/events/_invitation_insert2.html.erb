@@ -1,0 +1,13 @@
+<div class="invitation-insert">
+	<div class="header"><%= first_word @event.child_full_name %> Has Chosen to Share <%= @event.format_child_pronouns[2].capitalize  %> Wish!</div>
+	<div class="info">
+		<p>ShareYourWish replaces traditional gift-giving at children's parties. 
+		<p>To participate or learn more, please visit <%= first_word @event.child_full_name %>'s personal event page at the address below:
+	</div>
+	<div class="magic-phrase">
+		<div class="who"><%= first_word @event.child_full_name %>'s Magic Phrase</div>
+		<div class="what"><%= @event.magic_phrase %></div>
+	</div>
+	<div class="address">www.ShareYourWish.com</div>
+	<div class="slogan">Teaching the Virtues of Charity </div> 
+</div>

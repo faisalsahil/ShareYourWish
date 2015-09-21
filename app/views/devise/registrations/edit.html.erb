@@ -1,0 +1,100 @@
+<% title "My Profile Settings - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+<div class="clearfloat"></div>
+<div class="col-single-large-margin box-shadow-reg" id="edit_registration">
+
+	<h1>My Profile Settings</h1>
+
+	<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+	<%= devise_error_messages! %>
+
+	<div>
+		<%= f.label :email %>
+		<br />
+		<%= f.email_field :email, :class=> 'form-field-big indent-me', :placeholder => "your email", :tabindex => 550 %>
+	</div>
+
+	<div>
+		<%= f.label :full_name %>
+		<br />
+		<%= f.text_field :full_name, :class=> 'form-field-big indent-me', :placeholder => "full name", :tabindex => 550 %>
+	</div>
+
+	<div>
+		<%= f.label :user_name %> <i>Used for any public posts you make on ShareYourWish forums</i>
+		<br />
+		<%= f.text_field :user_name, :class=> 'form-field-big  indent-me', :placeholder => "user name", :tabindex => 550 %>
+	</div>
+
+	<div>
+		<%= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+		<br />
+		<%= f.password_field :password, :autocomplete => "off", :class=> 'form-field-big indent-me', :placeholder => "new password", :tabindex => 550 %>
+	</div>
+
+	<div>
+		<%= f.label :password_confirmation %>
+		<br />
+		<%= f.password_field :password_confirmation, :class=> 'form-field-big indent-me', :placeholder => "new password confirmation", :tabindex => 550 %>
+	</div>
+
+	<div>
+		<%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+		<br />
+		<%= f.password_field :current_password, :class=> 'form-field-big indent-me', :placeholder => "current password", :tabindex => 550 %>
+	</div>
+	
+	<div id="facebook_link_conteiner" class="indent-me">
+        <div id="facebook-link"<% if @user.has_facebook_account? %> class="hidden"<% end %>>
+            <%= link_to "Link Facebook to your account", user_omniauth_authorize_path(:facebook), :alt=>"Link Facebook to your account", :id => :link_facebook_account, :tabindex => 550 %>
+        </div>
+        <% if @user.has_facebook_account? %>
+            <div id="facebook-linked">
+                Linked with <%= link_to 'Facebook', "http://www.facebook.com/#{@user.facebook_login}", :target => '_blank', :tabindex => 550 %> 
+                <%= link_to 'x', authentication_path(@user.facebook_authentication, :format => :json), :confirm => "Are you sure you want unlink facebook account?", :class => :red, :alt => "Unlink Facebook to your account", :id => :unlink_facebook_account, :tabindex => 550 %>
+            </div>
+        <% end %>
+    </div>
+    
+    <div id="google_link_conteiner" class="indent-me">
+        <div id="google-link"<% if @user.has_google_account? %> class="hidden"<% end %>>
+            <%= link_to "Link Google to your account", user_omniauth_authorize_path(:google_oauth2), :alt=>"Link Google to your account", :id => :link_google_account, :tabindex => 550 %>
+        </div>
+        <% if @user.has_google_account? %>
+            <div id="google-linked">
+                Linked with <%= link_to 'Google', "https://www.google.com/settings/account", :target => '_blank', :tabindex => 550 %> 
+                <%= link_to 'x', authentication_path(@user.google_authentication, :format => :json), :confirm => "Are you sure you want unlink google account?", :class => :red, :alt => "Unlink Google to your account", :id => :unlink_google_account, :tabindex => 550 %>
+            </div>
+        <% end %>
+    </div>
+    
+    <div id="twitter_link_conteiner" class="indent-me">
+        <div id="twitter-link"<% if @user.has_twitter_account? %> class="hidden"<% end %>>
+            <%= link_to "Link Twitter to your account", user_omniauth_authorize_path(:twitter), :alt=>"Link Twitter to your account", :id => :link_twitter_account, :tabindex => 550 %>
+        </div>
+        <% if @user.has_twitter_account? %>
+            <div id="twitter-linked">
+                Linked with <%= link_to 'Twitter', "https://twitter.com/account/redirect_by_id?id=#{@user.twitter_login}", :target => '_blank', :tabindex => 550 %> 
+                <%= link_to 'x', authentication_path(@user.twitter_authentication, :format => :json), :confirm => "Are you sure you want unlink twitter account?", :class => :red, :alt => "Unlink Twitter to your account", :id => :unlink_twitter_account, :tabindex => 550 %>
+            </div>
+        <% end %>
+    </div>
+    
+	<div>
+		<label>Would You Like to Stay in Touch With ShareYourWish?</label>
+		<br />
+		<%= f.check_box :subscriber_opt_in, :class=> 'form-checkbox-big indent-me', :tabindex => 550 %> Sure, email me with important updates (but no spam!)
+	</div>
+
+	<div>
+		<%= f.submit "Update", :class=>"button-type-standard button-size-medium button-color-green", :tabindex => 550 %>
+	</div>
+	<% end %>
+
+</div>
+
+<% end %>

@@ -1,0 +1,42 @@
+.step {
+  .new_picture .preview canvas {
+    width: 60px;
+  }
+  #edit_pictures, #main_content #edit_pictures {
+    width: 650px;
+  }
+}
+
+.fileupload-loading {
+  border: 1px solid #333;
+  width: 500px;
+  height: 150px;
+}
+
+.progress .bar {
+  background: image-url('progressbar.gif');
+}
+
+#fileupload #draggable_area {
+  width: 400px;
+  height: 80px;
+  border: #ccc 1px dashed;
+  background-color: #ddffe5;
+  padding: 10px;
+  text-align: center;
+  color: grey;
+}
+
+.picture-uploader {
+  .table {
+    width: 660px;
+
+    .progress {
+      width: 170px;
+    }
+  }
+
+  .fileupload-buttonbar .btn {
+    margin: 0 6px;
+  }
+}

@@ -1,0 +1,8 @@
+<div class="guest_children hidden invited" style="width:290px;">
+	<%= link_to image_tag('modal_close.png'), 'javascript:void(0);', :class => :close_button, :title => 'Close' %>
+	<h4>List each child of this Guest invited to the Event</h4>
+	<span style="width:180px;display: inline-block;">Name</span>
+	<%= render 'children/guest_form', :is_invited => true, :form => form %>
+    <%= link_to 'Close', 'javascript:void(0)', :id => :guests_close_button, :class =>'close_button choose_button ui-button ui-widget ui-state-default ui-corner-all ui-state-hover' %>
+	<div class="guests_error" style="width:270px"></div>
+</div>

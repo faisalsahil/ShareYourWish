@@ -1,0 +1,37 @@
+<% title "Change your password - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+<div class="clearfloat"></div>
+<div class="col-single-large-margin box-shadow-reg">
+
+	<h2>Change your password</h2>
+
+	<p>We regret that you had a problem, but please enter a new password below and let's get going.
+	<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
+	<%= devise_error_messages! %>
+	<%= f.hidden_field :reset_password_token %>
+
+	<div>
+		<%= f.label :password, "New password" %>
+		<br />
+		<%= f.password_field :password, :class=> 'form-field-big', :placeholder => "new password" %>
+	</div>
+
+	<div>
+		<%= f.label :password_confirmation, "Confirm new password" %>
+		<br />
+		<%= f.password_field :password_confirmation, :class=> 'form-field-big', :placeholder => "confirm new password" %>
+	</div>
+
+	<div>
+		<%= f.submit "Change my password", :class => 'button-type-standard button-size-big button-color-green display-IB' %>
+	</div>
+	<% end %>
+
+</div>
+
+
+<% end %>

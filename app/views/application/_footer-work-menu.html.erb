@@ -1,0 +1,14 @@
+<div style="float:right; font-family: arial, helvetica, sans-serif; ">
+	<p style="font-size:14px;font-weight:bolder; color: #fbefe0">YOU ARE AN ADMINISTRATOR. You go link now. </p>
+	
+	<%= link_to 'Home', root_url  %> <br>
+	<%= link_to 'Landing Page', '/landing'  %> <br>
+	<%= link_to 'Temp Visitor Site', '/visitor-splash'  %> <br>
+	<%= link_to 'Subscribers List', '/subscribers'  %> <br>
+	<%= link_to 'Login', '/users/login'  %> <br>
+	<%= link_to 'Template', '/template'  %> <br>
+	<br>
+	<%= link_to 'Toggle Debug Display', '/?command=toggledebug'  %> <br>
+	<br>
+	<%= render :partial => 'release_version' %>
+</div>

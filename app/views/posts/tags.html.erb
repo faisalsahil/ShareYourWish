@@ -1,0 +1,19 @@
+<% title "Teaching Charity to Kids - Learning about Charity - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head' %>
+<div class="clearfloat"></div>
+
+<div class="col-one-third box-shadow-reg">
+    <%= render :partial => 'notices-and-errors', :locals => {:errobj => nil} %>
+    <%= render :partial => 'posts/categories'%>
+    <%= render :partial => 'posts/community'%>
+</div>
+
+<div class="col-two-thirds box-shadow-reg">
+    <h1>Teach &amp; Learn : Tags</h1>
+    <%= render :partial => 'posts/tags'%>
+</div>
+
+<% end %>

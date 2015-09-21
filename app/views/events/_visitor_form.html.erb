@@ -1,0 +1,34 @@
+<%= form_for @guest, :url => visitor_entrance_event_path, :html => { :id => :visitor_entrance } do |f| %>
+  <% if @guest.errors.any? %>
+    <%= render :partial => 'notices-and-errors', :locals => {:errobj => @guest} %>
+  <% end %>
+
+  <%= f.hidden_field :event_id, :value => @event.id %>
+  <% if current_user %>
+    <%= f.hidden_field :user_id, :value => current_user.id %>
+  <% end %>
+
+	<span class="field-flag">*</span>
+	<%= f.label :magic_phrase, 'Magic Phrase:' %>
+   <div class="field indent-me">
+	
+    <%= text_field_tag :magic_phrase, params["mp"] ? params["mp"] : nil, :required => :required, :size => 20, :class => 'form-field-small required', :minlength => 2, :maxlength => 255, :placeholder => "Magic Phrase" %>
+  </div>
+
+	<span class="field-flag">*</span>
+	<%= f.label :full_name, 'Your Full Name:' %>
+  <div class="field indent-me">
+    <%= f.text_field :full_name, :required => :required, :size => 20, :class => 'form-field-small required', :minlength => 2, :maxlength => 255, :placeholder => "Full name" %>
+  </div>
+
+	<span class="field-flag">*</span>
+	<%= f.label :email, 'Email Address:' %>
+  <div class="field indent-me">
+    <%= f.text_field :email, :required => :required, :size => 25, :class => 'form-field-small required email', :minlength => 2, :maxlength => 255, :placeholder => "Email"  %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit :value => 'Enter', :id => :guest_submit_button, :class => 'button-type-standard button-size-medium button-color-green'%> 
+  </div>
+
+<% end %>

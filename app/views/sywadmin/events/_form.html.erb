@@ -1,0 +1,43 @@
+<%= semantic_form_for [:sywadmin, @event], :html => {:multipart => true} do |f| %>
+    <%= f.inputs 'Details' do %>
+      <%= f.input :title %>
+      <%= f.input :event_date %>
+      <%= f.input :charity_donation_percent, :as => :select, :collection => Validation::Event::CHARITY_DONATION_PERCENTS, :include_blank => false %>
+      <%= f.input :rsvp_by %>
+      <%= f.input :gift_fund_locked %>
+      <%= f.input :donation_fund_locked %>
+      <%= f.input :contributions_locked %>
+      <%= f.input :child_full_name %>
+      <%= f.input :child_pronoun, :as => :select, :collection => [:male, :female, :they] %>
+      <%= f.input :child_dob %>
+      <%= f.input :location_name %>
+      <%= f.input :location_address %>
+      <%= f.input :parents_invited, :as => :select, :collection => Event::PARENTS_INVITED.invert, :include_blank => false %>
+      <%= f.input :magic_phrase %>
+      <%= f.input :package %>
+      <%= f.input :parental_consent_status %>
+      <%= f.input :slug %>
+      <%= f.input :user, :as => :select, :collection => User.all %>
+      <%= f.input :status, :as => :select, :collection => [:in_progress, :published, :cancelled] %>
+      <%= f.input :state, :as => :select, :collection => [:open, :complete] %>
+      <%= f.input :publicly_viewable %>
+      <%= f.input :event_sequence, :as => :select, :collection => [1,2,3,4,5,6] %>
+      <%= f.input :slug %>
+    <% end %>
+
+    <%= f.inputs 'Page content' do %>
+      <%= f.input :page_content_one, :input_html => { :rows => 10, :cols => 20 } %>
+      <%= f.input :page_content_two, :input_html => { :rows => 10, :cols => 20 } %>
+      <%= f.input :page_content_three, :input_html => { :rows => 10, :cols => 20 } %>
+      <%= f.input :page_content_four, :input_html => { :rows => 10, :cols => 20 } %>
+      <%= f.input :other_page_content, :input_html => { :rows => 10, :cols => 20 } %>
+    <% end %>
+
+    <%= f.buttons :commit %>
+<% end %>
+
+<hr />
+
+<%#= stylesheet_link_tag 'fileupload' %>
+<%#= javascript_include_tag "steps/personalize-page" %>
+<%= render "/events/fileupload/edit_pictures" %>

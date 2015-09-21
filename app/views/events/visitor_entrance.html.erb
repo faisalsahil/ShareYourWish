@@ -1,0 +1,22 @@
+<% title "Visitor Entrance - Share Your Wish" %>
+
+<% content_for :outside do %>
+
+  <%= render :partial => 'page_head'%>
+  <div class="col-single-large-margin box-shadow-reg">
+	<% if @event.pictures && !@event.pictures[0].nil? %>
+		<div style="float:left; margin: 10px; width: 250px;">
+		<%= image_tag @event.pictures[0].image.url(:medium) %>
+		</div>
+   <% end %>
+ 	<div style="float:left;">
+		 <h1><%= @event.title %></h1>
+		 <h3> Visitor Entrance - Welcome! Please Register And Come In</h3>
+		    <div class="visitor_entrance">
+		      <%= render 'visitor_form' %>
+		    </div>
+	</div>
+	<div class="clearfloat"></div>
+  </div>
+
+<% end %>

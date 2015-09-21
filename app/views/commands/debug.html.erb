@@ -1,0 +1,13 @@
+<% content_for :outside do %>
+
+	<%= render :partial => 'page_head'%>
+	
+	<h2>Debug - Session</h2>
+        
+	<%= debug session %>
+	       
+	<h2>Debug - Params</h2>               
+
+	<%= debug params %>
+
+<% end %>

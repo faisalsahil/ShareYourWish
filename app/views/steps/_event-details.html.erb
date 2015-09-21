@@ -1,0 +1,190 @@
+<% if step %>
+<% content_for :head do %>
+<% javascript_include_tag "steps/#{step.slug}" %>
+<% end %>
+
+<div class="step">
+
+	<div class="event_description">
+		<div class="step-head">
+			Let's get started! Tell us about the event you're planning
+		</div>
+		<div class="step-subhead">
+			Complete all required fields, then Publish it. You can still edit it later.
+		</div>
+	</div>
+
+	<div class="form">
+
+		<% if @event %>
+
+		<%= form_for @event, :url => event_path(:id => @event.id), :html => { :id => :new_event } do |f| %>
+		<%= f.hidden_field :id %>
+		<div id="step_error"></div>
+
+		<% if step.next %>
+		<%= f.hidden_field :step_id, :value => step.next.id %>
+		<%= f.hidden_field :state %>
+		<% end %>
+
+		<span class="field-flag">*</span>
+		<%= f.label :title, 'What is the occasion?' %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_field :title, :required => :required, :size => 50, :class => 'required', :minlength => 2, :maxlength => 255, :tabindex => 200 %>
+		</div>
+		<span class="description indent-me">For example: Rachel's Super Astronaut Princess 4th Birthday Party</span>
+		<br />
+
+		<span class="field-flag">*</span>
+		<%= f.label :host_name, "Host name(s)" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_field :host_name, :required => :required, :class => 'required', :tabindex => 201%>
+		</div>
+		<span class="description indent-me">Your invitations will be signed 'From' this name. For example: "Susan and Dave", "The Whole  Walton Family", "Joey, Monica, Rachel and Ross"</span>
+		<br />
+
+		<span class="field-flag">*</span>
+		<%= f.label :child_full_name, "Child(ren)'s name" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_field :child_full_name, :required => :required, :class => 'required', :tabindex => 202 %>
+		</div>
+		<span class="description indent-me">For example: &quot;Matthew&quot;, &quot;Matthew Smith&quot;, or for joint parties &quot;Jessica and Timothy&quot;</span>
+		<br />
+
+		<span class="field-flag">*</span>
+		<%= f.label :child_pronoun, "How should we refer to the child(ren)?" %>
+		<br />
+		<div class="indent-me">
+			
+			<%= f.radio_button :child_pronoun, 'male', :class=>'form-radio', :tabindex => 203 %> He / Him <br />
+			
+			<%= f.radio_button :child_pronoun, 'female', :class=>'form-radio', :tabindex => 203 %> She / Her  <br />
+			
+			<%= f.radio_button :child_pronoun, 'they', :class=>'form-radio', :tabindex => 203 %> They / Them &nbsp;&nbsp; (for joint parties)  <br />
+			<span id = "event_child_pronoun_status_ui"></span>
+		</div>
+		<span class="description indent-me">We use this to personalize messages correctly on your Event page and Invitations</span>
+		<br />
+
+		<span class="field-flag">*</span>
+		<%= f.label :child_dob, "Child's birthday" %>:
+		<br />
+		<div class="indent-me">
+			<%= f.date_select :child_dob, {:start_year => Time.now.year-20,  :end_year => Time.now.year, :order => [:month, :day, :year], :prompt => true}, { :class=> 'form-selectbox', :tabindex => 204 } %>
+			<br />
+			<span class="description">This will never be displayed. We use this internally to understand the age of our guests. If more than one child, enter the youngest child's birthday.</span>
+			<span id = "event_child_dob_status_ui"></span>
+			<br />
+		</div>
+
+		<span class="field-flag">*</span>
+		<%= f.label :event_date, "Date of the event" %>:
+		<br />
+		<div class="indent-me">
+			<%= f.date_select :event_date, {:start_year => Time.now.year,  :end_year => Time.now.year+1, :order => [:month, :day, :year], :prompt => true}, { :class=> 'form-selectbox', :tabindex => 205 }  %>
+			<span id = "event_event_date_status_ui"></span>
+			<br />
+			<span class="description"></span>
+			<br />
+		</div>
+
+		<div class="indent-me">
+			<div class="time-select">
+				<%= f.label :start_time, 'Start time' %>
+				<br />
+				<%= f.hidden_field :start_time, :value => @event.start_time ? @event.start_time : '', :size => 10  %>
+				<%= select_tag :start_time_hours, hours_options(@event.start_time), :prompt => "HH", :tabindex => 206 %>
+				<%= select_tag :start_time_minutes, minutes_options(@event.start_time), :prompt => "MM", :tabindex => 207 %>
+				<%= select_tag :start_time_noon, noon_options(@event.start_time), :tabindex => 208 %>
+			</div>
+			<div class="time-select">
+				<%= f.label :end_time, 'End time' %>
+				<br />
+				<%= f.hidden_field :end_time, :value => @event.end_time ? @event.end_time : '',:size => 10 %>
+				<%= select_tag :end_time_hours, hours_options(@event.end_time), :prompt => "HH", :tabindex => 209 %>
+				<%= select_tag :end_time_minutes, minutes_options(@event.end_time), :prompt => "MM", :tabindex => 210 %>
+				<%= select_tag :end_time_noon, noon_options(@event.end_time), :tabindex => 211 %>
+			</div>
+			<div class="clearfloat"></div>
+			<span class="description">(Start and End times are optional)</span>
+			<span id = "event_start_time_status_ui"></span>
+			<span id = "event_end_time_status_ui"></span>
+			<br />
+		</div>
+
+		<span class="field-flag"></span>
+		<%= f.label :location_name, "Location name" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_field :location_name, :size => 50, :tabindex => 212 %>
+		</div>
+		<span class="description indent-me">(optional)</span>
+		<br />
+
+		<span class="field-flag"></span>
+		<%= f.label :location_address, "Location address" %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_field :location_address, :size => 50, :tabindex => 213 %>
+			&nbsp;&nbsp;&nbsp;
+			<%= link_to 'javascript:void(0);', :id=>'google_map_it' do%>
+				<%= image_tag('map-it.png')%> Map It
+			<% end %>
+		</div>
+		<span class="description indent-me">(optional)</span>
+		<br />
+		
+        <span class="field-flag">*</span>
+        <%= f.label :parents_invited, "Are parents invited?" %>
+        <br />
+        <div class="indent-me">
+            <%= f.select :parents_invited, Event::PARENTS_INVITED.invert, {}, {:required => :required, :class => 'required', :tabindex => 213} %>
+            <br />
+        </div>
+		  <span class="description indent-me">We'll put a note on your page:  &quot;This party is Just For The Kids!&quot;, &quot;Parents Welcome to Attend&quot;, or &quot;Parents Please Attend&quot;</span>
+        <br />
+		<span class="field-flag">*</span>
+		<%= f.label :rsvp_by, 'RSVP' %>:
+		<br />
+		<div class="indent-me">
+			<%= f.date_select :rsvp_by, {:start_year => Time.now.year,  :end_year => Time.now.year+1, :order => [:month, :day, :year], :prompt => true}, { :class=> 'form-selectbox', :tabindex => 214 }  %>
+			<span id="event_rsvp_by_status_ui"></span>
+			<br />
+			<span class="description">The suggested RSVP date is <%= Event::RSVP_BY_DAYS.abs %> days before your event.
+				<br/>
+				Your child's gift fund will be released <%= Event::GIFT_FUND_UNLOCK_DAYS.abs %> days before your event.</span>
+			<br />
+			
+		</div>
+
+		<span class="field-flag">*</span>
+		<%= f.label :charity_donation_percent, 'Donation level' %>: <% if @edit %><span style="color:#880000; font-size:12px;">(cannot be changed once an Event has been published)</span><% end %>
+		<br />
+		<div class="indent-me">
+		    <%= f.radio_button :charity_donation_percent, 0.1, :class=>'form-radio', :disabled => @edit, :tabindex => 215 %>10%<span style="width:20px;display:inline-block"></span>
+			<%= f.radio_button :charity_donation_percent, 0.25, :class=>'form-radio', :disabled => @edit, :tabindex => 215 %>25%<span style="width:20px;display:inline-block"></span>
+			<%= f.radio_button :charity_donation_percent, 0.5, :class=>'form-radio', :disabled => @edit, :tabindex => 216 %>50%<span style="width:20px;display:inline-block"></span>
+			<%= f.radio_button :charity_donation_percent, 0.75, :class=>'form-radio', :disabled => @edit, :tabindex => 217 %>75%<span style="width:20px;display:inline-block"></span>
+			<%= f.radio_button :charity_donation_percent, 1.0,  :class=>'form-radio', :disabled => @edit, :tabindex => 218 %>100%
+			<span id = "event_charity_donation_percent_status_ui"></span>
+		</div>
+		<span class="description indent-me">This is the percent of all contributions that will go to the Charity Donation Fund. The remainder will go to your child's Gift Fund.</span>
+		<br />
+
+		<hr />
+		<%= f.button (@edit ? 'Save' : 'Save & Next step'), :id => "event_details_button", :class => "button-type-standard button-size-medium button-color-green event_form_submit_button fr", :type => :button, :state_class => @event.get_state_at_complete(step), :tabindex => 219 %>
+
+		<% end %>
+
+		<%= button_to 'Cancel Event', event_path(@event), :method => :delete, :class => "button-type-standard button-size-medium button-color-red", :confirm => 'Are you sure? This will permanently remove the Event.', :tabindex => 220 %>
+		<div class="clearfloat"></div>
+
+		<% end %>
+
+	</div>
+
+</div>
+<% end %>

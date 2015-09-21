@@ -1,0 +1,96 @@
+<% if step %>
+<% content_for :head do %>
+<% javascript_include_tag "steps/#{step.slug}" %>
+<% end %>
+<div class="step">
+
+	<div class="event_description">
+		<div class="step-head">
+			How are you going to invite guests to your event?
+		</div>
+		<div class="step-subhead">
+			Use ShareYourWish to email invitations, manage your guest list, and RSVP's. <br/>
+			Or, simply add a Magic Phrase to your own invites for easy guest access
+		</div>
+	</div>
+
+	<div class="form">
+	<%= form_for @event, :url => event_path(:id => @event.id), :html => { :id => :guests_new_event } do |f| %>
+	<div id="guests_step_error"></div>
+	<div id="step_error"></div>
+
+		<div class="invite_guests_radio_inputs">
+			<%= f.radio_button :invite_option, 'syw-email'%> <!-- id="event_invite_option_syw-email" name="event[invite_option]" -->
+			<%= f.radio_button :invite_option, 'other-email'%>
+			<%= f.radio_button :invite_option, 'print'%>
+		</div>
+
+		<div class="invite_guests_option <%= @event.invite_option=='syw-email' ? 'checked' : '' %>" id="invite_option_one">
+			<div class="title">ShareYourWish <br />Email Invitation</div>
+			<div class="tag">Send a <br />Personal Link</div>
+			<div class="icon"></div>
+			<ul>
+				<!--<li>Send invitations directly from your event dashboard-->
+				<li>Send e-mail invitations directly from your event dashboard (after you publish your event)
+			</ul>
+		</div>
+		<div style="width: 20px; float: left">&nbsp;</div>
+		<div class="invite_guests_option <%= @event.invite_option=='other-email' ? 'checked' : '' %>" id="invite_option_two">
+			<div class="title">Other <br />Email Invitation</div>
+			<div class="tag">Include your <br />Magic Phrase</div>
+			<div class="icon"></div>
+			<ul>
+				<li>Use any online invitation service, just include our URL and your Magic Phrase somewhere in the invite
+			</ul>
+		</div>
+		<div style="width: 20px; float: left">&nbsp;</div>
+		<div class="invite_guests_option <%= @event.invite_option=='print' ? 'checked' : '' %>" id="invite_option_three">
+			<div class="title">Traditional <br />Print Invitation</div>
+			<div class="tag">Print your <br />Magic Phrase</div>
+			<div class="icon"></div>
+			<ul>
+				<li>Print pre-formatted instruction card directly from your event dashboard (after you publish your event) and add to envelopes
+			</ul>
+		</div>
+		<div class="clearfloat"></div>
+		<br />
+		<div class="indent-me"><span class="description">You can use any method at any time. Just pick the method you think you'll use the most.</div>
+		<br />
+		
+		<hr>
+		<h3>Safe &amp; Secure</h3>
+
+		<span class="field-flag">*</span>
+		<%= f.label :magic_phrase, 'Magic Phrase' %>
+		<br />
+		<div class="indent-me">
+			<%= f.text_field :magic_phrase, :required => :required, :size => 25, :class => :required, :minlength => 2, :maxlength => 255, :tabindex => 320 %>
+			<br />
+			<span class="description">This phrase grants access to your event! Share it in print invitations, text messages, or in conversation. Keep it simple, like "Super Bunny". Tip: give your magic phrase to guests if you don't know their email address. </span>
+			<br />
+		</div>
+		
+		<!-- EP: this is ugly, fix it -->
+		<% if step.next %>
+		<%= f.hidden_field :step_id, :value => step.next.id %>
+		<%= f.hidden_field :state %>
+		<% end %>
+		<% if step.previous %>
+		<%= hidden_field_tag :previous_tab, step.previous.id %>
+		<% end %>
+		<input type="button" value="Next step" id="guests_button" class="event_form_submit_button hidden" state_class="<%= @event.get_state_at_complete(step) %>"  />
+		<input type="button" value="Previous" id="guest_previous" class="hidden guest previous_event_button" />
+
+		<input type="button" value="<%= @edit ? 'Save' : 'Save & Next step' %>" id="guests_button_clicker" class="button-type-standard button-size-medium button-color-green fr" tabindex="340" />
+
+		<input type="button" value="Previous" class="button-type-standard button-size-medium button-color-green fl" onclick="jQuery('.previous_event_button#guest_previous').click()" tabindex="341" />
+		
+		<!-- end comment -->
+		
+		<%= button_to 'Cancel Event', event_path(@event), :method => :delete, :class => "button-type-standard button-size-medium button-color-red cancel_event_button", :confirm => 'Are you sure? This will permanently remove the Event.', :tabindex => 342 %>
+		<div class="clearfloat"></div>
+	<% end #form %>
+	</div>	
+
+</div>
+<% end %>

@@ -1,0 +1,12 @@
+.charities{
+  @import "charities/index";
+  button.choose_button.active {
+  color: #E59A3E;
+  }
+  .col-one-third{
+    width: 270px;
+  }
+  .col-two-thirds{
+    width: 650px;
+  }
+}

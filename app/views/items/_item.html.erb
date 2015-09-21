@@ -1,0 +1,28 @@
+<% if item && package %>
+  <li>
+    <div class="item" id="item_<%= item.id %>">
+        
+      <div class="item_name">
+        <%= item.name %>
+      </div>
+      
+      <div class="item_icon popup_large">
+        <% if item.picture && item.picture.image? %>
+        <%= link_to (image_tag item.picture.image.url(:icon), :alt => item.name), 'javascript:void(0)', 'data-picture-medium' => item.picture.image.url(:large), :tabindex => 301 %>
+        <% else %>
+          <%= image_tag 'missing_icon.png'%>
+        <% end %>
+      </div>
+      
+      <div class="item_details">
+        <%= item.description %>
+      </div>
+
+      <div class="item_cost">
+        <%= number_to_currency(item.cost) %><br />
+        <%= button_to "Add to cart", line_items_path(item_id: item), remote: true, :class=>"btn btn-primary", :tabindex => 301 %>
+      </div>       
+
+    </div>
+  </li>
+<% end %>

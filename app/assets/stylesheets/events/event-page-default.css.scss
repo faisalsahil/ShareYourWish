@@ -1,0 +1,25 @@
+
+/* personalizable by client */
+.event-page-title {
+	color: #E4993E;
+	font-size: 3em;
+	font-family: arial, helvetica, sans-serif;
+	margin-top: 3px;
+	margin-bottom: 3px;
+	margin-left: 10px;
+	display: block;
+	width: 850px;
+	text-align: left;
+}
+.event-page-section-title {
+	color: #E4993E;
+	font-size: 1.5em;
+	margin-bottom: 5px;
+}
+.event-page-section-details {
+	padding-left:20px;
+	margin-bottom: 30px ;
+}
+.event-page-section-details.no-bottom {
+	margin-bottom: 0px ;
+}

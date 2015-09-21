@@ -1,0 +1,23 @@
+/*
+ *= require_self
+ *= require events
+ *= require event_timeline
+ *= require fileupload
+ *= require jquery-ui
+ *= require jquery.fileupload-ui
+ *= require jquery.lightbox-0.5
+ *= require main
+ *= require slide_gallery
+ *= require iealert_style
+ *= require bootstrap
+ *= require search
+ *= require validate
+ *= require feedbacks
+ *= require jquery.qtip.min
+ *= require children
+ *= require pagination
+ *= require charities
+ *= require help_messages
+ *= require selectlist
+ *= require posts
+ */

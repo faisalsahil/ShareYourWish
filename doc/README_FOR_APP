@@ -1,0 +1,156 @@
+Use this README file to introduce your application and point to useful places in the API for learning more.
+Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+issues:
+Goes to wrong step when creating a new event +
+Charity Donation % error when user manually enters a value  +
+Charity Display Logic - Missing Buttons When No Image +
+Charity Category Selector +
+
+commands:
+
+rvm install 1.9.3
+rvm use ruby-1.9.3-p0
+rvm gemset create rails322
+rvm gemset use rails322
+gem install rails -v 3.2.2
+rails new syw --skip-test-unit --database=mysql
+
+rake db:create
+rake db:migrate
+rake db:seed
+
+rails g controller welcome index
+rails generate devise:install
+rails generate devise User
+rails generate devise:views
+
+rails g model Package name:string description:text cost:decimal
+rails g model Picture imageable_type:string imageable_id:integer sort_order:integer layout_section:string layout_slot:integer image:has_attached_file
+rails g model Event  title:string event_date:datetime start_time:datetime end_time:datetime charity_donation_percent:decimal child_full_name:string child_dob:datetime page_content_one:text page_content_two:text page_content_three:text page_content_four:text other_page_content:text parental_consent_status:string page_alias:string page_customization_hash:text magic_phrase:string icon_picture_id:integer package_id:integer user:reference
+
+rails g controller event new
+rails g model Step title:string order:integer completness_of:integer
+
+rake watchr
+
+rails g migration AddSlugToStep
+
+tests:
+RAILS_ENV=test rake db:create
+RAILS_ENV=test rake db:migrate
+RAILS_ENV=test rake db:seed
+rake
+
+rails g model Charity name:string name_alias:string description:string city:string region:string url:string ntee_code:string
+
+rails g model Cart event:reference item_id:integer quantity:integer
+rails g model Guest event:references user:references full_name:string email:string status_id:integer guest_access_token:integer hidden:boolean
+rails g model LookupGuestsStatus status_code:string friendly_text:string
+rails g migration CreateEventsCharities event:references charity:references
+
+rails g controller charities index
+
+rails g model Item name:string description:text cost:decimal
+rails g migration CreatePackagesItems item:references package:references
+
+rails g controller items show
+rails g controller pictures create
+rails g controller packages show items
+
+rake db:drop
+rake db:setup
+
+rails g controller guests show create update create_or_update destroy
+
+rails generate active_admin:install
+
+rails g active_admin:resource User
+rails g active_admin:resource Cart
+rails g active_admin:resource Charity
+rails g active_admin:resource Event
+rails g active_admin:resource Guest
+rails g active_admin:resource Item
+rails g active_admin:resource LookupGuestsStatus
+rails g active_admin:resource Package
+rails g active_admin:resource Picture
+rails g active_admin:resource Step
+
+rails g active_admin:resource AdminUser
+
+http://0.0.0.0:3000/sywadmin
+login: email, pass: 123456
+
+RAILS_ENV=test rake db:migrate
+RAILS_ENV=test rake db:seed
+rake watchr
+
+rake spec:routing
+
+rails g model lookup_CharityCode ntee_code:string title:string
+
+rails g migration AddFeildsToCharities
+
+rails g migration ModifyGuestsGuestAccessToken
+rails g mailer GuestMailer
+
+
+
+Guest.last.invite! # send invite for guest
+rake guest:send_invitation # send invite for all guests
+
+write crontasks to cron command: 
+whenever --update-crontab share_your_wish 
+
+rails g model EventActivityLog message:text is_internal:boolean
+
+at first time: 
+rails s thin 
+and than just 
+rails s
+
+RAILS_ENV=production RAILS_GROUPS=assets bundle exec rake assets:clean tmp:clear assets:precompile
+
+rails g model Contribution amount:integer message:text anonymous:boolean charity:references guest:references event:references
+
+rails g controller Contributions index show create update destroy
+
+rails g model Lookup_Event_State code:string sequence:integer friendly_text:text
+rails g migration AddLookupEventStateToEvents lookup_event_state:references
+
+guard
+
+SYNTAX:
+When entering in commit messages in Git, any message that contains a specially formatted OnTime tag will attempted to be linked to the respective OnTime item. The tag is formatted as follows:
+
+[otx: id# (wl: # timeunit)]
+Where the x in otx can be:
+d for defects (i.e. otd)
+f for features (i.e. otf)
+t for tasks (i.e. ott)
+i for incidents (i.e. oti)
+NOTE: d, f, t and i are constant even if you've renamed the fields in your OnTime installation.
+id# is the id number of the item that the commit links to
+wl: # timeunit is optional. When provided it will add a worklog entry to that item after the commit is pushed to github.
+# is some non-negative real number
+timeunit is a valid timeunit that is used in your installation, either fully spelled or abbreviated with respect to your OnTime timeunit pick list configuration
+A few examples of valid tags (assuming you have hours as a timeunit in OnTime and it's abbreviated spelling is 'hrs'):
+
+[otd: 45]
+
+[otf: 2]
+
+[otf: 823 wl: 5 hours]
+
+[ott: 92 wl: 8.3 hrs]
+
+[oti: srx0091]
+
+git commit -am "[otd: 13]"
+git commit -am "[otf: 42]"
+
+Beta testers only: if you've been instructed to do so, you may use this test cc number 4111111111111111 and expiration date 12/2015 and any cvv
+
+
+
+

@@ -1,0 +1,18 @@
+<div id="pagehead-event">
+
+  <div id="event-page-welcome">
+    Welcome <%= @guest.full_name %>
+    <% unless params[:preview]=='true' || @event.owner?(current_user) || params[:howto]=='1' %>
+      <br/>
+      <br/>
+      <%= link_to 'Learn More About ShareYourWish', root_url, :class => 'indent-me' %>
+    <% end %>
+  </div>
+
+  <div id="event-page-logo">
+    <%= link_to image_tag('SYW_logo_for_event_page.jpg'), root_url %>
+  </div>
+
+  <div class="clearfloat"></div>
+
+</div>

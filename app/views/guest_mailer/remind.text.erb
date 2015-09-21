@@ -1,0 +1,17 @@
+<%= @guest.event.title %>
+
+RSVP and Charity Participation Reminder
+
+
+Dear <%= @guest.full_name %>, <%= @guest.invited_guest_or_children %> invited to <%= @guest.event.format_child_name %>'s special event, and it's coming up soon.
+
+Please take a minute to visit <%= link_to 'our event page at ShareYourWish.com', invite_url(@guest) %> to let us know if you'll be able to attend, and also whether you'd like to support <%= @guest.event.format_child_name %> by giving a gift that will be shared with a charity.
+
+(The link above is your personal invitation, so don't forward this email to anyone else!)
+
+We hope to see you there, but you can still participate (totally optional!) even if you won't be able to attend. We'd really appreciate your response by <%= @guest.event.rsvp_by.strftime("%A %B %e %Y") %>
+
+From,
+<%= @guest.event.host_name %>
+
+This message was sent to you by ShareYourWish.com on behalf of <%= @guest.event.host_name %>. Please visit our website to learn more about ShareYourWish.com. Do not reply to this message. For technical support please contact info@shareyourwish.com.

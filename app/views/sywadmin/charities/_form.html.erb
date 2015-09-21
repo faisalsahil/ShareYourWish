@@ -1,0 +1,14 @@
+<%= semantic_form_for [:sywadmin, @charity], :html => {:multipart => true} do |f| %>
+	<%= f.inputs :name, :name_alias, :description, :city, :region, :website_url, :lookup_charity_code, :featured, :top_recommended %>
+	<%= f.inputs 'Image' do %>
+        <% if @charity.picture && @charity.picture.image? %>
+            <%= image_tag(@charity.picture.image.url, :width => 200)  %><br/>
+            <%= check_box_tag 'charity[delete_image]' %>
+            <%= label :charity, :delete_image, 'Remove Image and Restore to Default Image' %>
+            <br/><br/>
+        <% end %>
+		<%= hidden_field(:picture, :imageable_id, {:value => @charity.id}) %>
+		<%= file_field('picture', :image) %>
+	<% end %>
+	<%= f.buttons :commit %>
+<% end %>

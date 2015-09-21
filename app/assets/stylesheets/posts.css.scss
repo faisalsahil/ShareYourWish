@@ -1,0 +1,20 @@
+body.posts{
+  .posts_tags_cloud{
+    margin-bottom: 10px;
+    ul{
+      padding: 0 10px;
+      li{
+        list-style-type: none;
+        display: inline;
+        &.css1 { font-size: 1.0em; }
+        &.css2 { font-size: 1.4em; }
+        &.css3 { font-size: 1.8em; }
+        &.css4 { font-size: 2.6em; }
+      }
+    }
+    #view_all_tags{
+      float: right;
+      padding-top:5px;
+    }
+  }
+}

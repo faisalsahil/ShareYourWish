@@ -1,0 +1,13 @@
+<% picked = charity.selected?(@selected_charities) if @selected_charities %>
+<% position = :top unless defined?(position) %>
+<% if defined?(charity) && defined?(picked)%>
+    <% if @public && @full %>
+        <%= render 'charities/event_show_popup_charity', :charity => charity %>
+    <% elsif @public %>
+        <%= render 'charities/event_show_charity', :charity => charity %>
+    <% elsif @full %>
+        <%= render 'charities/event_edit_popup_charity', :charity => charity, :picked => picked, :position => position %>
+    <% else %>
+        <%= render 'charities/event_edit_charity', :charity => charity, :picked => picked, :position => position %>
+    <% end %>
+<% end %>

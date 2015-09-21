@@ -1,0 +1,9 @@
+<% if @comments %>
+    <div class="flickr_pagination">
+        <%= will_paginate(@comments, :page_links => false) if @comments.count > 10 %>
+    </div>
+    <%= render @comments %>
+    <div class="flickr_pagination">
+        <%= will_paginate(@comments, :page_links => false) if @comments.count > 10 %>
+    </div>
+<% end %>

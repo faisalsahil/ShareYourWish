@@ -1,0 +1,52 @@
+<div class="nav">
+	<div class="nav-box">
+		<% if user_signed_in? %>
+			<ul id="user-menu">
+				<li>	
+						<%= link_to edit_user_registration_path, :tabindex => 999 do %>
+						<%= current_user.full_name.first(20)  %>
+						<%= image_tag 'user-menu-arrow.png', :id=>"user-menu-arrow" %>	
+						<% end %>
+						<ul>
+							<li><%= link_to "My Settings", edit_user_registration_path, :tabindex => 999 %></li>
+							<li><%= link_to "Sign Out", destroy_user_session_path, :method => :delete, :tabindex => 999 %></li>
+						</ul>
+				</li>
+			</ul>	
+		<% else %>
+			<%= link_to new_user_session_url, :tabindex => 999 do %>
+				<%= image_tag 'SYW_Nav_Icon_Login.png', :class=>"nav-box-icon" %> Sign Up / Log In
+			<% end %>
+		<% end %>
+		
+		<%= link_to '/contact-us', :tabindex => 1000 do %>
+			<%= image_tag 'SYW_Nav_Icon_Contact.png', :class=>"nav-box-icon" %> Contact Us
+		<% end %>
+		<span class="nav-search-box">
+			<%= form_tag(search_path, :method => "get", :id => :search_form) do %>
+				<%= text_field_tag :q, '', :tabindex => 1001 %>
+				<%= image_submit_tag("SYW_Nav_Icon_Search.png", :id => 'search-box-click', :alt => 'Search', :tabindex => 1001) %>
+			<% end %>
+		</span>
+		<% 
+		# disable display of Magic Phrase form inoput on events pages, because it is causing errors. Fix those errors and let it be displayed
+		unless params[:controller]=='events' && (params[:action]=='new' || params[:action]=='dashboard' || params[:action]=='edit')
+		%>
+		<div class="nav-magic_phrase-container">
+			<%= image_tag 'magic_hat.png', :class=>"nav-box-icon" %>
+			I Have a Magic Phrase: 
+			<span class="nav-magic_phrase-box">
+				<%= form_tag(search_path, :id => :magic_phrase_search_form, :remote => true) do %>
+					<%= text_field_tag :magic_phrase, '', :required => :required, :size => 50, :class => 'required', :minlength => 2, :maxlength => 255, :tabindex => 1002 %>
+					<%= image_submit_tag("SYW_Nav_Icon_Magic_Search.png", :id => 'magic_phrase-box-click', :alt => 'Search by Magic Phrase', :tabindex => 1002) %>
+				<% end %>
+			</span>
+		</div>
+		<div class="nav-magic_phrase-container_popup hidden">
+			<%= link_to image_tag('modal_close.png'), 'javascript:void(0);', :class => 'close_magic_phrase_button fr', :title => 'Close' %>
+			<p style="color:#852604;">Sorry, that Magic Phrase was not recognized.
+			<p>Please try again. You can also search for an event by Name or Title using the blue search box.
+		</div>
+		<% end %>
+	</div>
+</div>

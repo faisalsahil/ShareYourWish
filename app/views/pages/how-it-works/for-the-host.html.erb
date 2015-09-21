@@ -1,0 +1,19 @@
+<% title "How it Works for the Host - ShareYourWish " %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+        <div class="col-single-large-margin box-shadow-reg">
+
+           <h1>How ShareYourWish Works: For the Host</h1>
+           <%= render :partial=>'how_it_works' %>
+			  <p>
+			 <%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green fl" %>
+		     <%= link_to 'NEXT: Benefits of SYW', '/how-it-works/benefits', :class=>'button-type-standard button-size-big button-color-blue fr'%>
+        </div>
+        <p>
+        <div class="clearfloat "></div>
+
+
+<% end %>

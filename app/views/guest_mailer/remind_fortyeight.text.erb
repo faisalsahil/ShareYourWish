@@ -1,0 +1,12 @@
+Reminder... It's now only two days away...
+<%= @guest.event.title %> !
+		
+If you haven't already done so, please visit <%= link_to 'our event page at ShareYourWish.com', invite_url(@guest) %> for more information about this event, including information on how to participate and the charity that <%= @guest.event.format_child_name('has','have') %> chosen to support.
+
+We hope you can help us do something really good!
+
+From,
+<%= @guest.event.host_name %>
+
+
+This message was sent to you by ShareYourWish.com on behalf of <%= @guest.event.host_name %>. Please visit our website to learn more about <%= link_to 'ShareYourWish.com', root_url %>. Do not reply to this message. For technical support please contact <%= link_to 'info@shareyourwish.com','mailto:info@shareyourwish.com'%>

@@ -1,0 +1,127 @@
+<% title "In the News & Reviews - Share Your Wish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+	<div class="col-single-large-margin box-shadow-reg">
+		
+		<% content_for :head do %>
+		<%= javascript_tag do %>
+		  jQuery(function() {
+			 $( "#press-tabs" ).tabs().addClass( "ui-tabs-vertical ui-helper-clearfix" );
+		    $( "#press-tabs li" ).removeClass( "ui-corner-top" ).addClass( "ui-corner-left" );
+		  });
+		<% end %>
+		<% end %>
+		<h1>In the News &amp; Reviews</h1>
+			<div id="press-tabs">
+			  <ul>
+			    <li><a href="#press-tabs-1">Print &amp; Online</a></li>
+			    <li><a href="#press-tabs-2">Television &amp; Video</a></li>
+			    <li><a href="#press-tabs-3">Feedback &amp; Quotes</a></li>
+			  </ul>
+			  
+			  <div id="press-tabs-1">
+			  
+				<div class="press-article-container">
+					<div class="press-article-left-col">
+						<%= link_to 'http://www.weewestchester.com/2013/03/06/share-your-wish/#more-8080', :target=>"_new" do %>
+							<%= image_tag 'press/wee_westchester.jpg', :class=>"press-article-icon" %>
+							Wee Westchester
+						<% end %>
+					</div>
+					<div class="press-article-title">
+						<%= link_to "Teaching Kids Compassion For Their Birthday", 'http://www.weewestchester.com/2013/03/06/share-your-wish/#more-8080' %>
+					</div>
+					<div class="press-article-body">
+						<!-- 180 -->
+						<span class="press-curly-quote">&ldquo;</span>
+						I love the idea of quality over quantity...The child won’t feel shortchanged and you won’t have to stuff another ten board games in your closet.  
+					</div>
+				</div>
+				
+				<div class="press-article-container">
+					<div class="press-article-left-col">
+						<%= link_to 'http://www.beverlysbirthdays.org', :target=>"_new" do %>
+							<%= image_tag 'press/beverlys_birthdays.jpg', :class=>"press-article-icon" %>
+							Beverly's Birthdays
+						<% end %>
+					</div>
+					<div class="press-article-title">
+						<%= link_to "For Kids Too Young to Personally Volunteer", 'http://www.beverlysbirthdays.org' %>
+					</div>
+					<div class="press-article-body">
+						<!-- 180 -->
+						<span class="press-curly-quote">&ldquo;</span>
+						Beverly's Birthdays has partnered with Share Your Wish, an organization devoted to providing parents with the tools and resources to...
+					</div>
+				</div>
+
+					
+
+			  </div>
+			
+			  <div id="press-tabs-2">
+			    <p>We're currently in the green room, waiting to be called on stage!
+			  </div>
+			
+			  <div id="press-tabs-3">
+				
+			    <div class="press-feedback-container">
+					<span class="press-curly-quote">&ldquo;</span>
+					I have been invited to 3 Share Your Wish parties and can not wait to use them for my daughter's parties.  What a great way to teach your kids about the gift of sharing.  As a guest, it was so great to choose the charity to donate to,  frantic trips to the toy store were eliminated and the guest of honor got just the gifts he/she wished for.  A wish come true for everyone!
+					<br/>
+					<div class="press-feedback-author">
+						Lisa Nemeroff
+					</div>
+				 </div>
+				
+								
+			    <div class="press-feedback-container">
+					<span class="press-curly-quote">&ldquo;</span>
+					We recently used Share Your Wish for our daughter's 3rd Birthday. Not only was 
+					it a fabulous and easy way to have everyone invited contribute to the ultimate 
+					group gift (a shiny new big girl bike with all the trimmings!), it was a great 
+					way to introduce on a personal level the value and importance of giving back. 
+					Although she is of course too young to understand what charity means, kids are 
+					never too young to learn to act of sharing and brightening someone else's day. 
+					We are looking forward to using the site for years to come and teaching this 
+					message and instilling this value in our children. What better way to do it than 
+					letting your kids feel like a giving star!  
+					<br/>
+					<div class="press-feedback-author">
+						Tobi Spino
+					</div>
+				 </div>
+				
+				
+			    <div class="press-feedback-container">
+					<span class="press-curly-quote">&ldquo;</span>
+					I liked doing Share your wish because the kids get to buy the gifts that they really really want and they are also donating some of it to charity.  The charities need money to keep going and to keep helping people.  So I helped the charities and my friends helped me to get the gift i wanted- the lego death star!
+					<br/>
+					<div class="press-feedback-author">
+						Justin, age 8
+					</div>
+				 </div>
+				
+				
+			    <div class="press-feedback-container">
+					<span class="press-curly-quote">&ldquo;</span>
+					As a parent of 3 children, ages 8, 6 and 3, I love the idea of Share Your Wish because it teaches your kids the value of giving to charity and sharing their special day with others who are less fortunate than them. My children already have more toys than they need and this also allows them to pick one special gift that they really want rather than getting more small gifts that often get played with for a short period of time and tossed aside.  I just did it for a small party for my 8 year old and everyone contributed and commented on what a great idea it is.  I am excited to use it again next month for my other 2 kids.
+					<br/>
+					<div class="press-feedback-author">
+						Rachelle Shapiro
+					</div>
+				 </div>
+				
+
+				
+
+			
+			</div><!-- press-tabs -->
+	</div>
+
+
+	
+<% end %>

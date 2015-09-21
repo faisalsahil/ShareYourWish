@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	</head>
+	<table id="zbody" bgcolor="#CCCCCC" cellspacing="0" cellpadding="0" border="0" >
+		<tr>
+			<td>
+			<table id="zoutside" width="550" bgcolor="#FFFFFF" style="margin:14px; border: 1px #999999 dashed;">
+				<tr>
+					<td width="420" style="padding:5px; vertical-align: top;" valign="top"><h1 style="color: #e4993e; font-size: 1.75em; margin-top: 3px; margin-bottom: 3px;">Confirmation</h1><h2 style="color: #8b5d3b; font-size: 1.5em; margin-top: 3px; margin-bottom: 3px;">We have received your request</h2></td>
+					<td width="120" align="right" style="padding:5px;"> <%= image_tag 'SYW_logo.png', :width=>111, :height=>139 %> </td>
+				</tr>
+				<tr>
+					<td colspan="2" style="padding: 5px">
+					<p style="color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: .875em; padding: 5px; margin: 0px 0px 5px 0px; line-height: 125%; ">
+						Thanks for requesting to be reminded about ShareYourWish for your next special event. We'll send you a reminder email with lots of time to spare, so you can try on ShareYourWish for yourself. It's very easy to use and helps out everybody: You, your Guests, an important Charity, and most importantly your child!
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="padding: 10px; background-color: #DDDDDD;" >
+					<p style="font-size: 11px; color: #444444; padding: 20px;">
+						Please visit our website to learn more about <%= link_to 'ShareYourWish.com', root_url %>. Do not reply to this message. For technical support please contact <%= link_to 'info@shareyourwish.com','mailto:info@shareyourwish.com'%>
+					</td>
+				</tr>
+			</table></td>
+		</tr>
+	</table>
+</html>

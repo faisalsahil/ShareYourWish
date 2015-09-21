@@ -1,0 +1,7 @@
+<%= form_for @child do |f| %>
+<%= f.hidden_field :event_id %>
+<%= f.hidden_field :guest_id %>
+<%= f.text_field :name, :required => @child.persisted? %>
+<%= f.date_select :dob,  :start_year => Time.now.year-20, :end_year => Time.now.year, :order => [:month, :day, :year], :prompt => true, :html_options => { :class=> 'form-selectbox', :required => :required } %>
+<%= t.submit %>
+<% end %>

@@ -1,0 +1,53 @@
+<% if @guest %>
+
+<%= form_for(@guest, :remote => true, :url => @guest.anonymous? ? '/' : url_for(@guest)) do |f| %>
+Please respond by: <strong>
+<% if @event.rsvp_by %>
+   <%= @event.rsvp_by.strftime("%A, %B %e, %Y")%>
+<% else %>
+   (No RSVP date set)
+<% end %>
+</strong>
+<br />
+My Response: <span class="event-response" id="my_response"><%= Guest::ATTENDANCES[@guest.attendance.to_sym] %></span>
+<br />
+Leave a note with your response:<br />
+
+<% if @guest.anonymous? %>
+    <%= f.text_area :message, :value => '', :rows=>3, :name => :none, :disabled => :disabled %>
+<% else %>
+    <%= f.text_area :message, :value => '', :rows=>3, :class=>"guest_attendance_message", :tabindex => 30 %>
+<% end %>
+<div id="message_types" class="indent-me">
+	<input type="radio" name="message_type" id="message_type_host" tabindex="31" value="host"<%= @guest.anonymous? ? ' disabled="disabled"' : '' %> >
+	Private message to Host only
+	<br />
+	<input type="radio" name="message_type" id="message_type_board" tabindex="32" value="board" checked="checked"<%= @guest.anonymous? ? ' disabled="disabled"' : '' %> >
+	Also post on <%= first_word @event.child_full_name %>'s Message board
+	<br/>
+</div>
+<p>
+
+<div id="radio">
+    <% if @guest.anonymous? %>
+        <%= f.radio_button :attendance, Guest::ATTENDANCES.keys[0], :name => :none, :disabled => :disabled  %>
+        <%= f.label :attendance_yes, "Yes, I Can't Wait to Celebrate!", :id => :none %>
+    
+        <%= f.radio_button :attendance, Guest::ATTENDANCES.keys[2], :name => :none, :disabled => :disabled %>
+        <%= f.label :attendance_no, 'No, Sorry to Miss It', :id => :none %>
+    <% else %>
+    	<%= f.radio_button :attendance, Guest::ATTENDANCES.keys[0], :tabindex => 33 %>
+    	<%= f.label :attendance_yes, "Yes, I Can't Wait to Celebrate!", :class => :guest_attendance_button, :tabindex => 34 %>
+    
+    	<%#= f.radio_button :attendance, Guest::ATTENDANCES.keys[1], :tabindex => 35 %>
+    	<%#= f.label :attendance_maybe, 'Maybe', :class => "guest_attendance_button button-size-small button-color-yellow", :tabindex => 36 %>
+    
+    	<%= f.radio_button :attendance, Guest::ATTENDANCES.keys[2], :tabindex => 37 %>
+    	<%= f.label :attendance_no, 'No, Sorry to Miss It', :class => :guest_attendance_button, :tabindex => 38 %>
+	<% end %>
+	<br/>
+
+
+</div>
+<% end %>
+<% end %>

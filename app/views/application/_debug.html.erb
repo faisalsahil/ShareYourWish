@@ -1,0 +1,58 @@
+<div style="margin-left:30px; color:#FF3333 ">
+
+<div>
+		<h2>Current_User</h2>
+		<% if current_user %>
+			<%= simple_format current_user.to_yaml %>
+		<% else %>
+			no Event.User object
+		<% end %>
+</div>
+<div>
+	<h2>Event</h2>
+	<% if @event%>
+		<%= simple_format @event.to_yaml %>
+	<% else %>
+		no Event object
+	<% end %>
+</div>
+<div>
+		<h2>Event User</h2>
+		<% if @event && @event.user %>
+			<%= simple_format @event.user.to_yaml %>
+		<% else %>
+			no Event.User object
+		<% end %>
+</div>
+<div>
+		<h2>Cart</h2>
+		<% if @event && @event.cart %>
+			<%= simple_format @event.cart.to_yaml %>
+			<br><br>
+			<%= simple_format @event.cart.line_items.to_yaml %>
+		<% else %>
+			no Event.Cart object
+		<% end %>
+		
+</div>
+<div>
+		<h2>Event Pictures</h2>
+		<% if @event && @event.pictures %>
+			<%= simple_format @event.pictures.to_yaml %>
+		<% else %>
+			no Event.Pictures object
+		<% end %>
+		
+</div>
+<div>
+	<h2>Debug - Session</h2>
+	<%= debug session %>
+</div>
+<div>
+	<h2>Debug - Params</h2>               
+	<%= debug params %>
+</div>
+
+
+
+</div>

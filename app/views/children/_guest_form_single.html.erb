@@ -1,0 +1,17 @@
+<% if @guest && defined?(child) %>
+    <div class="fields_for_child">
+        <%= form.fields_for :children, child do |ch| %>
+            <% if is_invited %>
+               <%= ch.hidden_field :event_id %>
+            <% end %>
+            <%= ch.hidden_field :guest_id, :class => :guest_id %>
+            <%= ch.text_field :name, :required => child.persisted?, :class => :child_name %>
+            <% unless is_invited %>
+               <%= ch.date_select :dob, {:start_year => Time.now.year-20, :end_year => Time.now.year, :order => [:month, :day, :year], :prompt => true}, { :class=> 'form-selectbox', :required => child.persisted? } %>
+            <% end %>
+            <% if child.persisted? && ((is_invited && child.is_invited?) || (!is_invited && !child.is_invited?)) %>
+               <%= link_to 'Delete', 'javascript:void(0);', :data => {:url => guest_child_path(@guest,child)}, :id => :delete_guest_children_link %>
+            <% end %>
+        <% end %>
+    </div>
+<% end %>

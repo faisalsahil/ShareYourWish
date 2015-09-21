@@ -1,0 +1,46 @@
+<%= form.fields_for :payment do |pf| %>
+<%= pf.hidden_field :order_id %>
+<%= pf.hidden_field :payment_method %>
+<%= pf.hidden_field :amount, :value => @order.calc_total_cost %>
+
+<span class="field-flag">*</span>
+<%= label_tag :cc_num, 'Card Number: ' %>
+<br>
+<div class="indent-me">
+	<%= pf.text_field :cc_num, :class => 'form-field-big', :size => 20, :creditcard => true, :required => :required, :tabindex => 357 %>
+	<br />
+	<%= image_tag 'accepted_credit_cards.jpg' %>
+	<br />
+	<% if ENV['RAILS_ENV'] != 'production' %>
+		<span class="description">TESTING ONLY: use CC= 4111111111111111 and EXP= 12/2015 and CVV= 1234</span>
+		<br />
+	<% end %>
+</div>
+
+<span class="field-flag">*</span>
+<label>Card Expiration: </label>
+<br>
+<div class="indent-me">
+	<%= pf.select :cc_exp_month, options_for_select(Payment::CC_EXP_MONTHS), {:prompt =>'Month'}, :required => :required, :min => 1, :max => 12, :class => :required, :tabindex => 357 %>&nbsp;&nbsp;&nbsp;
+	<%= pf.select :cc_exp_year, options_for_select(Payment::CC_EXP_YEARS), {:prompt => 'Year'}, :class => :required, :required => :required, :min => Date.today.year, :max => Date.today.year+8, :tabindex => 357 %>&nbsp;&nbsp;&nbsp;
+</div>
+<br />
+
+<span class="field-flag">*</span>
+<%= pf.label :cc_cvv, 'Card Verification Code (CVV): ' %><%= help_text_caption '101-CVV' %>
+<br>
+<div class="indent-me">
+	<%= pf.text_field :cc_cvv, :class => 'form-field-small', :size => 5, :required => :required, :minlength => 2, :maxlength => 4, :digits => true, :tabindex => 357 %>
+	<br />
+	<br/>
+</div>
+
+<span class="field-flag">*</span>
+<%= pf.label :cc_postal_code, 'Card Billing Postal Code: ' %>
+<br>
+<div class="indent-me">
+	<%= pf.text_field :cc_postal_code, :class => 'form-field-small postalcode', :size => 20, :required => :required, :tabindex => 357 %>
+	<br />
+	<br/>
+</div>
+<% end %>

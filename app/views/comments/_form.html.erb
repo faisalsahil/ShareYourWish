@@ -1,0 +1,24 @@
+
+<div id="comment_form">
+<div class="alerts-container"></div>
+
+<%= form_for(@comment, :remote => true) do |f| %>
+	<div class="field">
+	  Name<br>
+	<%= f.text_field :full_name , :id=> 'full_name',  :placeholder => "Your Name", :class=> 'form-field-medium'  %>
+	</div>  
+	<div class="field">
+		Email<br>
+		<%= f.text_field :email, :id=> 'email',  :placeholder => "Email", :class=> 'form-field-medium' %>  (optional and never displayed)
+	</div>
+  <div class="field">
+	  Comment<br>
+	<%= f.text_area :content, :id=> 'content', :placeholder => "Comment", :class=> 'form-textarea-medium' %>
+  </div>
+ <div class="actions">
+    <%= f.submit :value => 'Add Comment', :class => 'button-type-standard button-size-medium button-color-green'%>
+  </div> 
+<input type="hidden" id='post_id' name="comment[post_id]" value='<%=@post.id%>'>
+<% end %>
+
+</div>

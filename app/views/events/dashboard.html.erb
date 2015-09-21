@@ -1,0 +1,281 @@
+<% title "Dashboard - Manage My Event - ShareYourWish" %>
+
+<% content_for :head do %>
+<%= javascript_include_tag 'events' %>
+<%= javascript_include_tag 'steps/invite-guests' %>
+<%= stylesheet_link_tag 'print/events/dashboard', :media => :print %>
+<% end %>
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+<div class="col-single-large-margin box-shadow-reg">
+
+	<h1>My Event - Dashboard</h1>
+
+	<%= render :partial => 'notices-and-errors', :locals => {:errobj => @event} %>
+
+	<% if @event && @event.published? %>
+
+	<div id="timeline-countdown" style="width: 864px; height: 18px;">
+		<div id="gift-fund-days-to-go" style="width:142px; text-align:center; margin-left:318px; font-size: 16px; font-weight:800; float:left; color: #aabb33; text-align: center;">
+			<% if @event.gift_fund_locked? %><%= pluralize(@event.gift_fund_days_to_unlock, "day") %>  <% end %>
+		</div>
+		<div id="event-days-to-go" style="width:142px; text-align:center; margin-left:0px; font-size: 16px; font-weight:800; float:left; color: #aabb33; text-align: center;">
+			<%= pluralize(@event.event_days_to_go, "day") %>
+		</div>
+		<div id="donation-fund-days-to-go" style="width:142px; text-align:center; margin-left:0px; font-size: 16px; font-weight:800; float:left; color: #aabb33; text-align: center;">
+			<% if @event.donation_fund_locked? %><%= pluralize(@event.donation_fund_days_to_unlock, "day") %>  <% end %>
+		</div>
+		<div class="clearfloat"></div>
+	</div>
+	
+	<%= render 'timeline' %>
+
+	<div id="dashboard-header">
+		<div id="dashboard-title">
+			<%= @event.title %>
+		</div>
+		<div class="indent-me">
+			<div class="field">
+				<span class="label">Date:</span> <%= @event.event_date.to_date.strftime("%A, %B %e, %Y") %><br />
+				<% if @event.start_time && @event.end_time %>
+					<span class="label">From:</span> <%= @event.start_time_formated %> <span class="label">To:</span>	<%= @event.end_time_formated %>
+				<% else %> 
+					(time not specified)
+				<% end %>
+			</div>
+			<div class="field">
+				<span class="label">For:</span> <%= @event.child_full_name %>
+			</div>
+			<!--
+			<div class="field">
+				<% if @event.charity_donation_percent %>
+					<span class="label">Donation Level:</span> <%= (@event.charity_donation_percent*100).to_i %>% 
+				<% end %>
+			</div>
+			-->
+			<div class="field">
+				<% if @event.magic_phrase %>
+					<span class="label">Magic Phrase:</span> <%= @event.magic_phrase %>
+				<% end %>
+			</div>
+			<div class="field">	
+				<%= link_to 'Edit event', edit_event_path(:id => @event.id, :user_id => current_user.id, :anchor => @first_tab), :id => "event_details_button", :class => "button-type-standard button-size-medium button-color-yellow" %>
+				<%= link_to 'View event', event_path(:id => @event.id, :user_id => current_user.id), :class => "button-type-standard button-size-medium button-color-yellow" %>
+			</div>
+			<!--
+			<div class="field">
+				<% if @event.package %>
+					<span class="label">Package Selection:</span> <%= @event.package.try(:name) %>
+				<% end %>
+			</div>
+			-->
+			<!-- 
+			<div class="field">
+				<% if @event.slug %>
+					<span class="label">Event Page URL:</span> <%= link_to @event.slug, url_for(@event) %>
+				<% end %>
+			</div>
+			-->
+
+					
+		</div>
+	</div>
+	
+
+	<div id="dashboard_contributions">
+		<div class="dashboard-section-header">Contributions:</div>
+		<div class="indent-me">
+			<div id="dashboard_contributions_raised_total" class="bordered display-IB funds"><%= number_to_currency @event.contributions_total_amount_after_fees %></div> Total, from <%= @event.event_transaction_logs.contribution_from_guests.count %> guests <br />
+			<%= ((1-@event.charity_donation_percent)*100).to_i %>% <div id="dashboard_contributions_raised_gift" class="bordered display-IB funds"><%= number_to_currency @event.gift_fund %></div><strong> Gift Fund</strong> <%= help_text_caption 'Gift-Fund' %><br />
+
+			<%= (@event.charity_donation_percent*100).to_i %>% <div id="dashboard_contributions_raised_donation" class="bordered display-IB funds"><%= number_to_currency @event.donation_fund %></div><strong> Donation Fund</strong><%= help_text_caption 'Donation-Fund' %><br />
+			
+		<% @event.event_transaction_logs.total_amount_and_guest_count_by_charities.each do |charity| %>
+			<div class="dashboard_contributions_charities bordered display-IB funds">
+			<%= number_to_currency charity.total_amount %> 
+			</div>
+			<%= charity.name %> (from <%= pluralize(charity.guest_count, "guest") %>)<br />
+			<div class="clearfloat"></div>
+		<% end %>
+			
+		</div>
+		
+		<br />
+		<!--  These buttons have been removed for now, as funds release will be performed by admins or programmatically, not by User
+		<span style="width: 150px; text-align:right;">
+			<% if @event.gift_fund_locked? %><%= pluralize(@event.gift_fund_days_to_unlock, "day") %> to unlock <% end %>
+		</span>
+		<span style="font-weight:800;">Gift Fund</span>
+		<% if @event.gift_fund_locked? || @event.event_sequence < 2 %>
+		<%= button_tag 'Release Gift Fund', :disabled => :disabled, :type => :button, :class=> "button-type-standard button-size-medium button-color-green" %>
+		<% else %>
+		<%= button_tag 'Release Gift Fund', :id => "release_gift_fund_button", :type => :button, 'data-href' => release_gift_fund_event_path, :class=> "button-type-standard button-size-medium button-color-green" %>
+		<% end %>
+		<br />
+		<br />
+		<span style="width: 150px; text-align:right;">
+			<% if @event.donation_fund_locked? %><%= pluralize(@event.donation_fund_days_to_unlock, "day") %> to unlock <% end %>
+		</span>
+		<span style="font-weight:800;">Donation Fund</span>
+		<% if @event.donation_fund_locked? || @event.event_sequence < 4 %>
+		<%= button_tag 'Release Donation Fund', :disabled => :disabled, :type => :button, :class=> "button-type-standard button-size-medium button-color-green" %>
+		<% else %>
+		<%= button_tag 'Release Donation Fund', :id => "release_donation_fund_button", :type => :button, 'data-href' => release_donation_fund_event_path, :class=> "button-type-standard button-size-medium button-color-green" %>
+		<% end %>
+		-->
+		
+	</div>
+	
+	<div id="dashboard_activity_log">
+		<div class="dashboard-section-header">Recent Activity:</div>
+		<% if @event_activity_logs %>
+		<div id="dashboard_activity_log_target">
+			<%= render :template => 'event_activity_logs/index' %>
+		</div>
+		<% else %>
+		No activity yet
+		<% end %>
+		<div style="clear:both;"></div>
+	</div>
+
+	<div class="clearfloat"></div>
+	
+	
+	<div class="dashboard-section-header">Tools:</div>
+	<div id="dashboard_other_controls" class="center-contents">
+		<div class="holder">
+			<%= link_to image_tag('invitation_insert_icon.jpg') + 'Print Inserts For Invitations',invitation_insert_event_path, :target=>'_blank' %>
+		</div>
+		<div class="holder">
+			<%= link_to image_tag('print_certificate_icon.png') + 'Print My Child\'s Reward Certificate', reward_certificate_event_path(@event, :format => :pdf), :target=>'_blank' %>
+		</div>
+	</div>
+	<div class="clearfloat"></div>
+
+	<div id="dashboard_guests">
+		<div class="dashboard-section-header">Guests:</div>
+		<div id="guest_select_buttons">
+			<%= button_tag 'Select all', :id => :select_all_button, :type => :button, :class =>'choose_button ui-button ui-widget ui-state-default ui-corner-all ui-state-hover' %>
+			<%= button_tag 'Select none', :id => :select_none_button, :class =>'ui-button ui-widget ui-state-default ui-corner-all ui-state-hover'%>
+			<%= button_tag 'Add Another Guest', :id => :add_guest_field, :class =>'button-type-standard button-size-medium button-color-blue ' %>
+		</div>
+
+		<div id="dashboard_guests_list" class="bordered">
+
+			<div id="guests-shown-container">
+				<div class="guests_error"></div>
+				<table style="width:680px;" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+						    <td style="width:30px;"></td>
+							<td style="width:125px; text-decoration:underline;font-weight:bold;">Adult Name</td>
+							<td style="width:150px; text-decoration:underline;font-weight:bold;">Email</td>
+							<td style="width:60px;"></td>
+							<td style="width:95px; text-decoration:underline;font-weight:bold;">Activity</td>
+							<td style="width:75px;"></td>
+							<td style="width:135px;"></td>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
+				<div id="shown_guests">
+					<% if @event.shown_guests.present? %>
+					<%= render @event.shown_guests %>
+					<% else %>
+					<% 1.times do %>
+					<%= render 'guests/form', :guest => Guest.new  %>
+					<% end %>
+					<% end %>
+				</div>
+
+				<div class="hidden" id="guests_inputs_template">
+					<%= render 'guests/form', :guest => Guest.new %>
+				</div>
+			</div>
+
+		</div>
+
+		<div id="dashboard_guests_actions">
+
+			<div id="dashboard_emails">
+				<strong>Invitations Sent</strong>: <%= @event.guests.invited.count %>
+				<br />
+				<strong>Yes</strong>: <%= @event.guests.yes.count %>
+				<br />
+				<strong>No</strong>: <%= @event.guests.no.count %>
+				<br />
+				<strong>No Response</strong>: <%= @event.guests.no_reply.count %>
+				<br />
+			</div>
+			<center>
+				<div style="padding: 3px; border: 1px dashed #CCC; background: #fbefe0;">
+					<div id="invitation_types">
+						<input type="radio" name="invitation_type" value="invite" checked="checked">
+						<label>Invitations</label>
+						<br/>
+						<input type="radio" name="invitation_type" value="remind">
+						<label>Reminder to RSVP</label>
+						<br/>
+						<input type="radio" name="invitation_type" value="thank">
+						<label>Thank You</label>
+						<br/>
+						<input type="radio" name="invitation_type" value="custom">
+						<label>Custom Message</label>
+					</div>
+					<%= button_tag 'Preview Email(s)', :id => :show_invitations_popup_button, :class =>'button-type-standard button-size-medium button-color-green ' %>
+				</div>
+				<%= button_tag 'Remove Guest', :id => :remove_from_list_button, :class =>'button-type-standard button-size-medium button-color-red ', :confirm => 'Are you sure?' %>
+				<br/>
+				<%= link_to image_tag('print.png'), '#', :id => :guests_print_button %>
+				<%= link_to '', 'javascript:void(0);', :id => :guests_bucket_button, :class => @event.hidden_guests.present? ? :full : '' %>
+			</center>
+		</div>
+
+		<div style="clear:both;"></div>
+
+		<div id="guests-hidden-container" class='hidden'>
+		    <%= link_to image_tag('modal_close.png'), 'javascript:void(0);', :class => :close_button, :title => 'Close' %>
+			<div id="guests-removed-title">
+				Trash
+			</div>
+
+			<div id="hidden_guests">
+				<% if @event.hidden_guests.present? %>
+				<%= render @event.hidden_guests %>
+				<% end %>
+			</div>
+		</div>
+
+		<div class="mixed_popup hidden">
+
+			<div id="guest_mailer_preview">
+				<div class="close">
+					<input type="button" value="Send Email(s)" id="send_invitations_button" class="button-type-standard button-size-medium button-color-green" />
+					<input type="button" value="Cancel" id="cancel_send_email_button" class="button-type-standard button-size-medium button-color-red close_popup" />
+				</div>
+				<div id="frame">
+					<h3>About to send this email to <span id="guests_quantity_for_send">0</span> guests</h3>
+					<div id="guest_mailer_form_container" class="dashed padded hidden">
+						<%= render 'guest_mailer/form' %>
+					</div>
+					<div id="popup_container"></div>
+				</div>
+			</div>
+		</div>
+		
+		<div style="margin-top:20px;">	
+			<%= button_to 'Cancel Event', event_path(@event), :method => :delete, :class => "button-type-standard button-size-medium button-color-red", :confirm => 'DANGER: This will permanently remove the Event. Are you sure want to continue?' %>
+		</div>
+		
+		
+	</div>
+
+	<% else %>
+	This Event can't be managed yet because it hasn't been published. Please complete setting up your event using the <%= link_to 'Create new Event', new_event_path(:user_id => current_user.id, :anchor => @first_tab) unless !user_signed_in? %> feature.
+	<% end %>
+
+</div>
+
+<% end %>

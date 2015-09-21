@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <table id="zbody" bgcolor="#CCCCCC" cellspacing="0" cellpadding="0" border="0" >
+	<tr><td>
+		<table id="zoutside" width="550" bgcolor="#FFFFFF" style="margin:14px; border: 1px #999999 dashed;">
+			<tr>
+				<td width="420" style="padding:5px; vertical-align: top;" valign="top">
+					<h1 style="color: #e4993e; font-size: 1.75em; margin-top: 3px; margin-bottom: 3px;">Welcome to ShareYourWish!</h1>
+				</td>
+				<td width="120" align="right" style="padding:5px;">
+		   		<%= image_tag 'SYW_logo.png', :width=>111, :height=>139 %>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding: 5px">
+				    <p style="color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: .875em; padding: 5px; margin: 0px 0px 5px 0px; line-height: 125%; ">
+					 Hello <%= first_word @user.full_name %>, and welcome to ShareYour Wish! Thanks for signing up.
+					 <p style="color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: .875em; padding: 5px; margin: 0px 0px 5px 0px; line-height: 125%; ">
+					 We've worked hard to make ShareYourWish simple to use, but if you need assistance or have any questions please let us know. We hope you can help us do something really good!
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="padding: 10px; background-color: #DDDDDD;" >
+					<p style="font-size: 11px; color: #444444; padding: 20px;">
+					Do not reply to this message. For technical support please contact <%= link_to 'info@shareyourwish.com','mailto:info@shareyourwish.com'%>
+				</td>
+			</tr>
+		</table>
+	</td></tr>
+  </table>
+</html>

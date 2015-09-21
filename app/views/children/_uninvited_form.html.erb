@@ -1,0 +1,14 @@
+<div class="guest_children hidden uninvited" >
+	<%= link_to image_tag('modal_close.png'), 'javascript:void(0);', :class => :close_button, :title => 'Close' %>
+	<h4>We'll send you a reminder 6-8 weeks before each child's birthday</h4>
+	<span style="width:180px;display: inline-block;">Name</span>
+	<span style="width:180px;">Birthday</span>
+	<%= form_for @guest, :html => { :id => :create_or_update_guest } do |f| %>
+	   <%= render 'children/guest_form', :form => f %>
+	   <div class="guests_children_buttons">
+            <%= link_to 'Save', 'javascript:void(0)', :id => :guests_save_button, :class =>'choose_button ui-button ui-widget ui-state-default ui-corner-all ui-state-hover' %>
+            <%= link_to 'Cancel', 'javascript:void(0)', :id => :guests_cancel_button, :class =>'choose_button ui-button ui-widget ui-state-default ui-corner-all ui-state-hover' %>
+        </div>
+	<% end %>
+	<div class="guests_error" style="width:490px;"></div>
+</div>

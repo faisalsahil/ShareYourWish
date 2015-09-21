@@ -1,0 +1,25 @@
+<%= semantic_form_for [:sywadmin, @item], :html => {:multipart => true} do |f| %>
+	<%= f.inputs 'Details' do %>
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.input :cost %>
+      <%= f.input :taxable %>
+      <%= f.input :is_visible %>
+      <%= f.input :is_package_proxy %>
+      <%= f.input :sort_order %>
+      <%= f.input :packages, :as => :select, :collection => Package.all %>
+    <% end %>
+
+	<%= f.inputs 'Image' do %>
+        <% if @item.picture && @item.picture.image? %>
+            <%= image_tag(@item.picture.image.url, :width => 200)  %><br/>
+            <%= check_box_tag 'item[delete_image]' %>
+            <%= label :item, :delete_image, 'Remove Image and Restore to Default Image' %>
+            <br/><br/>
+        <% end %>
+        <%= hidden_field(:picture, :imageable_id, {:value => @item.id}) %>
+		<%= file_field('picture', :image) %>
+
+	<% end %>
+	<%= f.buttons :commit %>
+<% end %>

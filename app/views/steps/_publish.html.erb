@@ -1,0 +1,68 @@
+<% if step %>
+<% content_for :head do %>
+<% javascript_include_tag "steps/#{step.slug}" %>
+<% end %>
+
+<div class="step">
+
+	<div class="event_description ">
+		<div class="step-head">
+			Publish your Event page!
+		</div>
+		<div class="step-subhead">
+			After publishing, you will not be able to change your Donation Level or Magic Phrase. 
+		</div>
+	</div>
+
+	<div class="form">
+
+		<% if @event %>
+
+		<%= form_for @event, :url => event_path(:id => @event.id), :html => { :id => :publish_event } do |f| %>
+
+		<div id="final_step_error"></div>
+		<%= f.hidden_field :step_id, :value => step.id %>
+		<%= f.hidden_field :state, :value => :complete %>
+		<% if step.previous %>
+		<%= hidden_field_tag :previous_tab, step.previous.id %>
+		<% end %>
+		<input type="submit" value="Publish Event Page" id="publish_button" class = "hidden"/>
+		<input type="button" value="Previous" class="hidden previous_event_button" />
+		<% end %>
+		
+		<% if @order.paid? %>
+		<div class="indent-me">
+			A payment has already been submitted for this Event.
+		</div>
+		<% else %>
+		<div id="order_form_container" class="indent-me hidden" >
+			<%= render 'orders/form' %>
+		</div>
+		<div id="checkout_confirm_container" class="indent-me<% unless @cart.positive? %> hidden<% end %>" >
+			<%= render 'orders/details' %>
+			<br />
+		</div>
+		<div id="free_package_message" class="indent-me<% if @cart.positive? %> hidden<% end %>">
+			<%= render 'users/form' %>
+		</div>
+		<% end %>
+		
+		<div class="indent-me">
+			By publishing your Event you acknowledge that you have read and agree with the <%= link_to 'Terms of Service', '/terms-of-service', :tabindex => 350 %> and <%= link_to 'Privacy Policy','/privacy-policy', :tabindex => 351 %>
+		</div>
+		<hr />
+		<% if !@order.paid? %>
+		<input type="button" value="Final Checkout" class = "checkout_confirm button-type-standard button-size-big button-color-green fr hidden" tabindex="359"/>
+		<input type="button" value="Review Order" class = "checkout button-type-standard button-size-big button-color-green fr hidden" tabindex="358"/>
+		<input type="button" value="Publish Event Page" class = "publish button-type-standard button-size-big button-color-green fr" onclick="jQuery('#publish_button').click()" tabindex="355"/>
+		<% end %>
+		<input type="button" value="Previous" class="button-type-standard button-size-medium button-color-green fl" onclick="jQuery('#publish_event .previous_event_button').click()" tabindex="360" />
+		<% end %>
+		<input type="button" value="Edit Order" class = "edit_order button-type-standard button-size-small button-color-green hidden" tabindex="361"/>
+		<%= button_to 'Cancel Event', event_path(@event), :method => :delete, :class => "button-type-standard button-size-medium button-color-red cancel_event_button", :confirm => 'Are you sure? This will permanently remove the Event.', :tabindex => 362 %>
+		<div class="clearfloat"></div>
+
+	</div>
+
+</div>
+<% end %>

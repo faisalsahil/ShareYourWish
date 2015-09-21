@@ -1,0 +1,14 @@
+<% if @posts_categories %>
+<h2>Categories</h2>
+
+<ul>
+	<li class="post-category">
+			<%= link_to 'All', posts_path %>
+	</li>
+	<% @posts_categories.each do |posts_category| %>
+		<li class="post-category">
+			<%= link_to_unless_current_posts_category posts_category %>
+		</li>
+	<% end %>
+</ul>
+<% end %>

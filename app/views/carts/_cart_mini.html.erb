@@ -1,0 +1,41 @@
+<div id="mini-cart-title">Cart</div>
+<div id="mini-cart-alerts"></div>
+<% if @cart.line_items.length > 0 %>
+<table id="mini-cart">
+	<tr>
+		<th class="qty"></th>
+		<th class="name">item</th>
+		<th class="each"></th>
+		<th class="ext">total</th>
+	</tr>
+
+	<%= render @cart.line_items.package_first %>
+
+	<tr>
+		<td class="mini-cart-divider" colspan="4"></td>
+	</tr>
+	<tr class="mini-cart-totals">
+		<td class="desc" colspan="3">Sub Total:</td>
+		<td class="amt"><%= number_to_currency(@cart.subtotal) %></td>
+	</tr>
+<!--
+	<tr>
+		<td class="mini-cart-totals" colspan="3">sales tax:</td>
+		<td id="tax-cost">tbd</td>
+	</tr>		
+	<tr>
+		<td class="mini-cart-totals" colspan="3">shipping:</td>
+		<td id="shipping-cost">tbd</td>
+	</tr>
+	<tr>
+		<td class="mini-cart-divider" colspan="4"></td>
+	</tr>
+	<tr>
+		<td class="mini-cart-totals" colspan="3">total:</td>
+		<td id="total-cost">tbd</td>
+	</tr>
+	-->
+</table>
+<% else %>
+<div class="center-contents">cart is empty</div>
+<% end %>

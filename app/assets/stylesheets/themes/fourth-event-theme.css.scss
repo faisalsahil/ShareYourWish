@@ -1,0 +1,30 @@
+$main_color: #3EE4E4;
+$bg_color: #FF66DD;
+
+/* personalizable by client */
+.event-page-bg {
+	background: $bg_color;
+}
+.event-page-title {
+  color: $main_color;
+  font-size: 4em;
+  font-family: arial, helvetica, sans-serif;
+  margin-top: 13px;
+  margin-bottom: 13px;
+  margin-left: 20px;
+  display: block;
+  width: 850px;
+  text-align: left;
+}
+.event-page-section-title {
+  color: $main_color;
+  font-size: 2.5em;
+  margin-bottom: 15px;
+}
+.event-page-section-details {
+  padding-left: 20px;
+  margin-bottom: 30px ;
+}
+.event-page-section-details.no-bottom {
+  margin-bottom: 0px ;
+}

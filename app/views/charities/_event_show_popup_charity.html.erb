@@ -1,0 +1,31 @@
+<% if defined?(charity) %>
+<div class="charity_container_full" id="charity_<%= charity.id %>" data-id="<%= charity.id %>">
+	<div class="charity_container_full_left_col">
+		<div class="charity_image">
+			<% if charity.picture && charity.picture.image? %>
+			<%= image_tag charity.picture.image.url(:medium) %>
+			<% else %>
+			<%= image_tag 'missing_medium.png' %>
+			<% end %>
+		</div>
+	</div>
+	<div class="charity_name">
+		<%= charity.name %>
+	</div>
+	<div class="charity_description">
+		<%= nl2br(charity.description) %>
+	</div>
+	<!--
+	<strong>Location:</strong> <%= charity.region %>
+	<br/>
+	<strong>Website:</strong> <%= website charity %>
+	-->
+</div>
+<% if @charities %>
+<div class="charity_paging centered flickr_pagination">
+	<div class="clearfloat"></div>
+    <%= will_paginate @charities %>
+</div>
+<% end %>
+
+<% end %>

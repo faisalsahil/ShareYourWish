@@ -1,0 +1,18 @@
+<% if theme %>
+<% current = @event && @event.theme_current?(theme) %>
+<div class="theme_container bordered<%= current ? ' selected' : '' %>" id="theme_<%= theme.id %>" data-id="<%= theme.id %>">
+
+	<div class="theme_icon popup_large">
+		<%= link_to (image_tag theme.icon), 'javascript:void(0)', :class => :theme_detail, :theme_id => theme.id, 'data-picture-medium' => theme.preview, :tabindex => 296 %>
+	</div>
+	<label for="event_theme_code_<%= theme.id %>">
+		<div class="theme_name">
+			<strong><%= theme.friendly_name %></strong>
+		</div>
+		<div class="theme_button">
+			<%= radio_button :event, :theme_code, theme.id, :class => :select_theme_button, :checked => current, :tabindex => 296 %>
+		</div> 
+    </label>
+
+</div>
+<% end %>

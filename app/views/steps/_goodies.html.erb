@@ -1,0 +1,69 @@
+<% if step %>
+<% content_for :head do %>
+  <% javascript_include_tag "steps/#{step.slug}" %>
+<% end %>
+
+  <div class="step">
+
+    <div class="event_description">
+    <div class="step-head">Choose a package. Basic is free, or upgrade for more fun!</div>
+    <div class="step-subhead">A package has to be chosen now. Goodies can be added now or later</div>    
+    </div>
+
+    <div class="form">
+
+      <% if @packages %>
+
+        <%= form_for @event, :url => event_path(:id => @event.id), :html => { :id => :goodies }  do |f| %>
+
+          <div id="step_error"></div>
+
+          <%= f.hidden_field :id %>
+          <%= f.hidden_field :package_id %>
+
+          <% if step.next %>
+            <%= f.hidden_field :step_id, :value => step.next.id %>
+            <%= f.hidden_field :state %>
+          <% end %>
+          <% if step.previous %>
+             <%= hidden_field_tag :previous_tab, step.previous.id %>
+          <% end %>
+
+         <input type="button" value="Save & Next step" id="goodies_button" class="hidden event_form_submit_button" state_class=<%= @event.get_state_at_complete(step) %> />
+         <input type="button" value="Previous" class="hidden previous_event_button" />
+
+       <% end %>
+
+          <div class="packages_container">
+            <ul>
+              <%= render @packages %>
+            </ul>
+          </div>
+          <div style="clear:both;"></div>
+
+       <hr />
+         <h3>Pick Goodies</h3>
+
+         <div class="items_container">
+           <ul>
+          <% @items.each do |item| %>
+          <%= render item, :package => @event.package %>
+          <% end %>
+        </ul>
+         </div>
+
+      <% else %>
+        Error: No packages defined. Please inform the Admin.
+      <% end %>
+      <hr />
+      <input type="button" value="<%= @edit ? 'Save' : 'Next step' %>" id="goodies_button" class="button-type-standard button-size-medium button-color-green fr" onclick="jQuery('#goodies_button').click()" tabindex="303" />
+
+      <input type="button" value="Previous" class="button-type-standard button-size-medium button-color-green fl" onclick="jQuery('#goodies .previous_event_button').click()" tabindex="304" />
+
+      <%= button_to 'Cancel Event', event_path(@event), :method => :delete, :class => "button-type-standard button-size-medium button-color-red cancel_event_button", :confirm => 'Are you sure? This will permanently remove the Event.', :tabindex => 305 %>
+      <div class="clearfloat"></div>
+
+    </div>
+
+  </div>
+<% end %>

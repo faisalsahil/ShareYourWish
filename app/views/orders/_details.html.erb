@@ -1,0 +1,21 @@
+<% if @order %>
+<fieldset class="dashed padded">
+	<legend class="padded">
+		Order Summary:
+	</legend>
+	<table>
+		<tr>
+			<td style="text-align:right;">Subtotal:</td><td style="text-align:right; width:100px;"><span id="subtotal"><%= number_to_currency @order.subtotal %></span></td><td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">Shipping:</td><td style="text-align:right; width:100px;"><span id="shipping_total_cost"><%= number_to_currency@order.shipping_total_cost %></span></td><td></td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">Sales Tax:</td><td style="text-align:right; width:100px;"><span id="tax_total_cost"><%= number_to_currency@order.tax_total_cost %></span></td><td style="font-size:10px;"> (7.375% NY only)</td>
+		</tr>
+		<tr>
+			<td style="text-align:right;">Total:</td><td style="text-align:right; width:100px;"><span id="total_cost"><%= number_to_currency@order.calc_total_cost %></span></td><td></td>
+		</tr>
+	</table>		
+</fieldset>
+<% end %>

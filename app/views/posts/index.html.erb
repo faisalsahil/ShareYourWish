@@ -1,0 +1,56 @@
+<% title "Teaching Charity to Kids - Learning about Charity - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head' %>
+<div class="clearfloat"></div>
+
+<div class="col-one-third box-shadow-reg">
+	<%= render :partial => 'notices-and-errors', :locals => {:errobj => nil} %>
+	<%= render :partial => 'posts/categories'%>
+	<%= render :partial => 'posts/tags'%>
+	<%= render :partial => 'posts/community'%>
+
+</div>
+
+<div class="col-two-thirds box-shadow-reg">
+	<h1>Teach &amp; Learn<%= @posts_category ? " : #{@posts_category.name}" : '' %><%= @tag ? " : #{@tag}" : '' %></h1>
+	<% for post in @posts do %>
+	<div class="post-container">
+		<div class="post-title">
+			<%= link_to post.title, post_path(post.posts_category.slug, post.slug) %>
+		</div>
+		<div class="indent-me">
+			<%= raw post.content.first(300) %> <%= link_to "...more", post_path(post.posts_category.slug, post.slug) %>
+			<br/>
+			<div class="post-byline">
+				<%= post.author %>, <%= time_ago_in_words post.created_at %> ago
+				<br>
+				<span style="font-size:.875em;">(<%= link_to "comment_count", post_path(post.posts_category.slug, post.slug, :anchor => :disqus_thread) %>)</span>
+			</div>
+			<div class="clearfloat"></div>
+		</div>
+	</div>
+	<% end %>
+	<div class="charity_paging centered flickr_pagination">
+		<div class="clearfloat"></div>
+		<%= will_paginate @posts %>
+	</div>
+</div>
+
+<!-- begin disqus - for comment counts -->
+<script type="text/javascript">
+	var disqus_shortname = 'shareyourwish';
+	/* * * DON'T EDIT BELOW THIS LINE * * */
+	( function() {
+			var s = document.createElement('script');
+			s.async = true;
+			s.type = 'text/javascript';
+			s.src = 'http://' + disqus_shortname + '.disqus.com/count.js';
+			(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+		}()); 
+</script>
+<!-- end disqus -->
+
+<% end %>
+

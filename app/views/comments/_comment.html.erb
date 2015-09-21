@@ -1,0 +1,12 @@
+<div class="comment">
+	<div class="content"><%= h comment.content %></div>
+  
+  <% if @guest.try(:can_delete_comment?, comment) || current_user.try(:can_delete_comment?, comment, @event) %>
+    <%= button_tag "Delete", type: :button, :class => "delete_comment_button button-type-standard ui-corner-all button-color-red", :tabindex => 61, 'data-url' => url_for(comment) if comment.id  %>
+  <% end %>
+
+	
+	<div class="author"><%= comment.fullname %>, <%= time_ago_in_words comment.created_at %> ago</div>
+	<div class="clearfloat"></div>
+
+</div>

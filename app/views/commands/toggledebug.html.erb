@@ -1,0 +1,16 @@
+<% content_for :outside do %>
+
+	<%= render :partial => 'page_head'%>
+	
+	<h2>Toggle Debug</h2>
+                  
+	<p>A cookie has been (re-)set to show debug info in certain parts of the site
+		<p>Display of debug information = 
+		<% case session[:debug] 
+				when "opensesame" %>
+					ON
+		<%    else %>
+					OFF
+		<% end %>
+
+<% end %>

@@ -1,0 +1,13 @@
+<% if @tags %>
+<div class = "posts_tags_cloud">
+  <%= link_to 'View All Tags', posts_tags_path, :id => :view_all_tags unless current_page?(posts_tags_path) %>
+  <h2>Tags</h2>
+  <ul>
+      <% tag_cloud(@tags, %w(css1 css2 css3 css4)) do |tag, css_class| %>
+      <li class="post-tag <%= css_class %>">
+          <%= link_to_unless_current tag.name, posts_tag_path(tag.name) %>
+      </li>
+      <% end %>
+  </ul>
+</div>
+<% end %>

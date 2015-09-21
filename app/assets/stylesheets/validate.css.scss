@@ -1,0 +1,16 @@
+/*  validate  */
+input.valid{
+  background-position: right 3px;
+  background-image: image-url('ui-icon_valid.png');
+  background-origin: padding-box;
+  background-repeat: no-repeat;
+  background-size: auto;
+
+}
+input.invalid{
+  background-position: right 3px;
+  background-image: image-url('ui-icon_invalid.png');
+  background-origin: padding-box;
+  background-repeat: no-repeat;
+  background-size: auto;
+}

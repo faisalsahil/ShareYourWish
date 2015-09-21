@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<link href='http://fonts.googleapis.com/css?family=Copse' rel='stylesheet' type='text/css' />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="description" content="Share Your Wish simplifies gift giving at kids' birthday parties while teaching the virtues of charity" />
+		<meta name="keywords" content="teach children, help parents, sharing, birthday parties, birthday wishes, learn, teach charity to children, teach children to share, generosity, selflessness, frivolous gifts, meaningful gifts, excessive gifts, celebration, share gifts" />
+		<link rel="icon" href="<%= path_to_image "favicon.ico" %>" type="image/x-icon" />
+		<title><%= content_for?(:title) ? yield(:title) : "Teaching Children The Importance of Helping Others - Share Your Wish" %></title>
+		<%= stylesheet_link_tag "application" %>
+		<!--[if !IE]><!-->
+			<%= stylesheet_link_tag "not-ie" %>
+		<!--<![endif]-->
+		<% if request.fullpath.index("sywadmin",0)  %>
+		<%= stylesheet_link_tag "activeadmin-only/active_admin.css" %>
+		<% else %>
+		<%= javascript_include_tag "application" %>
+		<% end %>
+		<%= csrf_meta_tag %>
+		<%= auto_discovery_link_tag :atom, "/feed" %>
+		<%= auto_discovery_link_tag :rss, "/feed.rss" %>
+		<%= yield :head %>
+		<!-- google analytics -->
+		<script type="text/javascript">
+			var _gaq = _gaq || [];
+			_gaq.push(['_setAccount', 'UA-30643074-1']);
+			_gaq.push(['_trackPageview']);
+
+			(function() {
+				var ga = document.createElement('script');
+				ga.type = 'text/javascript';
+				ga.async = true;
+				ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+				var s = document.getElementsByTagName('script')[0];
+				s.parentNode.insertBefore(ga, s);
+			})();
+
+		</script>
+		<% if production? %>
+			<!-- kissmetrics -->
+			<script type="text/javascript">
+			  var _kmq = _kmq || [];
+			  var _kmk = _kmk || 'ef919d390878c3ef50faf3c058fe7f0ce31100a5';
+			  function _kms(u){
+			    setTimeout(function(){
+			      var d = document, f = d.getElementsByTagName('script')[0],
+			      s = d.createElement('script');
+			      s.type = 'text/javascript'; s.async = true; s.src = u;
+			      f.parentNode.insertBefore(s, f);
+			    }, 1);
+			  }
+			  _kms('//i.kissmetrics.com/i.js');
+			  _kms('//doug1izaerwt3.cloudfront.net/' + _kmk + '.1.js');
+			</script>
+		<% end %>
+	</head>
+
+	<body class='<%= controller.controller_name %>'>
+		<!-- ClickTale Top part -->
+		<script type="text/javascript">
+		var WRInitTime=(new Date()).getTime();
+		</script>
+		<!-- ClickTale end of Top part -->
+		
+		<div class="hidden" id="opaco"></div>
+		<div class="hidden" id="popup"></div>
+		<a name="top">&nbsp;</a>
+		<div id="top_link">
+			<%= link_to '^ top', '#top' %>
+		</div>
+		<div class="outside">
+			<%= yield :outside %>
+		</div>
+
+		<% if debug_enabled? %>
+		<%= render :partial=>'debug' %>
+		<% end %>
+
+		<%= render :partial => 'footer' %>
+
+		<!-- ClickTale Bottom part -->
+		<div id="ClickTaleDiv" style="display: none;"></div>
+		<script type="text/javascript">
+		if(document.location.protocol!='https:')
+		  document.write(unescape("%3Cscript%20src='http://s.clicktale.net/WRd.js'%20type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+		if(typeof ClickTale=='function') ClickTale(17007,0.25,"www14");
+		</script>
+		<!-- ClickTale end of Bottom part -->
+
+		<%= render :partial => 'uservoice' %>
+		<%= render :partial => 'quantcast' %>
+	</body>
+</html>

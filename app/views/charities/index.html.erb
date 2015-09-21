@@ -1,0 +1,31 @@
+<% if @charities.present? %>
+
+	<%= carusel_external_control @charities.count %>
+	<div class="charities_line">
+		<ul>
+			<% $i = 0; $num = @charities.count; while $i < $num  do %>
+			<li class="carusel">
+				<%= render @charities[$i..($i+5)], :position => :bottom %>
+			</li>
+			<% $i +=6; end %>
+		</ul>
+	</div>
+
+  <%= javascript_tag do %>
+    jQuery(function() {
+
+      jQuery(".charities_line").jCarouselLite({
+          btnNext: ".next",
+          btnPrev: ".prev",
+           visible: 1,
+           scroll: 1,
+           circular: false,
+           btnGo:[
+            <% $i = 0; $b = 1; $num = @charities.count; while $i < $num  do %>
+              ".externalControl .<%= $b %>",
+            <% $i +=6; $b += 1; end %>]
+      });
+
+    });
+  <% end %>
+<% end %>

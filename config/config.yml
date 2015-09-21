@@ -1,0 +1,41 @@
+# APP_CONFIG['host']
+defaults: &defaults
+  host: 'www.shareyourwish.com'
+  asset_host: 'http://www.shareyourwish.com'
+  admin_email: 'admin@shareyourwish.com'
+  from: 'ShareYourWish <do-not-reply@shareyourwish.com>'
+  facebook_app_id: '387685564604361'
+  facebook_app_secret: '6e36d3745f915757d431bfab865e86c9'
+  google_app_id: '402936170760.apps.googleusercontent.com' 
+  google_app_secret: 'dyGQgfWRD0lccj4LBZIjYyDr'
+  # https://dev.twitter.com/apps/new    this is Sergiy's.. need to setup Twitter
+  twitter_app_id: 'HWeAyeA98JzRUIoj4JQ'
+  twitter_app_secret: 'mrtEwt4j3SSLroOmDzKnrFrZ56yrQHfOxB9vm2zDw'
+
+development:  
+  <<: *defaults
+  host: 'localhost:3000'
+  asset_host: 'http://localhost:3000'
+  facebook_app_id: '139886396142317'
+  facebook_app_secret: '773862455c39ad4addf20d1f898f182d'
+  google_app_id: '402936170760-65tujh2940cp5uvnq1271bqtefttlemk.apps.googleusercontent.com' 
+  google_app_secret: 'WYY-sThyvUbvM8_q1zOowp3p'
+
+test:
+  <<: *defaults
+  host: 'www.example.com'
+  asset_host: 'http://www.example.com'
+
+# this environment doesn't really exist... insert these settings into production: in the actual Staging environment
+staging:
+  <<: *defaults
+  host: 'staging.shareyourwish.com'
+  asset_host: 'http://staging.shareyourwish.com'
+  facebook_app_id: '162046597272473'
+  facebook_app_secret: 'ad32cc6cb0218bd22f4a0b905d9a4f08'
+  google_app_id: '402936170760-adui7tmte7e1nna4n4sg0pr55t345eos.apps.googleusercontent.com' 
+  google_app_secret: 'AqHAQ8NjODmzmRIu8pIECsHm'
+
+production:
+  <<: *defaults
+

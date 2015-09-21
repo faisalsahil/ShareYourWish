@@ -1,0 +1,40 @@
+                
+
+<div id="subscriber-form-popup">               
+	
+	<h1>Hello! Welcome to Share Your Wish!</h1>
+	<p class="indent-me">
+		Since you're here anyway, why not sign up for our mailing list? We'll keep you up to date on:
+		  <ul id="feature-benefits">
+				<li>New entries to Our blog
+				<li>Progress on development of ShareYourWish.com
+				<li>How to participate in our upcoming private Beta Release
+				<li>News and views important to the ShareYourwish community
+			</ul>
+	<p>
+	<div class="alerts-container"></div>
+
+	<%= form_for(@subscriber, :remote => true) do |f| %>
+		<div class="field">
+		  Name:<br>
+		<%= f.text_field :full_name , :id=> 'full_name2',  :placeholder => "Your Name", :class => "form-field-medium"  %>
+		</div>  
+		<div class="field">
+			Email:<br>
+			<%= f.text_field :email, :id=> 'email2',  :placeholder => "Email", :class => "form-field-medium"  %>
+		</div>
+	 <div class="actions">
+	    <%= f.submit :value => 'Sign Up', :class => 'button-type-standard button-size-medium button-color-green'%>
+	  </div> 
+	<% end %>   
+
+</div>   
+
+<% if cookies[:saw_onetime_popup_A].nil? %>
+	<script type="text/javascript">
+	    $(document).ready(function() {
+			  $( "#signup-form-popup" ).dialog( "open" );
+	    });
+	</script>        
+	<% cookies[:saw_onetime_popup_A] = { :value => true, :expires => 1000.days.from_now  } %>  
+<% end %>

@@ -1,0 +1,16 @@
+<% if current_user && @states && @mailing_address %>
+
+	<%= form_for([@mailing_address, current_user], :url => url_for(current_user), :html => {:id => :event_user_address_form}) do |uf| %>
+		<%= render :partial => 'notices-and-errors', :locals => {:errobj => @mailing_address} %>
+		
+		<fieldset class="dashed padded">
+			<legend class="padded">
+				Mailing address
+			</legend>
+			<span class="description">The charities you've selected will need your full mailing address in order to process the donation</span>
+			<br />
+			<%= render 'addresses/form', :form => uf, :address => @mailing_address %>
+		</fieldset>
+	
+	<% end %>
+<% end %>

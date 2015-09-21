@@ -1,0 +1,49 @@
+
+<div class="footer-outside">
+	<div class="footer-inside">
+		<% if user_signed_in? && current_user.is_admin? %>
+			<%= render :partial => 'footer-work-menu' %>        
+		<% end %>
+			<div class="footer-menus center-contents  ">
+				<ul class="footer-menu display-IB">
+					<li><%= link_to 'About Us','/about-us' %>
+					<li><%= link_to 'Contact Us','/contact-us' %>
+					<li><%= link_to 'Our Mission','/mission' %>
+					<li><%= link_to 'Our Team','/team' %>
+					<li><%= link_to 'In The News & Reviews','/press' %>
+				</ul>
+				<ul class="footer-menu display-IB">
+					<li><%= link_to 'Terms of Service','/terms-of-service' %>
+					<li><%= link_to 'Privacy Policy','/privacy-policy' %>
+				</ul>                                         	
+			</div>        	
+			<div class="clearfloat"></div>
+			<div class="social-buttons ">
+				<!-- AddThis Button BEGIN -->
+				<script type="text/javascript">
+				var addthis_config = addthis_config||{};
+				addthis_config.data_track_addressbar = false;
+				</script>
+				<div class="addthis_toolbox addthis_32x32_style addthis_default_style">
+				<a class="addthis_button_facebook_follow" addthis:userid="TeachShareInspire"></a>
+				<a class="addthis_button_twitter_follow" addthis:userid="shareyourwish"></a>
+				<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a> 
+				<a class="addthis_button_tweet" tw:count="vertical"></a>
+				<a class="addthis_button_google_plusone" g:plusone:size="tall"></a> 
+				<a class="addthis_button_compact"></a>
+				</div>
+				<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-4f74ff0200b30993"></script>
+
+
+				<!-- AddThis Button END -->
+			</div>   
+		         
+		<div>
+			<p>&nbsp;
+			<p>Share Your Wish, llc &copy; 2012-2013, All Rights Reserved, Magic Phrase&trade; is a trademark of Share Your Wish, llc
+			<p>Business &amp; Technology services provided by <a href="http://www.veryinventive.com/" target="_blank">Very Inventive&trade;</a>
+		</div>
+
+		
+	</div>
+</div>

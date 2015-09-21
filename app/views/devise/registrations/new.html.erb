@@ -1,0 +1,85 @@
+<% title "Login or Sign Up - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+<div class="clearfloat"></div>
+<div class="col-single-large-margin box-shadow-reg" id="new_register">
+
+	<h1>Sign Up and Share Your Wish!</h1>
+
+	<%= render :partial => 'notices-and-errors', :locals => {:errobj => @user} %>
+
+	<% unless @user.login_with_social? %>
+	<%= render 'social_login' %>
+	<% end %>
+
+	<div id="local-login">
+		<%= form_for(@user, :url => registration_path(:user)) do |f| %>
+		<%= f.hidden_field :login_with_social %>
+
+		<% @user.authentications.each do |authentication| %>
+		<%= f.fields_for :authentications, authentication do |au| %>
+		<%= au.hidden_field :provider %>
+		<%= au.hidden_field :uid %>
+		<%= au.hidden_field :token %>
+		<% end %>
+		<% end %>
+
+		<div>
+			<%= f.label :full_name %>
+			<br />
+			<%= f.text_field :full_name, :class=> 'form-field-big indent-me', :placeholder => "full name", :tabindex => 13 %>
+		</div>
+
+		<div>
+			<%= f.label :email %>
+			<br />
+			<%= f.email_field :email, :class=> 'form-field-big indent-me', :placeholder => "email", :readonly => @user.login_with_social? && !@user.login_with?(:twitter), :tabindex => 14 %>
+		</div>
+
+		<% unless @user.login_with_social? %>
+		<div>
+			<%= f.label :password %>
+			<br />
+			<%= f.password_field :password, :class=> 'form-field-big indent-me', :placeholder => "password", :tabindex => 15 %>
+		</div>
+
+		<div>
+			<%= f.label :password_confirmation %>
+			<br />
+			<%= f.password_field :password_confirmation, :class=> 'form-field-big indent-me', :placeholder => "confirm password", :tabindex => 16 %>
+		</div>
+		<% else %>
+		<%= f.hidden_field :password %>
+		<%= f.hidden_field :password_confirmation %>
+		<% end %>
+
+		<div>
+			<label>Would You Like to Stay in Touch With ShareYourWish?</label>
+			<br />
+			<%= f.check_box :subscriber_opt_in,  :checked=>true, :class=> 'form-checkbox-big indent-me', :tabindex => 17 %> Sure, email me with important updates (but no spam!)
+		</div>
+
+		<div>
+			<label>Remember Me</label>
+			<br />
+			<%= f.check_box :remember_me,  :checked=>true, :class=> 'form-checkbox-big indent-me', :tabindex => 18 %> Keep me logged in on this computer
+		</div>
+
+		<div>
+			<%= f.label :terms_of_use %>
+			<br />
+			<%= f.check_box :terms_of_use, :class=> 'form-checkbox-big indent-me', :tabindex => 19 %> I have read and accept the <%= link_to "Terms of Use", "/terms-of-service" %>
+		</div>
+
+		<div class="center-contents">
+			<%= f.submit "Sign in", :class => 'button-type-standard button-size-big button-color-green display-IB', :value => @user.login_with_social? ? 'Done' : 'Sign Up', :tabindex => 20 %>
+		</div>
+		<% end %>
+
+	</div>
+</div>
+
+<% end %>

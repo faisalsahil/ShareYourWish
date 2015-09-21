@@ -1,0 +1,34 @@
+<% title "Browse Charities - ShareYourWish" %>
+<% content_for :outside do %>
+<%= render :partial => 'page_head'%>
+
+<div class="col-one-third box-shadow-reg">
+	<h1>Browse Charities</h1>
+	<div id="charity-filter-buttons" class="center-contents buffer-me-a-little">
+		<button type="button" class="choose_button active featured_button" tabindex="255" data-list="featured">
+			Featured
+		</button>
+		</br>
+		<button type="button" class="choose_button top_recommended_button" tabindex="256" data-list="top_recommended">
+			Top Recommended
+		</button>
+		</br>
+		<button type="button" id="otherCharity" class="choose_button other_button" tabindex="257" onclick="alert('Please contact us if you\'d like to support a charity not in our list. If your charity can be found on DonateNow.org, we can add that charity very quickly.')">
+			Other
+		</button>
+		<button type="button" class="choose_button all_button hidden" tabindex="257" data-list="all">
+			All
+		</button>
+	</div>
+
+</div>
+<div class="col-two-thirds box-shadow-reg">
+	<div class="charities_for_selection as" id="charities_for_selection">
+		<% if @charities.present? %>
+		<%= render :template => 'charities/index' %>
+		<% end %>
+	</div>
+</div>
+<%= render :partial => 'mixed_popup' %>
+<% end %>
+

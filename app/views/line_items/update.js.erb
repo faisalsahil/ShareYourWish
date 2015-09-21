@@ -1,0 +1,18 @@
+<% if @line_item.errors.any? %>
+	jQuery('#mini-cart-alerts').html('<span class="error buffer-me-a-little" id="cart_alert"></span>');
+	<% @line_item.errors.full_messages.each do |error| %>
+	  jQuery('#cart_alert').append('<%= escape_javascript( error ) %><br>');
+	<% end %>
+<% else %>
+	jQuery('#event_cart').html("<%=j render :partial=>'carts/cart_mini' %>");
+	jQuery('#mini-cart-alerts').html('<span class="alert buffer-me-a-little">Item Updated</span>');
+	//jQuery('#mini-cart-alerts').html('<span class="notice">Item Updated</span>');
+	jQuery(function(){
+        orders.update_subtotal(<%= @cart.subtotal %>)
+        orders.recalculate_total_cost()
+        orders.show_hide_checkout_confirm_container()
+    });
+<% end %>
+jQuery('html, body').animate({
+    scrollTop: jQuery("#mini-cart-title").offset().top - 30
+}, 500);

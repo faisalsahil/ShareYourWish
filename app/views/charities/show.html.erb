@@ -1,0 +1,7 @@
+<% title "#{@charity.name} - Charity - ShareYourWish" %>
+<% content_for :outside do %>
+    <%= render :partial => 'page_head'%>
+    <div class="col-single-large-margin box-shadow-reg">
+        <%= render 'event_show_popup_charity', :charity => @charity %>
+    </div>
+<% end %>

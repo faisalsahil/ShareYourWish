@@ -1,0 +1,22 @@
+<% event = search_result %>
+<a href="<%= url_for event %>">
+  <li>
+    <div class="event-item"> 
+      <div class="event-item-icons">
+        <% if event.pictures && event.pictures[0].present? %>
+          <% event.pictures.each do |pic | %>
+            <%= image_tag pic.image.url(:tiny), :class=>"event-item-icon" %>
+          <% end%>
+        <% else %>
+          No Images
+        <% end %>
+      </div>
+      <div class="event-item-title"><%= event.title%></div>
+      <div class="event-item-details">  
+        <strong>Date: </strong><%= event.event_date.strftime("%b %e %Y") if event.event_date %><br />
+        <strong>Child: </strong><%= event.child_full_name %><br />
+        <strong>Desc: </strong><%= event.page_content_one.length>100 ? event.page_content_one.first(100) + '...' : event.page_content_one if event.page_content_one %>        
+      </div>
+    </div>
+  </li>
+</a>

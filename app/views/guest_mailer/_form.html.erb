@@ -1,0 +1,32 @@
+<%= form_tag :guest_mailer_custom, :id => :guest_mailer_custom_form do |f| %>
+
+<div style="float: right; width: 220px; ">
+	<b>Note:</b>
+	<ul>
+	<li style="list-style-position:outside;padding-bottom:5px;">Guests cannot reply to this message.
+	<li style="list-style-position:outside;">Personalized link to the Event page will be added below the Email Body
+	</ul>
+</div>
+
+	<label>Subject Line:</label>
+  <div class="field">
+    <%= text_field_tag :subject, '', :placeholder => "Subject", :class => "form-field-small required", :size => 50, :minlength => 2, :maxlength => 255, :required => :required  %> 
+  </div>
+
+	<label>Email Page Header:</label>
+  <div class="field">
+    <%= text_field_tag :title, '', :placeholder => "Page Header", :class => "form-field-medium required", :size => 100, :minlength => 2, :maxlength => 255, :required => :required %> 
+  </div>  
+
+	<label>Email Body:</label>
+  <div class="field">
+    <%= text_area_tag :body, '', :placeholder => "Body", :class => "form-field-medium required", :rows => 5, :minlength => 2, :required => :required %> 
+
+  </div>
+
+  <div class="actions">
+    <%= button_tag 'Back', :id => :guest_mailer_back_button, :type => :button, :class => 'button-type-standard button-size-medium button-color-green hidden'%> 
+    <%= submit_tag 'Submit', :id => :guest_mailer_submit_button, :class => 'button-type-standard button-size-medium button-color-green hidden'%> 
+    <%= button_tag 'Preview', :id => :guest_mailer_preview_button, :type => :button, :class => 'button-type-standard button-size-medium button-color-green'%> 
+  </div>
+<% end %>

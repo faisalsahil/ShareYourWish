@@ -1,0 +1,45 @@
+<%= form.fields_for :payment do |pf| %>
+<%= pf.hidden_field :contribution_id %>
+<%= pf.hidden_field :payment_method %>
+
+<span class="field-flag">*</span>
+<%= label_tag :cc_num, 'Card Number: ' %>
+<br>
+<div class="indent-me">
+	<%= pf.text_field :cc_num, :class => 'form-field-big', :size => 20, :creditcard => true, :required => :required, :disabled => @guest.anonymous?, :tabindex => 49 %>
+	<br />
+	<%= image_tag 'accepted_credit_cards.jpg' %>
+	<br />
+	<% if ENV['RAILS_ENV'] != 'production' %>
+		<span class="description">TESTING ONLY: use test cc number 4111111111111111 and expiration date 12/2015 and any cvv</span>
+		<br />
+	<% end %>
+</div>
+
+<span class="field-flag">*</span>
+<label>Card Expiration: </label>
+<br>
+<div class="indent-me">
+	<%= pf.select :cc_exp_month, options_for_select(Payment::CC_EXP_MONTHS), {:prompt =>'Month'}, :required => :required, :min => 1, :max => 12, :class => :required, :disabled => @guest.anonymous?, :tabindex => 50 %>&nbsp;&nbsp;&nbsp;
+	<%= pf.select :cc_exp_year, options_for_select(Payment::CC_EXP_YEARS), {:prompt => 'Year'}, :class => :required, :required => :required, :min => Date.today.year, :max => Date.today.year+8, :disabled => @guest.anonymous?, :tabindex => 51 %>&nbsp;&nbsp;&nbsp;
+</div>
+<br />
+
+<span class="field-flag">*</span>
+<%= pf.label :cc_cvv, 'Card Verification Code (CVV): ' %>
+<br>
+<div class="indent-me">
+	<%= pf.text_field :cc_cvv, :class => 'form-field-small', :size => 5, :required => :required, :minlength => 2, :maxlength => 4, :digits => true, :disabled => @guest.anonymous?, :tabindex => 52 %>
+	<br />
+	<br/>
+</div>
+
+<span class="field-flag">*</span>
+<%= pf.label :cc_postal_code, 'Card Billing Postal Code: ' %>
+<br>
+<div class="indent-me">
+	<%= pf.text_field :cc_postal_code, :class => 'form-field-small postalcode', :size => 20, :required => :required, :disabled => @guest.anonymous?, :tabindex => 53 %>
+	<br />
+	<br/>
+</div>
+<% end %>

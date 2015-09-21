@@ -1,0 +1,51 @@
+<div>
+  <h3>Pictures</h3>
+
+  <p class="description">Choose photos to decorate your Event Page</p>
+  <%= form_for Picture.new, :url => pictures_path(:imageable_id => @event.id), :html => {:class => "picture-uploader", :multipart => true} do |f| %>
+    <%= f.hidden_field :imageable_id, :value => @event.id %>
+    <%= f.hidden_field :imageable_type, :value => :event %>
+    <div class="row fileupload-buttonbar">
+      <div class="span7">
+        <span class="btn btn-large btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span>Select photos...</span>
+            <%= f.file_field :image, :name => 'picture[image]', :multiple => :multiple %>
+        </span>
+        <button class="btn btn-large btn-success btn-primary photo-by-url-btn">
+          <i class="icon-upload icon-white"></i>
+          <span>Select URL</span>
+        </button>
+        <div class="hidden progress progress-striped active remote-progress-bar">
+          <div class="bar" style="width: 100%;"></div>
+        </div>
+        <div class="hidden image-remote-url-cont">
+          <h4 class="description">Paste URL Here:</h4>
+
+          <div>
+            <%= f.url_field :image_remote_url, :class => 'url required file_types', :placeholder => 'image url here', :file_types => 'jpg,jpeg,gif,png' %>
+            <button class="btn btn-primary upload-image-remote-url">
+              <i class="icon-upload icon-white"></i>
+              <span>Upload</span>
+            </button>
+            <button class="btn btn-warning cancel-image-remote-url">
+              <i class="icon-ban-circle icon-white"></i>
+              <span>Cancel</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="span5 fileupload-progress fade">
+        <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="bar" style="width:0%;"></div>
+        </div>
+        <div class="progress-extended">&nbsp;</div>
+      </div>
+    </div>
+    <div class="fileupload-loading"></div>
+    <table role="presentation" class="table table-striped">
+      <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+    </table>
+  <% end %>
+
+</div>

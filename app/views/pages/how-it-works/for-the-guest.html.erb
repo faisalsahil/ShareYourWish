@@ -1,0 +1,92 @@
+<% title "How it Works for the Guest - ShareYourWish " %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+	<div class="col-single-large-margin box-shadow-reg">
+
+		<H1>How ShareYourWish Works: For the Guest</H1>
+		<div class="how-step-row">
+			<div class="how-step-num">1</div>
+			<div class="how-step-description">
+				<span class="how-step-title">GET INVITED</span>
+				<ul>
+					<li>Receive an email invitation from the Host</li>
+					<li>Or, Host shares the 'Magic Phrase'</li>
+				</ul>
+			</div>
+			<div class="how-step-image">
+				
+			</div>
+		</div>
+
+		<div class="how-step-row">
+			<div class="how-step-num">2</div>
+			<div class="how-step-description">
+				<span class="how-step-title">VISIT EVENT PAGE</span>
+				<ul>
+					<li>Follow the link in the personalized email</li>
+					<li>Or, go to ShareYourWish.com and provide the 'Magic Phrase'</li>
+					<li>View event details
+				</ul>
+			</div>
+			<div class="how-step-image">
+				
+			</div>
+		</div>
+
+		<div class="how-step-row">
+			<div class="how-step-num">3</div>
+			<div class="how-step-description">
+				<span class="how-step-title">RSVP AND CONTRIBUTION</span>
+				<ul>
+					<li>RSVP to the party
+					<li>Make a contribution, rather than buying a gift</li>
+					<li>Contribution amounts are undisclosed unless otherwise requested</li>
+					<li>The Host may give a choice of charities for you to support</li>
+				</ul>
+			</div>
+			<div class="how-step-image">
+				
+			</div>
+		</div>
+
+		<div class="how-step-row">
+			<div class="how-step-num">4</div>
+			<div class="how-step-description">
+				<span class="how-step-title">CONTRIBUTIONS ARE SHARED</span>
+				<ul>
+					<li>A portion of each contribution goes to the chosen charity</li>
+					<li>The remainder is used by Host to buy a meaningful gift for the child</li>
+				</ul>
+			</div>
+			<div class="how-step-image">
+				
+			</div>
+		</div>
+	
+		<div class="how-step-row">
+			<div class="how-step-num">5</div>
+			<div class="how-step-description">
+				<span class="how-step-title">FEEL GREAT</span>
+				<ul>
+					<li>You've helped somebody to share their wish by helping others</li>
+					<li>Print "Thank You Letter" from SYW, recognizing your (or your child's) participation</li>
+					<li>Hopefully, you are inspired to teach, share and inspire others</li>
+				</ul>
+			</div>
+			<div class="how-step-image">
+				
+			</div>
+		</div>
+		
+		<p>
+		<%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green fr", :tabindex => 82 %>
+	</div>	
+
+
+	
+	
+<% end %>
+

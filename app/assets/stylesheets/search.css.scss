@@ -1,0 +1,22 @@
+input#q{
+  border:none;
+  background: none;
+  font-size: 14px;
+  color: white;
+  width: 130px;
+  line-height: 20px;
+}
+.nav-search-box {
+  background: image-url('search_box.jpg') no-repeat scroll;
+  position: relative;
+  float:right;
+  width: 150px;
+  height: 28px;
+  padding: 2px 10px 2px 10px ;
+}
+#search-box-click {
+  float: right;
+  margin-right: 12px;
+  position: absolute;
+  right: 0;
+}

@@ -1,0 +1,52 @@
+<% if guest %>
+<%= form_for guest, :html => { :id => :create_or_update_guest } do |f| %>
+<%= f.hidden_field :event_id, :value => @event.id %>
+<%= f.hidden_field :email %>
+<%= f.hidden_field :hidden, :value => guest.hidden ? false : true %>
+
+<table class="guest-table dashboard<%= guest.hidden ? ' hidden' : '' %>" cellpadding="0" cellspacing="0">
+	<tbody>
+		<tr>
+			<td style="width:30px;" class="guests-checkbox"><%= check_box_tag :select_guest, guest.id, false  %></td>
+			<td style="width:125px; word-wrap: break-word; font-weight: 900;" class="guests-full-name"><%= guest.full_name %></td>
+			<td style="width:150px; word-wrap: break-word;" class="guests-email"><%= guest.email %></td>
+			<td style="width:56px;"><% if guest.message.present? %><%= link_to image_tag('message_icon.png'), 'javascript:void(0);', :class=>'message-tip', :title => guest.message %><% else%><%= image_tag 'message_icon_empty.png', :class=>'message-tip-empty'%><% end %></td>
+			<td style="width:170px; padding-right: 4px;" colspan="2" class="guests-status-smaller light_blue"><div class="response hidden"></div> <%= guest.lookup_guests_status.try(:friendly_text) %></td>
+			<td style="width:135px;" class="guests-edit"><%= link_to 'Edit', 'javascript:void(0)', :id => :enable_guest_edit, :class =>'choose_button ui-button ui-widget ui-state-default ui-corner-all ui-state-hover' %> </td>
+		</tr>
+		<tr>
+			<td style="width:30px;"></td>
+			<td style="width:275px; word-wrap: break-word; font-weight: 900;" colspan="2"><span style="font-weight:400;"><span style="text-decoration:underline;">Kids</span>: </span><%= guest.invited_children.length>0 ? guest.invited_children : "none"  %></td>
+			<td style="width:56px;"></td>
+			<td style="width:99px;" class="guests-status-smaller">RSVP:</td>
+			<td style="width:210px;" colspan="2" class="guests-status-smaller light_blue"><%= Guest::ATTENDANCES_TMP[guest.attendance.to_sym] %></td>
+		</tr>
+		<tr>
+          <td style="width:30px;"></td>
+          <td style="width:275px;" colspan="2"></td>
+          <td style="width:56px;"></td>
+          <td style="width:99px;" class="guests-status-smaller">Contribution:</td>
+          <td style="width:210px;" colspan="2" class="guests-status-smaller light_blue"><%= guest.contribution_text %></td>
+      </tr>
+		<tr>
+			<td colspan="7" style="font-size: 10px;">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+<table class="guest-table dashboard removed<%= guest.hidden ? '' : ' hidden' %>" cellpadding="0" cellspacing="0" style="width:650px;">
+	<tbody>
+		<tr>
+			<td style="width:40px;"></td>
+			<td style="width:125px;" class="guests-full-name"><%= guest.full_name %></td>
+			<td class="guests-action"><%= check_box_tag :guest_restore, guest.id, false, :id => :guest_restore %>Restore </td>
+			<td class="guests-status"><% unless guest.contributed? %>
+			<%= check_box_tag :guest_delete, guest.id, false, :id => :guest_delete %>
+			Permanently delete
+			<% end %> </td>
+		</tr>
+	</tbody>
+</table>
+
+<% end %>
+<% end %>
+

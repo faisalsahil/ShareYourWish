@@ -1,0 +1,9 @@
+<%= content_tag_for(:li, subscriber) do %>
+  <%= subscriber.full_name %>, 
+  <%= subscriber.email %>, 
+  <%= subscriber.comment.blank? ? "(no comment)" :  subscriber.comment %>
+  (<%= link_to 'Edit', edit_subscriber_path(subscriber), :remote => true  
+%>)
+  (<%= link_to 'Delete', subscriber, :confirm => 'Are you sure?',
+  :method => :delete, :remote => true %>)
+<% end %>

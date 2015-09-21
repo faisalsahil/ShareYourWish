@@ -1,0 +1,27 @@
+<% if defined?(charity) && defined?(picked) %>
+<div class="charity_container <%=charity.featured ? 'featured' : '' %>" id="charity_<%= charity.id %>" data-id="<%= charity.id %>">
+	<div class="charity_name">
+		<%= link_to truncate(charity.name, :length => 45, :separator => '...'), charity, :class => :charity_details, :charity_id => charity.id %>
+	</div>
+	<div class="charity_container_left_col">
+		<div class="charity_image">
+			<% if charity.picture && charity.picture.image? %>
+			<%= link_to (image_tag charity.picture.image.url(:mini)), charity, :class => :charity_details, :charity_id => charity.id %>
+			<% else %>
+			<%= link_to (image_tag 'missing_mini.png'), charity, :class => :charity_details, :charity_id => charity.id, :alt => 'missing image' %>
+			<% end %>
+		</div>
+		<div class="charity_button">
+			<input type="button" value="Select" class="add_charity_button<%= picked ? ' hidden' : '' %>" tabindex="260"  />
+			<input type="button" value="Remove" class="remove_charity_button<%= (position == :top && picked) ? '' : ' hidden'  %>" tabindex="250" />
+		    <%= image_tag 'state-complete.png', :class => (position == :bottom && picked) ? :charity_selected_check : 'hidden charity_selected_check'  %>
+		</div>
+		
+	</div>
+	<div class="charity_description">
+		<%= two_lines_description charity %>
+	</div>
+
+</div>
+<% end %>
+

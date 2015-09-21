@@ -1,0 +1,80 @@
+<% if @guest && @contribution %>
+
+<%= form_for([@guest, @payment, @contribution], :url => @guest.anonymous? ? '/' : guest_contributions_path(@guest, @contribution)) do |cf| %>
+
+<% unless @guest.anonymous? %>
+<%= render :partial => 'notices-and-errors', :locals => {:errobj => @guest.contribution} %>
+<%= cf.hidden_field :guest_id %>
+<%= cf.hidden_field :event_id %>
+<%= hidden_field_tag :transaction_fee, Contribution::TRANSACTION_FEE %>
+<% end %>
+
+<div id="ssl-security-logo"></div>
+
+<span class="field-flag">*</span>
+<%= cf.label :amount, 'My contribution' %>
+<br>
+<div class="indent-me">
+	<span id="contribution-amount">$<%= cf.text_field :amount, :required => :required, :size => 3, :class => 'required', :number => true, :min => 1, :disabled => @guest.anonymous?, :tabindex => 41 %></span>
+	<br />
+	<div class="indent-me">
+		<%= cf.check_box :anonymous, :checked => true, :disabled => @guest.anonymous?, :tabindex => 42 %>
+		<%= cf.label :anonymous, 'Make contribution amount Undisclosed' %>
+		<br />
+		<span class="description">If selected, the event host will see that you made a contribution but they will NOT see the amount of the contribution.</span>
+	</div>
+	<br />
+	<div class="indent-me">
+		<%= cf.check_box :pay_transaction_fee, :disabled => @guest.anonymous?, :tabindex => 43 %>
+		<%= cf.label :pay_transaction_fee, 'Cover the ShareYourWish service fees ' %>
+		<br />
+		<span class="description">If selected, the ShareYourWish service fee of <%= number_to_currency Contribution::TRANSACTION_FEE %> will be added to the amount of your contribution. If not selected (default), you will be charged exactly the amount of your contribution above.</span>
+	</div>
+	<br />
+</div>
+
+<span class="field-flag">*</span>
+<%= cf.label :charity_id, 'I choose to support: ' %>
+<br>
+<div class="indent-me">
+	<%
+	@event.charities.each_with_index do |chr,index| %>
+	<%= cf.radio_button :charity_id, chr.id, :required => :required, :disabled => @guest.anonymous?, :checked => index.zero?, :tabindex => 44+index %><%= chr.name %>
+	<br/>
+	<% end %>
+</div>
+
+<br />
+
+<% unless @guest.anonymous? %>
+<%= cf.fields_for :guest do |gf| %>
+<%= gf.hidden_field :lookup_guests_status_id, :value => @lookup_guests_status_made_donation.id %>
+
+<fieldset id="gf">
+	<span class="field-flag">*</span>
+	<%= gf.label :full_name, 'Name' %>
+	<div class="indent-me">
+		<%= gf.text_field :full_name, :class => 'form-field-small required', :size => 20, :required => :required,  :minlength => 2, :maxlength => 255, :tabindex => 47 %>
+		<br />
+	</div>
+
+	<span class="field-flag">*</span>
+	<%= gf.label :email, 'Email' %>
+	<div class="indent-me">
+		<%= gf.text_field :email, :class => 'form-field-small required email', :required => :required, :size => 20, :minlength => 2, :maxlength => 255 , :tabindex => 48%>
+		<br />
+	</div>
+</fieldset>
+<% end %>
+<% end %>
+
+<%= render 'payments/guest_form', :form => cf %>
+
+<% if @event.owner? current_user %>
+<%= cf.submit "Send Contribution - Disabled for Host", :class => 'button-type-standard button-size-medium button-color-green disabled', :disabled => :disabled %>
+<% else %>
+<%= cf.button 'Send My Contribution', :id => @guest.anonymous? ? :none : :send_guest_contribution, :type => :button, :class => 'button-type-standard button-size-medium button-color-green', :disabled => @guest.anonymous?, :tabindex => 55 %>
+<% end %>
+
+<% end %>
+<% end %>

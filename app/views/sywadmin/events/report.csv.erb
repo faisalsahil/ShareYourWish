@@ -1,0 +1,27 @@
+	Event Transaction Log
+
+<% if @event %>
+			<%= number_to_percentage (@event.charity_donation_percent*100), :precision => 0 %> donation level
+			<%= @event.charities.count.to_words.capitalize %> <%= 'charity'.pluralize @event.charities.count %> selected
+			Host chooses an <%= @event.package.try(:name) %> package
+			A guest provides a late contribution after the Gift Fund disbursement
+
+<%
+event_fund = 0.0
+donation_fund = 0.0
+gift_fund = 0.0
+syw_fund = 0.0
+%>
+
+			Transaction Amounts												Running Balances
+ID	Date	Category	Description	Memo	Event_Fund	Donation_Fund	Gift_Fund	SYW_Fund	Event ID	Contribution_ID	Payment_ID	Charity SYW_Altkey		Event_Fund	Donation_Fund	Gift_Fund	SYW_Fund	
+
+<% @event.event_transaction_logs.each do |event_transaction_log| %>
+<%= event_transaction_log.id %>	<%= event_transaction_log.created_at.to_date %>	<%= event_transaction_log.event_transaction_log_category_id %>	<%= event_transaction_log.description %>	<%= event_transaction_log.memo %>	<%= event_transaction_log.event_fund %>	<%= event_transaction_log.donation_fund %>	<%= event_transaction_log.gift_fund %>	<%= event_transaction_log.syw_fund %>	<%= event_transaction_log.event_id %>	<%= event_transaction_log.contribution_id %>	<%= event_transaction_log.payment_id %>	<%= event_transaction_log.charity.try(:syw_altkey) %>		<%= event_fund += event_transaction_log.event_fund %>	<%= donation_fund += event_transaction_log.donation_fund %>	<%= gift_fund += event_transaction_log.gift_fund %>	<%= syw_fund += event_transaction_log.syw_fund %>
+<% end %>
+
+			FINAL BALANCE		<%= @event.event_fund %>	<%= @event.donation_fund %>	<%= @event.gift_fund %>	<%= @event.syw_fund %>				
+			
+<% else %>
+There is no event!
+<% end %>

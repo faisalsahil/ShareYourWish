@@ -1,0 +1,8 @@
+<% if @layout %>
+	<% content_for :outside do %>
+		<%= render :partial => 'page_head_event' %>
+		<%= render :partial => 'event' %>
+	<% end %>
+<% else %>
+	<%= render :partial => 'event' %>
+<% end %>

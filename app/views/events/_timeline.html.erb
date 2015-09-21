@@ -1,0 +1,21 @@
+
+<% if @event && @lookup_event_sequences %>
+  <div class="event_timeline">
+	<% if params[:action]=='new' || params[:action]=='edit' %>
+		<%= image_tag 'dashboard_menu_shim.jpg', :style=>'position:absolute; left:-25px; z-index:500;'%>
+	<% end %>
+    <div class="event_timeline_gray_bar">
+      <div class="event_timeline_blue_bar" style="width: <%=  (@event.event_sequence)*144 - 72 %>px;"></div>
+    </div>
+    <% @lookup_event_sequences.each do |les| %>
+      <div class="event_timeline_item">
+        <%if  @event.event_sequence >= les.sequence %>
+          <%= image_tag('blue_square.png') %>
+        <% else %>
+	       <%= image_tag('grey_square.png') %>
+        <% end %>
+        <%= les.friendly_text %>
+      </div>
+    <% end %>
+  <% end %>
+</div>

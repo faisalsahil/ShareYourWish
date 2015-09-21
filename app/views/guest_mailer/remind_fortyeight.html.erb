@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+	</head>
+	<table id="zbody" bgcolor="#CCCCCC" cellspacing="0" cellpadding="0" border="0" >
+		<tr>
+			<td>
+			<table id="zoutside" width="550" bgcolor="#FFFFFF" style="margin:14px; border: 1px #999999 dashed;">
+				<tr>
+					<td width="420" style="padding:5px; vertical-align: top;" valign="top"><h2 style="color: #8b5d3b; font-size: 1.5em; margin-top: 3px; margin-bottom: 3px;">
+						Reminder... It's now only two days away...</h2><h1 style="color: #e4993e; font-size: 1.75em; margin-top: 3px; margin-bottom: 3px;"><%= @guest.event.title %> !</h1></td>
+					<td width="120" align="right" style="padding:5px;"> <%= image_tag 'SYW_logo.png', :width=>111, :height=>139 %> </td>
+				</tr>
+				<tr>
+					<td colspan="2" style="padding: 5px">
+					<p style="color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: .875em; padding: 5px; margin: 0px 0px 5px 0px; line-height: 125%; ">
+						If you haven't already done so, please visit <%= link_to 'our event page at ShareYourWish.com', invite_url(@guest) %> for more information about this event, including information on how to participate and the charity that <%= @guest.event.format_child_name('has','have') %> chosen to support.
+					</p>
+					<p style="color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: .875em; padding: 5px; margin: 0px 0px 5px 0px; line-height: 125%; ">
+						We hope you can help us do something really good!
+					</p>
+					<p style="color: #000000; font-family: Arial, Helvetica, sans-serif; font-size: .875em; padding: 5px; margin: 0px 0px 5px 0px; line-height: 125%;">
+						From,
+						<br>
+						<%= @guest.event.host_name %>
+					</p></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="padding: 10px; background-color: #DDDDDD;" >
+					<p style="font-size: 11px; color: #444444; padding: 20px;">
+						This message was sent to you by ShareYourWish.com on behalf of <%= @guest.event.host_name %>. Please visit our website to learn more about <%= link_to 'ShareYourWish.com', root_url %>. Do not reply to this message. For technical support please contact <%= link_to 'info@shareyourwish.com','mailto:info@shareyourwish.com'%>
+					</td>
+				</tr>
+			</table></td>
+		</tr>
+	</table>
+</html>

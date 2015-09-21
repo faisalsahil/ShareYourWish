@@ -1,0 +1,12 @@
+<% title "Contact Us :: ShareYourWish" %>
+<% content_for :outside do %>
+  <%= render :partial => 'page_head'%>
+  <div class="col-single-large-margin box-shadow-reg">
+    <h1>Contact Us</h1>
+    <p><strong>Note to testers: Please submit all Bugs and Feedback beta testing using the Feedback button hanging on the right side of the window.</strong>
+    <p>We welcome your feedback, questions and comments
+    <%= render 'form' %>
+  </div>
+<% end %>
+<%= link_to 'Show', @feedback %> |
+<%= link_to 'Back', feedbacks_path %>

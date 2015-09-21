@@ -1,0 +1,104 @@
+<% title "My Events - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+<%= render :partial => 'notices-and-errors', :locals => {:errobj => nil} %>
+
+<div class="col-single-large-margin box-shadow-reg">
+	<h1>My Events</h1>
+
+	<% if current_user %>
+
+	<% if @events %>
+	<div class="events-container">
+		<ul>
+			<% @events.each do |event| %>
+			<li>
+				<div class="event-item">
+					<div class="event-item-icons">
+						<span style="text-decoration:underline;">Pictures</span>
+						<br />
+						<% if event.pictures && !event.pictures[0].nil? %>
+						<% event.pictures.each do |pic | %>
+						<%= image_tag pic.image.url(:tiny), :class=>"event-item-icon" %>
+						<% end%>
+						<% else %>
+						No Images
+						<% end %>
+					</div>
+
+					<div class="event-item-title">
+						<span style="text-decoration:underline;font-weight:normal;">Title</span>
+						<br />
+						<%= event.title%>
+					</div>
+					<div class="event-item-charities">
+						<span style="text-decoration:underline;">Charities</span>
+						<br />
+						<ul>
+							<% event.charities.each do |charity| %>
+							<li>
+								<%= charity.name %>
+								<% end %>
+						</ul>
+					</div>
+					<div class="event-item-details">
+						<span style="text-decoration:underline;">Details</span>
+						<br />
+						<strong>Date: </strong><%= event.event_date.strftime("%b %e %Y") if event.event_date %>
+						<br />
+						<strong>Child: </strong><%= event.child_full_name %>
+						<br />
+						<strong>Desc: </strong><%= event.page_content_one.length>100 ? event.page_content_one.first(100) + '...' : event.page_content_one if event.page_content_one %>
+					</div>
+					<div class="event-item-status">
+						<% t = case event.status
+                          when "in_progress"
+                            "In Progress"
+                          when "published"
+                            "Published"
+                          when "cancelled"
+                            "Cancelled"
+                        end %>
+						<strong>Status:</strong> <%= t %>
+						<br />
+						<% if event.in_progress? %>
+						<%= link_to "Preview", event_path(:id => event, :preview => true), :class=>"button-type-standard button-size-medium button-color-blue", "data-open-in-popup" => "#preview-dialog-#{event.id}" %>
+            <div id="preview-dialog-<%= event.id %>" class="ui-helper-hidden">
+              <iframe frameborder="0" width="100%" height="100%"></iframe>
+            </div>
+						<br/>
+						<%= link_to "Setup", new_event_path(:user_id => current_user.id, :anchor => @first_tab), :class=>"button-type-standard button-size-medium button-color-blue" %>
+						<br/>
+						<%= link_to "Manage", 'javascript:void(0)', :class=>"button-type-standard button-size-medium button-color-inactive disabled", :title => "This Event can't be managed yet because it hasn't been published. Please complete setup first." %>
+						<% else %>
+						<%= link_to "View", event_path(:id => event), :class=>"button-type-standard button-size-medium button-color-blue" %>
+						<br/>
+						<%= link_to "Edit", edit_event_path(:id => event, :user_id => current_user.id, :anchor => @first_tab), :class=>"button-type-standard  button-size-medium button-color-blue"  %>
+						<br/>
+						<%= link_to "Manage", event_dashboard_path(event), :class=>"button-type-standard button-size-medium button-color-blue" %>
+						<% end %>
+						<br/>
+					</div>
+
+				</div>
+			</li>
+			<% end %>
+			<% else %>
+			You have no Events
+			<% end %>
+		</ul>
+	</div>
+	<br />
+	<br />
+	<%= link_to "Create a New Event", user_signed_in? ? new_event_path(:user_id => current_user.id, :anchor => @first_tab) : new_user_session_path, :class=>"button-type-standard button-size-medium button-color-green"  %>
+
+	<% else %>
+
+	Please login first
+
+	<% end # current_user%>
+</div>
+
+<% end %>

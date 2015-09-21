@@ -1,0 +1,6 @@
+<% if @event_activity_logs %>
+	<ul><%= render @event_activity_logs %></ul>
+	<div class="flickr_pagination">
+	   <%= will_paginate @event_activity_logs if @event_activity_logs.count > 5 %>
+	</div>
+<% end %>

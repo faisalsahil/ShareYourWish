@@ -1,0 +1,10 @@
+<% action = (@guest && !@guest.anonymous?) ? event_comments_url(@event, :guest_id => @guest.id) : event_comments_url(@event) %>
+<%= form_for([@event, @event.comments.build(:guest => @guest)], :url => action) do |f| %>
+  <%= f.hidden_field :commentable_type %>
+  <%= f.hidden_field :commentable_id %>
+  <%= f.hidden_field :guest_id %>
+  <%= f.text_area :content, :placeholder => "Leave a message", :class=> 'required form-textarea-small', :required => :required, :tabindex => 58 %>
+  <% unless (@guest && !@guest.anonymous?) || current_user %><%= f.text_field :full_name, :placeholder => "Your name", :class => 'required form-field-small', :size => 20, :required => :required, :tabindex => 59 %><% end %>
+  <% if current_user %><%= f.hidden_field :full_name, :value => current_user.full_name %><% end %>
+  <%= f.submit 'Add Comment', :id => :add_guest_comment, :class => 'button-type-standard button-size-small button-color-blue', :tabindex => 60 %>
+<% end %>

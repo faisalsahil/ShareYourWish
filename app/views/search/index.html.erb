@@ -1,0 +1,21 @@
+<% content_for :outside do %>
+  <%= render :partial => 'page_head'%>
+
+  <% if @search_results %>
+    <% title "Search results for \"#{@query}\" :: ShareYourWish" %>
+    <div class="col-single-large-margin box-shadow-reg">
+      <h1>Search results for "<%= @query %>" (<%= @search_results.total_entries %>)</h1>
+      <div class="search_results">
+        <div class="events-container">
+          <ul>
+            <%= render :partial => "search/search_result", :collection => @search_results %>
+          </ul>
+        </div>
+      </div>
+      <div class="flickr_pagination">
+        <%= will_paginate @search_results %>
+      </div>
+    </div>
+  <% end %>
+
+<% end %>

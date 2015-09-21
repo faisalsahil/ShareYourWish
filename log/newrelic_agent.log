@@ -1,0 +1,16 @@
+# Logfile created on 2013-03-08 10:36:09 +0500 by logger.rb/31641
+[03/08/13 10:36:09 +0500 adil-Latitude-E6420 (14035)] INFO : Dispatcher: thin
+[03/08/13 10:36:09 +0500 adil-Latitude-E6420 (14035)] INFO : Application: My Application
+[03/08/13 10:36:09 +0500 adil-Latitude-E6420 (14035)] WARN : Agent configured not to send data in this environment.
+[03/08/13 10:36:09 +0500 adil-Latitude-E6420 (14035)] INFO : New Relic Ruby Agent 3.5.4.33 Initialized: pid = 14035
+[03/08/13 10:36:09 +0500 adil-Latitude-E6420 (14035)] INFO : Agent Log at /home/adil/projects/ShareYourWish/log/newrelic_agent.log
+[03/08/13 10:58:43 +0500 adil-Latitude-E6420 (27655)] INFO : Dispatcher: thin
+[03/08/13 10:58:43 +0500 adil-Latitude-E6420 (27655)] INFO : Application: My Application
+[03/08/13 10:58:43 +0500 adil-Latitude-E6420 (27655)] WARN : Agent configured not to send data in this environment.
+[03/08/13 10:58:43 +0500 adil-Latitude-E6420 (27655)] INFO : New Relic Ruby Agent 3.5.4.33 Initialized: pid = 27655
+[03/08/13 10:58:43 +0500 adil-Latitude-E6420 (27655)] INFO : Agent Log at /home/adil/projects/ShareYourWish/log/newrelic_agent.log
+[03/08/13 11:09:21 +0500 adil-Latitude-E6420 (424)] INFO : Dispatcher: thin
+[03/08/13 11:09:21 +0500 adil-Latitude-E6420 (424)] INFO : Application: My Application
+[03/08/13 11:09:21 +0500 adil-Latitude-E6420 (424)] WARN : Agent configured not to send data in this environment.
+[03/08/13 11:09:21 +0500 adil-Latitude-E6420 (424)] INFO : New Relic Ruby Agent 3.5.4.33 Initialized: pid = 424
+[03/08/13 11:09:21 +0500 adil-Latitude-E6420 (424)] INFO : Agent Log at /home/adil/projects/ShareYourWish/log/newrelic_agent.log

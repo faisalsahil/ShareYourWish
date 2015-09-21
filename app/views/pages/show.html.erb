@@ -1,0 +1,15 @@
+<% if @page %>
+    <% title "#{@page.title} - ShareYourWish" %>
+    <% content_for :outside do %>
+    <%= render :partial => 'page_head'%>
+    
+        <div class="col-single-large-margin box-shadow-reg">
+        	<h1><%= simple_format @page.title %></h1>
+        	<% if @page.teaser %>
+        	<%= simple_format @page.teaser %>
+        	<% end %>
+        	<%= custom_sanitize @page.text %>
+        </div>
+    
+    <% end %>
+<% end %>

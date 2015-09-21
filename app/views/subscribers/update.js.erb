@@ -1,0 +1,22 @@
+<% if @subscriber.errors.any? %>
+
+	// Create errors
+	var errors = $('<div class="flash error"></div>');
+	<% @subscriber.errors.full_messages.each do |error| %>
+	  errors.append('<%= escape_javascript( error ) %><br>');
+	<% end %>
+
+
+	// Display errors
+	$(".alerts-container").html(errors);
+
+<% else %>
+
+	// Display success (clearing any errors)
+	// Set success message in controller as the flash
+	$(".alerts-container").html('<div class="flash notice"><%=escape_javascript(flash.discard(:notice)) %></div>'); 
+	$('#subscribers').prepend('<%= escape_javascript(render(@subscriber)) %>');
+	$('#subscriber-form > form')[0].reset();
+
+<% end %>
+

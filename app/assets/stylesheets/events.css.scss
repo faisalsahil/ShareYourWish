@@ -1,0 +1,772 @@
+
+/* Vertical Tabs
+.ui-tabs-vertical and #tabs are the outer div  
+.ui-tabs-nav and #steps-menu is the tab buttons' div
+.ui-tabs-panel is the content areas' divs that are switched by the tabs
+(set css on #tabs and #steps-menu to override elements of jquery's injected classes' css)
+----------------------------------*/
+
+.light_blue {
+	color: #4da9bf;
+}
+
+
+.events{
+  
+  #tabs { 
+  	width: 940px; 
+  	padding: 5px; 
+  	overflow: auto; 
+  	border: 0px; 
+  	background: #FFF;
+  	overflow-x: hidden;
+  }
+  #tabs .ui-tabs-nav { 
+  	width: 250px;
+  	padding: 5px; 
+  	float: left; 
+  	border: 0px #aaa solid; 
+  	-moz-box-shadow: 3px 3px 6px #666;
+  	-webkit-box-shadow: 3px 3px 6px #666;
+  	box-shadow: 3px 3px 6px #666;
+  }
+  #tabs .ui-tabs-panel { 	
+  	width: 660px;
+  	padding: 5px; 
+  	margin-left: 10px; 
+  	float: right; 
+  }
+  .ui-tabs-vertical .ui-tabs-nav li { 
+  	width: 100%; 
+  	height: 35px;
+  	clear: left; 
+  	border-bottom-width: 1px !important; 
+  	border-right-width: 0 !important; 
+  	margin: 0 -1px .2em 0; 
+  }
+  .ui-tabs-vertical .ui-tabs-nav li a { 
+  	display:block; 
+  }
+  .ui-tabs-vertical .ui-tabs-nav li.ui-tabs-selected { 
+  
+  }
+  #steps-menu li a { 
+  	padding-left: 45px;  
+  	width: 190px; 	
+  	font-size: 16px;
+  }
+  #steps-menu li a.state-not-ready { 
+  	background: image-url('state-not-ready.png') no-repeat;  
+  }
+  #steps-menu li a.state-open { 
+  	background: image-url('state-open.png') no-repeat; 
+  }
+  #steps-menu li a.state-complete { 
+  	background: image-url('state-complete.png') no-repeat; 
+  }
+  #steps-menu li a.state-complete-and-locked { 	
+  	background: image-url('state-complete-and-locked.png') no-repeat; 
+  }
+  .event-left-sidebar {
+  	float: left;
+  	width: 240px;
+  	margin: 10px 5px;
+  	padding: 5px;
+  	background: #E9E9E9;
+  }
+  
+  /* Charities Step */
+  @import "charities/index";
+  
+  /* Event Details Step */
+  .table {
+  	width: 100%;
+  }
+  .table tr {
+  	background: #FFF;
+  	border-collapse: collapse;
+  	background-color: transparent;
+  	border-spacing: 0;
+  }
+  .table tbody tr:hover td, .table tbody tr:hover td th {
+  	background: #CCC;
+  }
+  
+  
+  
+ /* Invite Guests step */
+
+ .invite_guests_option {
+   width: 175px; // 197
+   height: 290px;
+   margin-top: 5px;
+   padding: 5px 8px 8px 14px;
+   float: left;	
+   color: #FFF;
+   font-size: 1em;
+   overflow: hidden;
+   position: relative;
+	background: #4da9bf;
+   .title {
+     font-size: 1.25em;
+     color: #FFF;
+     font-weight: 800;
+     text-align: left;
+     line-height: 1em;
+     }
+   .tag {
+     font-weight: 900;
+     color: #000;
+     text-align: right;
+     font-size: 1em;
+     line-height: .9em;
+     margin-top: 2px;
+     }
+   .icon {
+     margin-top:2px;
+     height: 130px;
+   }
+   ul {
+     margin: 0px;
+     padding: 0px;
+     }
+   li {
+     list-style-position: outside;
+     color: #015666;
+     font-size: .875em;
+     padding: 0px 5px 5px 0px;
+     margin: 0px 0px 0px 10px;
+     min-height: 50px;
+     }
+  }
+  #invite_option_one {
+   background: image-url('invite_option_sprites.jpg') repeat-y;
+   background-position: 0px 0px;
+  }
+  #invite_option_two {
+    background: image-url('invite_option_sprites.jpg') repeat-y;
+    background-position: -217px 0px;
+  }
+  #invite_option_three {
+    background: image-url('invite_option_sprites.jpg') repeat-y;
+    background-position: -433px 0px;
+  }
+  #invite_option_one:hover, #invite_option_one.invite_guests_option.checked  {
+    background-position: 0px -290px;
+  }
+  #invite_option_two:hover, #invite_option_two.invite_guests_option.checked  {
+    background-position: -217px -290px;
+  }
+  #invite_option_three:hover, #invite_option_three.invite_guests_option.checked  {
+    background-position: -433px -290px;
+  }
+ .invite_guests_radio_inputs {
+    display: none;
+  }
+
+
+  /* Goodies Step */
+  .packages_container, .items_container { 
+  	width: 670px; 
+  }
+  .packages_container ul, .items_container ul {
+  	list-style-type: none;
+  	background: transparent;
+  }
+  .packages_container li:hover, .items_container li:hover {
+  	background: #eee;
+  }
+  .package {
+  	width: 658px;
+  	overflow: auto;
+  	border: #ddd dashed 1px;
+  	padding: 10px 5px;
+  	margin-bottom: 10px;
+  	background: #fbefe0;
+  }
+  .item {
+  	width: 660px;
+  	overflow: auto;
+  	padding: 10px 5px;
+  	margin-bottom: 10px;
+  }
+  .package_name, .item_name {
+  	font-weight: bold;
+  }
+  .package_icon, .item_icon {
+  	width: 80px;
+  	float: left;
+  	padding: 10px;
+  }
+  .package_details, .item_details { 
+  	width: 410px;
+  	float: left;
+  	padding: 10px; 
+  }	
+  .package_cost, .item_cost {
+  	width: 100px;
+  	float: left;
+  	padding: 10px;
+  	font-weight: bold;
+  }
+  .package_items { 
+  	width: 400px;
+  	margin-top: 10px;
+  	margin-left: 20px; 
+  }
+  
+  /* Cart */
+  .cart-add-item {
+  	display: inline;
+  }
+  #mini-cart {
+  	width: 100%;
+  	font-size: 11px;
+  	border-collapse: collapse;
+  }
+  #mini-cart th {
+  	text-align: left;
+  	text-decoration: underline;
+  	padding-bottom: 5px;
+  }
+  #mini-cart-title {
+  	font-size: 16px;
+  	color: #E4993E;
+  	font-weight: bold;
+  	margin-top: 2px;
+  	margin-bottom: 5px;
+  }
+  #mini-cart-alerts {
+  	font-size: 12px;
+  	padding: 3px;
+  }
+  .mini-cart-row {
+  
+  }
+  .mini-cart-row td {
+  	padding-bottom: 8px;
+  }
+  .mini-cart-row td.qty {
+  	width: 60px;
+  }
+  .mini-cart-row td.name {
+  
+  }
+  .mini-cart-row td.each {
+  
+  }
+  .mini-cart-row td.ext, #mini-cart th.ext, {
+  	text-align: right;
+  }
+  .mini-cart-divider {
+  	border-bottom: 1px solid #BBB;
+  }
+  .mini-cart-totals {
+  	text-align: right;
+  }
+  .mini-cart-totals td {
+  	padding-bottom: 2px;
+  }
+  .mini-cart-totals td.desc {
+  	padding-right: 8px;
+  }
+  .mini-cart-totals td.amt {
+  
+  }
+  
+  /* Personalize page Step
+  	this step uses a lot of Bootstrap styles (just for the fileupload component) which is in a separate file */
+  #picture-buttons {
+  	float: left;
+  	width: 640px;
+  }
+  #picture-info {
+  	float: left;
+  	width: 130px;
+  }
+  #pictures-table {
+  	width: 680px;
+  	margin-bottom: 0px;
+  	td.blank {
+      width: 335px;
+    }
+  }
+  #image_from_url_uploader{
+    background-color: white;
+    width: 650px;
+    height: 120px;
+  }
+  #pictures-table td.name {
+  	width: 220px;
+  }
+  #event_cart{
+  	float: right;
+  }
+  #popup_container{
+  	width: 720px;
+  	height: 350px;
+  	overflow: auto;
+  }
+  .select_choises{
+  	width: 400px;
+  	height: 95px;
+  	float: right;
+  	margin-top: 2px;
+  }
+  .sample-text-buttons {
+  	float: right;
+  	margin-top: 30px;
+  	z-index:50;
+  }
+  .tooltip{
+    width: 280px;
+    height: 240px;
+    background-color: #EEE;
+    border: 1px solid #555;
+    position:relative;
+    margin-left: -200px;
+    margin-top: -160px;
+    overflow: none;
+    padding: 5px;	
+    z-index: 400;
+  	-moz-box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
+  	-webkit-box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
+  	box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.5);
+  	font-size: .875em;
+  	ul {
+  		padding: 0px;
+  		margin: 0px;
+  		float: left;
+  		position: relative;
+  	}
+     li{
+  		list-style-type: none;
+  		float: left;
+  		position: relative;
+  		a {
+  	   	padding: 8px 13px;
+  			font-size: 1.5em;
+  			display: block;
+  		}
+  		a:hover{
+  	    	background-color: #FFF;
+  	   }
+   	}
+    .sample_text_preview{
+      overflow: auto;
+      height: 115px;
+      width: 260px;
+      font-size: 16px;
+  	margin: 5px;
+  	padding: 8px 5px;
+  	background: #FFF;
+  	border: 1px dashed #444;
+    }
+    .example-text-warn {
+  	color: #993333;
+  	}
+    .example-text-close {
+  	float: right;
+  	padding: 8px 13px;
+  	font-size: 1.25em;
+  	display: block;
+  	}
+    .example-text-close:hover {
+  	background-color: #FFF;	
+  	}
+  }
+  
+  .image_from_url_progressbar{
+    float: right;
+    width: 120px;
+    margin-top: 7px;
+  }
+  
+  /* Themes */
+  .themes_wrapper{
+    width:640px;
+    height:260px; 
+    text-align:center; 
+    padding: 10px; 
+    background: #DDD;
+    overflow: auto;
+    .theme_container{
+      width:185px;
+      height:100px; 
+      float: left;
+      margin: 3px;
+      .theme_icon{
+        width:100px;
+        height:80px; 
+        float: left;
+        img{
+          width:100px;
+        }
+      }
+      .theme_button{
+        margin-top: 5px;
+      }
+    }
+    .theme_container:hover,
+    .theme_container.selected,
+    {
+      background: white;
+    }
+  }
+  
+  /* Dashboard */
+  #dashboard_guests{
+    position: relative;
+  	border: 2px solid #17708f;
+  
+    #guest_select_buttons{
+      float: right;
+      display: block;
+      button{
+        padding: 6px 10px;
+        font-size: 12px;
+        font-weight: normal;
+        letter-spacing: 1px;
+      }
+    }
+  	#dashboard_guests_list{
+  		width: 680px;
+  		min-height:300px;
+  		padding: 10px;
+  		float: right;
+  		.guest-table.dashboard{
+  			width: 680px;
+  			.guests-status{
+  				color: #4da9bf;
+  				.response{
+  				  color: #e59a3e;
+  				}
+  			}
+  		}
+  	}
+    #guests-hidden-container{
+      margin-top: 15px;
+      color: #888;
+      padding: 10px; 
+      border: 1px solid #CCC; 
+      background: #fbefe0;
+      position: absolute;
+      top: 290px;
+      left: 230px;
+      .guests-action{
+        font-size:.9em;
+      }
+      .guests-status{
+        font-size:.9em;
+      }
+      .guest_is_hidden_td{
+        color: #888;
+        label{
+          color: #888;
+        }
+      }
+    }
+  	#dashboard_guests_actions{
+  		width: 170px;
+  		min-height:300px;
+  		padding: 2px 10px;
+  		button{
+  			padding: 6px 10px;
+  			font-size: 12px;
+  			font-weight: normal;
+  			letter-spacing: 1px;
+  		}
+  		#send_invitations_button{
+  			margin-top: 5px;
+  			width: 150px;
+  		}
+  		#remove_from_list_button{
+  			margin-top: 15px;
+  		}
+  		#add_guest_field{
+  			margin-top: 30px;
+  		}
+  		#invitation_types{
+  		  text-align:left;
+  		  padding-left: 15px;
+  		}
+  		#guests_bucket_button{
+  		  background: image-url('bucket.png');
+  		  width:67px;
+  		  height:76px;
+  		  display: inline-block;
+  		  background-position: 0px -76px;
+        &.full{
+          background-position: 0px 0px;
+        }
+      }
+  		#guests_print_button:hover,
+  		#guests_bucket_button:hover{
+  		  opacity: 0.6;
+  		}
+  	}
+  }
+  a#guests_save_button, 
+  a#enable_guest_edit, 
+  a#guests_cancel_button,
+  #delete_guest_children_link,
+  #add_new_guest_child_link,
+  #guests_close_button{
+  	padding: 6px 14px;
+  	font-size: 11px;
+  }
+  a#guests_save_button.dirty{
+    color:darkred;
+  }
+
+ #guests-shown-container {
+ 	width: 670px;
+ }
+ #guests-hidden-container {
+ 	width: 660px;
+ 	padding: 5px;
+ 	background: #CCC;
+ }
+ #shown_guests {
+ 	width: 660px; 
+ 	.guest_children{
+     color: #888;
+     padding: 10px;
+     border: 1px solid #CCC;
+     background: #FBEFE0;
+     position: absolute;
+     left: 300px;
+     width: 510px;
+     z-index: 1000;
+     .guests_children_buttons{
+       padding-right:34px;
+       float:right;
+     }
+
+ 	}
+ }
+ #hidden_guests { 
+ 	width: 660px; 
+ }
+ $grey-gradient-lightest:	#EEE;
+ $grey-gradient-light:	#DDD;
+ .guest-table {
+ 	width: 670px;
+ 	background: #DDD;
+ 	background-image: -ms-linear-gradient(top, $grey-gradient-lightest, $grey-gradient-light);
+ 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from($grey-gradient-lightest), to($grey-gradient-light));
+ 	background-image: -webkit-linear-gradient(top, $grey-gradient-lightest, $grey-gradient-light);
+ 	background-image: -o-linear-gradient(top, $grey-gradient-lightest, $grey-gradient-light);
+ 	background-image: -moz-linear-gradient(top, $grey-gradient-lightest, $grey-gradient-light);
+ 	background-image: linear-gradient(top, $grey-gradient-lightest, $grey-gradient-light);
+ 	padding-top: 5px;
+ 	padding-bottom: 4px;
+ 	padding-left: 3px;
+ 	border: 1px solid #FFFFFF;
+ 	table-layout:fixed;
+ }
+//  This perverts all the input buttons to use wrong size/font... why is this necessary?
+// .guest-table input, .ui-widget input { 
+// 	margin-left: 0!important;
+// 	font-size: 11px!important;
+// 	font-family: 'Lucida Grande'!important;
+// }
+ .guest-table td { 
+ 	text-align: left;
+ 	vertical-align:text-top;
+ 	padding-bottom: 5px;
+ }
+ .guest-table:hover {
+ 	background:#FFF;
+ 	border: 1px solid #CCC;
+ }
+ .guests-action {
+ 	font-size: 11px;
+ 	padding-left: 10px;
+ }
+ .guests-status-smaller {
+ 	font-size: 13px;
+	.response{
+	  color: #e59a3e;
+	}
+ }
+ td.guests-small-label {
+ 	text-align: right;
+ 	font-size: 11px;
+ 	color: #666;
+ }
+ td.guests-small-text {
+ 	text-align: left;
+ 	font-size: 11px;
+ 	color: #666;
+ }
+ td.guests-children {
+ 	text-align: left;
+ }
+ .message-tip-empty, .message-tip img {
+ 	vertical-align: top;
+ }
+
+
+  .close_button{
+    float: right;
+  }
+
+  #guest_mailer_preview{
+    width:680px; 
+    height: 390px;
+    overflow: hidden;
+    #frame{
+      width:1480px; 
+      height: 380px;
+      #popup_container{
+        display:block;
+        height: 340px;
+      }
+      #guest_mailer_form_container{
+        height: 285px;
+        float: left;
+        width: 655px;
+        margin-top: 15px;
+        #guest_mailer_back_button{
+          float: right;
+        }
+      }
+  
+    }
+    .close{
+      width:240px; 
+      float:right;
+    }
+  }
+  
+  #dashboard-header {
+  	background: #17708f;
+  	color: #FFF;
+  	padding: 5px;
+  	overflow: auto;
+  	.field {
+  		float: left;
+  		width: 270px;
+  		margin-left: 5px;
+  		margin-bottom: 8px;
+  		font-size: 14px;
+  		font-weight: 200;
+  		.label {
+  			font-size: 16px;
+  			font-weight: 400;
+  			color: #E4993E;
+  		}
+  	}
+  }
+  #dashboard-title {
+  	font-size: 1.75em;
+  	font-weight: 500;
+  	color: #fbefe0;
+  	margin-top: 7px;
+  	margin-bottom: 4px;
+  }
+  .dashboard-section-header {
+  	font-size: 1.25em;
+  	font-weight: 600;
+  	color: #8b5d3b; 
+  	margin: 3px;
+  }
+  
+  #dashboard_event_details{
+  	width: 390px;
+  	float: right;
+  	ul{
+  		list-style: none;
+  	}
+  	#event_details_button{
+  		margin-left: 130px;
+  	}
+  }
+  
+  #dashboard_contributions{
+  	margin-bottom: 5px;
+  	padding: 10px;
+  	width: 385px;
+  	border: 2px solid #17708f;
+  	background: #DDD;
+  	float: left;
+	min-height: 250px;
+  	.funds {
+  		background: #FFF;
+  		width: 80px;
+		padding: 10px 20px 10px 10px;
+		text-align:right;
+  	}
+  	span#dashboard_contributions_raised_total {
+
+  	}
+  	span#dashboard_contributions_raised_gift {
+
+  	}
+  	span#dashboard_contributions_raised_donation {
+
+  	}
+  	.dashboard_contributions_charities{
+  		font-size: 14px;
+		margin-left: 70px;
+		float: left;
+		display: inline-block;
+		vertical-align: top;
+		margin-right:3px;
+  	}
+  }
+  #dashboard_activity_log{
+  	margin-bottom: 5px;
+  	padding: 10px;
+  	width: 466px;
+  	border: 2px solid #17708f;
+  	background: #DDD;
+  	float: left;
+	min-height: 250px;
+  	ul{
+  		list-style: none;
+  	}
+  }
+  #dashboard_other_controls {
+    margin: 0 auto;
+    padding:10px 5px 10px 5px;
+    overflow:auto;
+    .holder {
+      width:180px;
+      margin-left: 20px;
+      margin-right: 20px;
+      float:left;
+      img {	
+        vertical-align:middle;
+        float:left;
+        padding-right:4px;
+      }
+    }
+  }
+  #dashboard_emails {
+	background: image-url('email_dashboard_icon.jpg') no-repeat; 
+	margin: 3px;
+	padding-top: 75px;
+	width: 100%;
+	}
+
+
+  .step{
+    .cancel_event_button{
+      margin-left: 160px;
+    }
+    .edit_order{
+      margin-left: 150px;
+    }
+  }
+  
+  // QTIP
+  .ui-tooltip-rounded{
+    font-size: 14px!important;
+    line-height: 16px!important;
+  }
+
+}
+
+

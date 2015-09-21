@@ -1,0 +1,62 @@
+<% if @steps && @event %>
+
+<% content_for :head do %>
+  <%= javascript_include_tag 'events' %>
+<% end %>
+
+<div id="tabs" class="ui-tabs-vertical">
+	<span class="hidden" id="steps_states_path"><%= event_steps_states_path(@event) %></span>
+	<br class="hidden" id="event_form_state" data-form_state="<%= @edit ? 'edit' : 'new' %>"/>
+
+	<ul id="steps-menu" class="">
+		<% @steps.each do |step| %>
+		<li class="ui-corner-left">
+			<% if @edit && step.locked_on_completion %>
+			<a href="#tabs-<%= step.id %>" class="<%=	@event.get_state_css_class(step) %>" title="<%= @event.get_state_message(step) %>" tabindex="500"><%= step.title %></a>
+			<% else %>
+			<a href="#tabs-<%= step.id %>" id="step_<%= step.slug %>" class="<%= @event.get_state_css_class(step) %>" title="<%= @event.get_state_message(step) %>" tabindex="500"><%= step.title %></a>
+			<% end %>
+		</li>
+		<% end %>
+	</ul>
+
+	<% @steps.each do |step| %>
+	<div id="tabs-<%= step.id %>" class="tab_container" data-step-must-complete="<%= step.must_complete %>">
+		<% if step.slug && !(@edit && @event.complete_and_locked?(step)) %>
+		<%= render(:partial => "/steps/#{step.slug}", :locals => { :step => step }) || 'This step unavailable.' %>
+		<% end %>
+	</div>
+	<% end %>
+
+<!--
+	<div id="event_cart" class="event-left-sidebar box-shadow-reg">
+		<%# = render :partial => 'carts/cart_mini' %>
+	</div>
+-->
+
+	<%= link_to event_path(@event.id, :preview => true), :tabindex => 510 do %>
+	<div class="event-left-sidebar event_page_preview center-contents">
+		<%= image_tag "event_preview_button.png" %>
+		<br/>
+		Preview My Event Page
+	</div>
+	<% end %>
+  <div id="preview-dialog" class="ui-helper-hidden">
+    <iframe frameborder="0" width="100%" height="100%"></iframe>
+  </div>
+
+	<%= render :partial => 'mixed_popup' %>
+
+</div>
+
+<% if @existing_event_notice && @existing_event_notice==true %>
+	<% content_for :head do %>
+	<%= javascript_tag do %>
+	jQuery(document).ready(function() {
+		alert('We found an existing new event already in progress. You can either complete and publish this event, or select the Cancel button at the bottom of the page and start over. \n\n This message won't repeat on this device for this event.');
+	});
+	<% end %>
+	<% end %>
+<% end %>
+
+<% end %>

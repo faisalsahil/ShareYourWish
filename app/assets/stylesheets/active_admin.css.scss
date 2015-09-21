@@ -1,0 +1,30 @@
+// Active Admin CSS Styles
+@import "active_admin/mixins";
+@import "active_admin/base";
+@import "selectlist";
+
+// To customize the Active Admin interfaces, add your
+// styles here:
+
+// This CSS should only be served for ActiveAdmin pages ... it is rude, overriding other CSS for the main site
+#header{
+  height: 50px;
+}
+
+select{
+  height: 32px;
+  border: 1px solid #C9D0D6;
+  font-size: 0.95em;
+  font-family: Helvetica, Arial, sans-serif;
+}
+.selectlist-select{
+  float: left;
+  display: block;
+}
+.selectlist-list{
+  .selectlist-item{
+    float:left;
+    padding: 6px 30px 6px 7px;
+    margin: 0 5px;
+  }
+}

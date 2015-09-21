@@ -1,0 +1,77 @@
+
+/*
+golden ratio 1.618	680x420  but that's too tall
+wide screen 16:9  1.777	672x378
+
+use this:  680x380
+
+*/
+
+.gallery-container {
+  position: relative;
+  padding-bottom: 20px;
+}
+.gallery {
+  width: 680px;
+	height: 380px ;
+  margin: 0px;
+  padding: 0px;
+}
+ul.gallery {
+  list-style: none;
+}
+.gallery-slide {
+  position: relative;
+}
+.gallery-slide img {
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.gallery-caption {
+  position:absolute;
+  bottom: 0;
+  left: 0;
+  width: 660px;
+  color: #fff;
+  background: image-url('caption-overlay.png');
+  padding: 12px 10px;
+  -moz-border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
+  overflow: hidden;
+  font-size: 22px;
+  line-height: 20px;
+  font-weight: normal;
+  opacity: 0.99;
+}
+
+.gallery-pager {
+  margin: 0 auto;
+  padding: 0;
+  /* padding-left: 20px; */
+  position: absolute;
+  bottom: 0;
+}
+
+.gallery-pager li {
+  float: left;
+  list-style: none;
+  margin-right: 8px;
+}
+
+.gallery-pager li a {
+  display: block;
+  height: 15px;
+  width: 15px;
+  background: image-url('slider_buttons.png') no-repeat;
+  background-position: 0px 0px;
+  text-indent: -9000px;
+  border: none;
+  overflow: hidden;
+}
+
+.gallery-pager li.activeSlide a {
+  background-position: -17px 0px;
+}
+
+

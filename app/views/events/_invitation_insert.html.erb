@@ -1,0 +1,13 @@
+<div class="invitation-insert">
+	<div class="header"><%= first_word @event.child_full_name %> Has Chosen to Share <%= @event.format_child_pronouns[2].capitalize  %> Wish!</div>
+	<div class="info">
+		<p>We have chosen <b>Share Your Wish</b> for <%= @event.format_child_name %>'s party. Please visit <%= @event.format_child_pronouns[2]  %> event page where you can make a contribution in lieu of shopping for a gift!
+			
+		<p><%= @event.format_child_name %> will give a portion to charity and the rest will be pooled to purchase a special gift(s) from all <%= @event.format_child_pronouns[2]  %> friends! 
+	   <p> Please go to <b>ShareYourWish.com</b> and enter the following "Magic Phrase":
+	</div>
+	<div class="magic-phrase">
+		<div class="who"><%= @event.format_child_name %>'s Magic Phrase</div>
+		<div class="what"><%= @event.magic_phrase %></div>
+	</div>
+</div>

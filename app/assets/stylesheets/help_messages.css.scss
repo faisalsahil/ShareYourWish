@@ -1,0 +1,26 @@
+// Place all the styles related to the help_message controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.help_message_container{
+  display: inline;
+  position: relative;
+  sup.help_message_question{
+    vertical-align: super;
+    font-weight: 400;
+    a.help_message_show_link{
+      font-weight: 400;
+    }
+  }
+  div.help_message_text{
+    position:absolute;
+    top: 10px;
+    left:7px;
+    z-index: 1;
+    width: 300px;
+    padding: 10px;
+    background: white;
+    border: 1px solid grey;
+  }
+}
+

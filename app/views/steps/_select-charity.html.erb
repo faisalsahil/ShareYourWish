@@ -1,0 +1,90 @@
+<% if step %>
+<% content_for :head do %>
+<% javascript_include_tag "steps/#{step.slug}" %>
+<% end %>
+<div class="step">
+
+	<div class="event_description">
+		<div class="step-head">
+			Select up to three (3) Charities to support
+		</div>
+		<div class="step-subhead">
+			Pick just one for maximum impact, but Guests might prefer to have a choice
+		</div>
+	</div>
+
+	<div class="form">
+
+		<%= form_for @event, :url => event_path(:id => @event.id), :html => { :id => :new_event } do |f| %>
+
+		<div id="step_error"></div>
+
+		<% if step.next %>
+		<%= f.hidden_field :step_id, :value => step.next.id %>
+		<%= f.hidden_field :state %>
+		<% end %>
+		<% if step.previous %>
+		<%= hidden_field_tag :previous_tab, step.previous.id %>
+		<% end %>
+
+		<h3>Your Charity(s)</h3>
+		<div class="selected_charities as" id="selected_charities">
+			<% if @selected_charities %>
+			<%= render @selected_charities, :picked => true, :position => :top %>
+			<% end %>
+		</div>
+
+		<div class="clearfloat"></div>
+
+		<h3>Choose From:</h3>
+		<div id="charity-filter-buttons" class="center-contents buffer-me-a-little">
+			<button type="button" class="choose_button active featured_button" tabindex="255" data-list="featured">
+				Featured
+			</button>
+			<button type="button" class="choose_button top_recommended_button" tabindex="256" data-list="top_recommended">
+				Top Recommended
+			</button>
+			<button type="button" class="choose_button other_button" tabindex="257" onclick="alert('Please contact us if you\'d like to support a charity not in our list. If your charity can be found on DonateNow.org, we can add that charity very quickly.')">
+				Other
+			</button>
+			<button type="button" class="choose_button all_button hidden" tabindex="257" data-list="all">
+				All
+			</button>
+		</div>
+
+		<DIV CLASS="HIDDEN">
+			<!-- temporarily hide all search features
+
+			<h3 class="externalControl">Then, you can optionally refine your search:</h3>
+			<div class="center-contents buffer-me-a-little">
+			<%= select_tag :search_by_region, options_from_collection_for_select(Charity.regions, :id, :region), :prompt => "Location" %>
+			<%= select_tag :search_by_ntee_code, options_from_collection_for_select(LookupCharityCode.not_empty, :id, :title), :prompt => "Category"%>
+			<%= text_field_tag :search_by_name, nil, :placeholder => 'search' %>
+			<button type="button" id="search_by_name_button">Search</button>
+			<button type="button" id="search_by_name_clear_button">Clear</button>
+			</div>
+			-->
+		</DIV>
+
+		<div class="charities_for_selection as" id="charities_for_selection">
+			<% if @charities.present? %>
+			<%= render :template => 'charities/index' %>
+			<% end %>
+		</div>
+
+		<div style="clear:both;"></div>
+		<hr />
+
+		<input type="button" value="<%= @edit ? 'Save' : 'Save & Next step' %>" id="select_charity_button" class="button-type-standard button-size-medium button-color-green event_form_submit_button fr" state_class="<%= @event.get_state_at_complete(step) %>" tabindex="275" />
+
+		<input type="button" value="Previous" class="previous_event_button button-type-standard button-size-medium button-color-green fl" tabindex="276" />
+
+		<%= button_to 'Cancel Event', event_path(@event), :method => :delete, :class => "button-type-standard button-size-medium button-color-red cancel_event_button", :confirm => 'Are you sure? This will permanently remove the Event.', :tabindex => 277 %>
+
+		<% end %>
+		<div class="clearfloat"></div>
+
+	</div>
+
+</div>
+<% end %>

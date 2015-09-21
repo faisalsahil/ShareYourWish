@@ -1,0 +1,99 @@
+<h2>Event Transaction Log</h2>
+
+<% if @event %>
+<strong><%= number_to_percentage (@event.charity_donation_percent*100), :precision => 0 %></strong> donation level
+<br/>
+<strong><%= @event.charities.count.to_words.capitalize %></strong> <%= 'charity'.pluralize @event.charities.count %> selected
+<br/>
+Host chooses <strong><%= @event.package.try(:name) %></strong> package
+<br/>
+
+<table>
+	<caption>
+		<center>
+			<strong>Transaction Amounts</strong>
+		</center>
+	</caption>
+	<thead>
+		<tr>
+			<th>ID</th>
+			<th>Date</th>
+			<th>Category</th>
+			<th>Description</th>
+			<th>Memo</th>
+			<th>Event_Fund</th>
+			<th>Donation_Fund</th>
+			<th>Gift_Fund</th>
+			<th>SYW_Fund</th>
+			<th>Event ID</th>
+			<th>Contribution_ID</th>
+			<th>Payment_ID</th>
+			<th>Charity SYW_Altkey</th>
+		</tr>
+	</thead>
+	<tbody>
+		<% @event.event_transaction_logs.each do |event_transaction_log| %>
+		<tr>
+			<td><%= event_transaction_log.id %></td>
+			<td><%= event_transaction_log.created_at.to_date %></td>
+			<td><%= event_transaction_log.event_transaction_log_category_id %></td>
+			<td><%= event_transaction_log.description %></td>
+			<td><%= event_transaction_log.memo %></td>
+			<td><%= number_to_currency event_transaction_log.event_fund %></td>
+			<td><%= number_to_currency event_transaction_log.donation_fund %></td>
+			<td><%= number_to_currency event_transaction_log.gift_fund %></td>
+			<td><%= number_to_currency event_transaction_log.syw_fund %></td>
+			<td><%= event_transaction_log.event_id %></td>
+			<td><%= event_transaction_log.contribution_id %></td>
+			<td><%= event_transaction_log.payment_id %></td>
+			<td><%= event_transaction_log.charity.try(:syw_altkey) %></td>
+		</tr>
+		<% end %>
+		<tr>
+			<td colspan="3"></td>
+			<td colspan="2">FINAL BALANCE</td>
+			<td><%= number_to_currency @event.event_fund %></td>
+			<td><%= number_to_currency @event.donation_fund %></td>
+			<td><%= number_to_currency @event.gift_fund %></td>
+			<td><%= number_to_currency @event.syw_fund %></td>
+			<td colspan="4"></td>
+		</tr>
+	</tbody>
+</table>
+
+<%
+event_fund = 0.0
+donation_fund = 0.0
+gift_fund = 0.0
+syw_fund = 0.0
+%>
+
+<table>
+    <caption>
+        <center>
+            <strong>Running Balances</strong>
+        </center>
+    </caption>
+    <thead>
+        <tr>
+            <th>Event_Fund</th>
+            <th>Donation_Fund</th>
+            <th>Gift_Fund</th>
+            <th>SYW_Fund</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% @event.event_transaction_logs.each do |event_transaction_log| %>
+        <tr>
+            <td><%= number_to_currency event_fund += event_transaction_log.event_fund %></td>
+            <td><%= number_to_currency donation_fund += event_transaction_log.donation_fund %></td>
+            <td><%= number_to_currency gift_fund += event_transaction_log.gift_fund %></td>
+            <td><%= number_to_currency syw_fund += event_transaction_log.syw_fund %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+<% else %>
+    There is no event!
+<% end %>
+

@@ -1,0 +1,38 @@
+<% title "How it Works - Dashboard - ShareYourWish" %>
+
+<% content_for :outside do %>
+
+<%= render :partial => 'page_head'%>
+
+	<div class="col-single-large-margin box-shadow-reg">
+		
+		<H1>How ShareYourWish Works: Your Event Dashboard</H1>
+		
+		<div class="how-step-row">
+			<div class="how-step-num"></div>
+			<div class="how-step-description" style="width:600px;">
+				<span class="how-step-title">Manage Your Event</span>
+				<ul>
+					<li>Guest Activity</li>
+					<li>Total Contributions Received</li>
+					<li>RSVP's</li>
+					<li>Send Invitations, Reminders, Thank You's and Custom Messages</li>
+				</ul>
+			</div>
+		</div>
+		
+		<h3 style="text-decoration:underline;">SAMPLE DASHBOARD:</h3>
+		<%=image_tag 'sample-dashboard-1.jpg'%>
+		<p>
+		<p>
+		
+		<h3 style="text-decoration:underline;">SAMPLE DASHBOARD:</h3>
+		<%= image_tag 'sample-dashboard-2.jpg'%>
+	
+		<p>
+		<%= link_to "Get Started!", user_signed_in? ? new_event_path(:user_id => current_user.id) : new_user_session_path , :class=>"button-type-standard button-size-big button-color-green fl" %>
+		<%= link_to 'NEXT: Event Page', '/how-it-works/event-page', :class=>'button-type-standard button-size-big button-color-blue fr'%>
+	</div>
+	
+	
+<% end %>
